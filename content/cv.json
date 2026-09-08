@@ -3,7 +3,7 @@
   "title": "IT Systems Engineer",
   "tagline": "Linux · Docker · CI/CD · Cloud & DNS",
   "contact": {
-    "location": "Debrecen, Hungary",
+    "location": "Bicske, Hungary",
     "email": "soma.eipl@gmail.com"
   },
   "about": [
@@ -93,6 +93,22 @@
       {
         "text": "SQL data models & database management",
         "bold": false
+      },
+      {
+        "text": "PHP",
+        "bold": false
+      },
+      {
+        "text": "Transactional email APIs (Brevo)",
+        "bold": false
+      },
+      {
+        "text": "Reverse engineering & decompilation",
+        "bold": false
+      },
+      {
+        "text": "AI-assisted development workflows (Claude Code)",
+        "bold": false
       }
     ],
     "interpersonal": [
@@ -107,7 +123,7 @@
   "drivingLicence": "Categories: AM, B",
   "footer": {
     "email": "soma.eipl@gmail.com",
-    "github": "github.com/somaeipl",
-    "linkedin": "linkedin.com/in/somaeipl"
+    "github": "github.com/eiplsoma",
+    "linkedin": "linkedin.com/in/eiplsoma"
   }
 }
