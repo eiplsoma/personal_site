@@ -11,6 +11,7 @@ export function Nav() {
           <Link href="/#work">work</Link>
           <Link href="/projects">projects</Link>
           <Link href="/#skills">skills</Link>
+          <Link href="/#background">background</Link>
           <Link href="/#contact">contact</Link>
         </div>
       </div>

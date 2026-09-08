@@ -98,7 +98,48 @@ export default function Home() {
                 </span>
               ))}
             </div>
+            <div className="skill-group">
+              <div className="gtitle">Interpersonal</div>
+              {cv.skills.interpersonal.map((s) => (
+                <span className="tag" key={s}>
+                  {s}
+                </span>
+              ))}
+            </div>
           </div>
+        </section>
+
+        <div className="divider"># background</div>
+        <section id="background">
+          <div className="gtitle" style={{ marginBottom: 10 }}>Education</div>
+          <div className="timeline">
+            {cv.education.map((item) => (
+              <div className="titem" key={item.degree}>
+                <div className="head">
+                  <h3>{item.degree}</h3>
+                  <span className="when">{item.period}</span>
+                </div>
+                <div className="org">{item.org}</div>
+              </div>
+            ))}
+          </div>
+
+          <div className="gtitle" style={{ margin: "30px 0 10px" }}>Certifications</div>
+          <div className="timeline">
+            {cv.certifications.map((item) => (
+              <div className="titem" key={item.title}>
+                <div className="head">
+                  <h3>{item.title}</h3>
+                  <span className="when">{item.date}</span>
+                </div>
+                <div className="org">{item.org}</div>
+              </div>
+            ))}
+          </div>
+
+          <p className="tagline" style={{ marginTop: 30 }}>
+            {cv.languages} · {cv.drivingLicence}
+          </p>
         </section>
       </div>
       <SiteFooter />
