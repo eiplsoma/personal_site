@@ -1,0 +1,115 @@
+{
+  "name": "Soma Eipl",
+  "title": "IT Systems Engineer",
+  "tagline": "Linux · Docker · CI/CD · Cloud & DNS",
+  "contact": {
+    "location": "Debrecen, Hungary",
+    "phone": "[redacted]",
+    "email": "soma.eipl@gmail.com"
+  },
+  "about": [
+    "IT Systems Engineer with hands-on experience across Linux administration, containerization, and CI/CD automation, built through day-to-day operational support and through infrastructure projects I design and run myself end to end.",
+    "Day to day, I configure and troubleshoot VPS infrastructure, manage DNS and Cloudflare routing, and handle mail system migrations, with a focus on stability and security-oriented configuration.",
+    "On the side, I build and deploy my own projects: Dockerized applications, GitHub Actions pipelines with automated VPS deployment, nginx/TLS setup, and structured post-deploy security audits.",
+    "I also work with structured data systems - redesigning reporting logic around bookkeeping data models and rebuilding calculated fields from legacy MDB/DLL sources for dashboard reporting."
+  ],
+  "experience": [
+    {
+      "title": "IT Support Specialist",
+      "org": "Hungary",
+      "period": "2024 - Present",
+      "bulletsLabel": "Responsibilities:",
+      "bullets": [
+        "System-level troubleshooting and infrastructure support in daily operations",
+        "Design and implement internal digital solutions and workflow automation"
+      ]
+    },
+    {
+      "title": "Self-Hosted CI/CD Pipeline - Next.js on a VPS",
+      "org": "Personal Project",
+      "period": "2026",
+      "bulletsLabel": "Highlights:",
+      "bullets": [
+        "Multi-stage Docker image + GitHub Actions pipeline with automated SSH deploy",
+        "Diagnosed a Cloudflare bot-mitigation conflict (HTTP 403) breaking automated health checks, and redesigned them to run from inside the VPS",
+        "VPS hardening (SSH keys, UFW firewall) plus a structured security audit"
+      ]
+    }
+  ],
+  "education": [
+    {
+      "degree": "Business Informatics, BSc",
+      "org": "University of Debrecen",
+      "period": "2019 - 2025",
+      "highlight": true
+    },
+    {
+      "degree": "Secondary School",
+      "org": "Fazekas Mihály Secondary School of Debrecen",
+      "period": "2014 - 2019",
+      "highlight": false
+    }
+  ],
+  "certifications": [
+    {
+      "title": "IT Specialist - Python",
+      "org": "Certiport",
+      "date": "13/02/2024"
+    },
+    {
+      "title": "English Intermediate (B2) Combined Language Exam",
+      "org": "ELTE Origó Nyelvi Centrum Kft.",
+      "date": "08/05/2019"
+    }
+  ],
+  "skills": {
+    "professional": [
+      "Incident diagnosis using server-side logs",
+      "Operational documentation & runbooks",
+      "Systems-level analytical thinking",
+      "Structured technical problem-solving",
+      "Cross-functional technical collaboration"
+    ],
+    "technical": [
+      {
+        "text": "Linux administration & CLI troubleshooting",
+        "bold": false
+      },
+      {
+        "text": "Docker: multi-stage builds & Compose",
+        "bold": true
+      },
+      {
+        "text": "CI/CD pipelines with GitHub Actions",
+        "bold": true
+      },
+      {
+        "text": "nginx reverse proxy & TLS (Let's Encrypt/certbot)",
+        "bold": false
+      },
+      {
+        "text": "DNS & Cloudflare configuration",
+        "bold": false
+      },
+      {
+        "text": "SQL data models & database management",
+        "bold": false
+      }
+    ],
+    "interpersonal": [
+      "Analytical and systems-oriented thinking",
+      "Structured technical problem-solving",
+      "High attention to technical detail",
+      "Reliability in operational environments",
+      "Adaptability to evolving technical requirements"
+    ]
+  },
+  "languages": "Hungarian (Native) · English (B2) · German (A2)",
+  "drivingLicence": "Categories: AM, B",
+  "footer": {
+    "email": "soma.eipl@gmail.com",
+    "phone": "[redacted]",
+    "github": "github.com/somaeipl",
+    "linkedin": "linkedin.com/in/somaeipl"
+  }
+}
