@@ -52,9 +52,13 @@ jobs:
   deploy:
     needs: build-and-push
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
     steps:
       - name: Checkout
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
 
       - name: Copy compose file to VPS
         uses: appleboy/scp-action@ff85246acaad7bdce478db94a363cd2bf7c90345 # v1.0.0
@@ -72,10 +76,11 @@ jobs:
           host: ${{ secrets.VPS_HOST }}
           username: ${{ secrets.VPS_USER }}
           key: ${{ secrets.VPS_SSH_KEY }}
+          envs: GITHUB_SHA
           script: |
             set -e
             cd ~/personal-site
-            echo "IMAGE_TAG=${{ github.sha }}" > .env
+            echo "IMAGE_TAG=$GITHUB_SHA" > .env
             docker compose pull
             docker compose up -d
             docker image prune -f
@@ -86,6 +91,6 @@ jobs:
           status=$(curl -s -o /dev/null -w "%{http_code}" --max-time 10 https://eiplsoma.hu/)
           echo "HTTP status: $status"
           if [ "$status" != "200" ]; then
-            echo "Smoke test failed (expected on the very first deploy, before Task 5's nginx server-block exists on the VPS)"
+            echo "Smoke test failed — site did not return 200, see docs/deploy-runbook.md"
             exit 1
           fi

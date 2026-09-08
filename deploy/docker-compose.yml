@@ -1,6 +1,6 @@
 services:
   personal-site:
-    image: ghcr.io/eiplsoma/personal_site:${IMAGE_TAG:-latest}
+    image: ghcr.io/eiplsoma/personal_site:${IMAGE_TAG:?IMAGE_TAG must be set}
     container_name: personal-site
     restart: unless-stopped
     networks:
