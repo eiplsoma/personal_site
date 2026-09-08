@@ -4,7 +4,6 @@
   "tagline": "Linux · Docker · CI/CD · Cloud & DNS",
   "contact": {
     "location": "Debrecen, Hungary",
-    "phone": "[redacted]",
     "email": "soma.eipl@gmail.com"
   },
   "about": [
@@ -108,7 +107,6 @@
   "drivingLicence": "Categories: AM, B",
   "footer": {
     "email": "soma.eipl@gmail.com",
-    "phone": "[redacted]",
     "github": "github.com/somaeipl",
     "linkedin": "linkedin.com/in/somaeipl"
   }
