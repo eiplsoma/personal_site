@@ -12,7 +12,7 @@ export default function Home() {
       <div className="wrap">
         <section className="hero">
           <div className="prompt">
-            <span className="dot" /> soma@bicske:~$ whoami
+            <span className="dot" /> soma@eipl:~$ whoami
             <span className="cursor" />
           </div>
           <h1>

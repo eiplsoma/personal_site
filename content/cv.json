@@ -95,6 +95,22 @@
         "bold": false
       },
       {
+        "text": "VPS deployment & management",
+        "bold": false
+      },
+      {
+        "text": "VirtualBox virtualization",
+        "bold": false
+      },
+      {
+        "text": "Mail infrastructure management",
+        "bold": false
+      },
+      {
+        "text": "Data structuring & transformation",
+        "bold": false
+      },
+      {
         "text": "PHP",
         "bold": false
       },
@@ -116,7 +132,8 @@
       "Structured technical problem-solving",
       "High attention to technical detail",
       "Reliability in operational environments",
-      "Adaptability to evolving technical requirements"
+      "Adaptability to evolving technical requirements",
+      "Effective team collaboration"
     ]
   },
   "languages": "Hungarian (Native) · English (B2) · German (A2)",
