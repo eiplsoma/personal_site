@@ -31,7 +31,8 @@
       "bullets": [
         "Multi-stage Docker image + GitHub Actions pipeline with automated SSH deploy",
         "Diagnosed a Cloudflare bot-mitigation conflict (HTTP 403) breaking automated health checks, and redesigned them to run from inside the VPS",
-        "VPS hardening (SSH keys, UFW firewall) plus a structured security audit"
+        "Hardened a fresh VPS end to end: non-root sudo access, SSH key-only auth, UFW firewall, fail2ban, automatic security patching",
+        "Closed every inbound port except 80/443 by moving SSH behind a Cloudflare Zero Trust Tunnel, verifying the same host-key fingerprint through the tunnel to rule out a MITM"
       ]
     }
   ],
@@ -103,7 +104,7 @@
         "bold": false
       },
       {
-        "text": "Mail infrastructure management",
+        "text": "Mail infrastructure management (incl. Zoho migration)",
         "bold": false
       },
       {
@@ -124,6 +125,30 @@
       },
       {
         "text": "AI-assisted development workflows (Claude Code)",
+        "bold": false
+      },
+      {
+        "text": "Cloudflare Zero Trust & Tunnel",
+        "bold": true
+      },
+      {
+        "text": "UFW firewall & fail2ban",
+        "bold": false
+      },
+      {
+        "text": "Self-hosted Vaultwarden",
+        "bold": false
+      },
+      {
+        "text": "Bash scripting",
+        "bold": false
+      },
+      {
+        "text": "Security fundamentals (privilege escalation, ethical hacking concepts)",
+        "bold": false
+      },
+      {
+        "text": "Bootstrap",
         "bold": false
       }
     ],
