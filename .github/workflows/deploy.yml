@@ -73,6 +73,7 @@ jobs:
           username: ${{ secrets.VPS_USER }}
           key: ${{ secrets.VPS_SSH_KEY }}
           script: |
+            set -e
             cd ~/personal-site
             echo "IMAGE_TAG=${{ github.sha }}" > .env
             docker compose pull
