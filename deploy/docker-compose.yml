@@ -1,0 +1,12 @@
+services:
+  personal-site:
+    image: ghcr.io/eiplsoma/personal_site:${IMAGE_TAG:-latest}
+    container_name: personal-site
+    restart: unless-stopped
+    networks:
+      - proxy_net
+
+networks:
+  proxy_net:
+    external: true
+    name: proxy_default
