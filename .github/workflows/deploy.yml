@@ -54,9 +54,6 @@ jobs:
     runs-on: ubuntu-latest
     permissions:
       contents: read
-    env:
-      TUNNEL_SERVICE_TOKEN_ID: ${{ secrets.CF_ACCESS_CLIENT_ID }}
-      TUNNEL_SERVICE_TOKEN_SECRET: ${{ secrets.CF_ACCESS_CLIENT_SECRET }}
     steps:
       - name: Checkout
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
@@ -64,34 +61,43 @@ jobs:
           persist-credentials: false
 
       - name: Install cloudflared
-        # Pinned to 2026.5.1, not latest: 2026.6.0+ has a confirmed regression
-        # where `access ssh`/`access tcp` ignores service-token credentials
-        # entirely and falls back to interactive browser auth on every
-        # connection (cloudflare/cloudflared#1673). No fix exists yet upstream.
         run: |
-          curl -sL -o /usr/local/bin/cloudflared https://github.com/cloudflare/cloudflared/releases/download/2026.5.1/cloudflared-linux-amd64
-          echo "3c6a5ba995a258dbe90f98e5fdb2c2620b7be72c3ca761614f6eb52aee252cea  /usr/local/bin/cloudflared" | sha256sum -c -
+          curl -fsSL --proto '=https' --tlsv1.2 --retry 3 -o /usr/local/bin/cloudflared https://github.com/cloudflare/cloudflared/releases/download/2026.8.3/cloudflared-linux-amd64
+          echo "f29324fe934d1e100617484c78deef803c4dc2cd351d645bbde42e96b4fccc5e  /usr/local/bin/cloudflared" | sha256sum -c -
           chmod +x /usr/local/bin/cloudflared
 
-      - name: Set up SSH over Cloudflare Access
+      - name: Set up SSH over Cloudflare Tunnel
+        # Uses a dedicated tunnel hostname (ci-deploy.eiplsoma.hu) that has no
+        # Cloudflare Access application/policy attached to it at all, unlike
+        # the human-facing ssh.eiplsoma.hu. This deliberately avoids Cloudflare
+        # Access entirely: mTLS auth is Business-plan-only, and Access Service
+        # Tokens hit a confirmed cloudflared bug (cloudflare/cloudflared#1673)
+        # where `access ssh`/`access tcp` ignores service-token credentials and
+        # falls back to interactive browser auth. The real access control here
+        # is the SSH key itself (same as any key-only-auth SSH host) — the
+        # tunnel just avoids exposing port 22 on the VPS firewall directly.
         run: |
           mkdir -p ~/.ssh
           chmod 700 ~/.ssh
-          echo "${{ secrets.VPS_SSH_KEY }}" > ~/.ssh/deploy_key
-          chmod 600 ~/.ssh/deploy_key
-          echo "ssh.eiplsoma.hu ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIJMaOYsuKBX5ds4PtTwoayoSsvk7ggIaMJ8eWchJZb3l" > ~/.ssh/known_hosts
-          cat >> ~/.ssh/config <<'EOF'
+          (umask 077; printf '%s' "$VPS_SSH_KEY" > ~/.ssh/deploy_key)
+          echo "ci-deploy.eiplsoma.hu ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIJMaOYsuKBX5ds4PtTwoayoSsvk7ggIaMJ8eWchJZb3l" > ~/.ssh/known_hosts
+          cat >> ~/.ssh/config <<EOF
           Host vps
-            HostName ssh.eiplsoma.hu
-            User ${{ secrets.VPS_USER }}
+            HostName ci-deploy.eiplsoma.hu
+            User $VPS_USER
             IdentityFile ~/.ssh/deploy_key
             ProxyCommand cloudflared access ssh --hostname %h
             StrictHostKeyChecking yes
           EOF
           chmod 600 ~/.ssh/config
+        env:
+          VPS_SSH_KEY: ${{ secrets.VPS_SSH_KEY }}
+          VPS_USER: ${{ secrets.VPS_USER }}
 
       - name: Copy compose file to VPS
-        run: scp deploy/docker-compose.yml vps:~/personal-site/docker-compose.yml
+        run: |
+          ssh vps 'mkdir -p ~/personal-site'
+          scp deploy/docker-compose.yml vps:~/personal-site/docker-compose.yml
 
       - name: Deploy on VPS
         run: |
