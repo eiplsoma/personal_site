@@ -3,9 +3,9 @@ import { t } from "@/lib/i18n"
 import { ProjectsContent } from "@/components/projects-content"
 
 export const metadata: Metadata = {
-  title: t("en").projectsPage.metaTitle,
+  title: t("hu").projectsPage.metaTitle,
   alternates: {
-    canonical: "/projects",
+    canonical: "/hu/projects",
     languages: {
       en: "/projects",
       hu: "/hu/projects",
@@ -13,6 +13,6 @@ export const metadata: Metadata = {
   },
 }
 
-export default function ProjectsPage() {
-  return <ProjectsContent locale="en" />
+export default function ProjectsPageHu() {
+  return <ProjectsContent locale="hu" />
 }

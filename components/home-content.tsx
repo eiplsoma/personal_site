@@ -1,0 +1,158 @@
+import Link from "next/link"
+import { getCv } from "@/lib/cv"
+import { localePath, t, type Locale } from "@/lib/i18n"
+import { Nav } from "@/components/nav"
+import { SiteFooter } from "@/components/site-footer"
+
+export function HomeContent({ locale }: { locale: Locale }) {
+  const cv = getCv(locale)
+  const strings = t(locale)
+  const project = cv.experience.find((e) => e.org === "Personal Project" || e.org === "Saját projekt")
+
+  return (
+    <>
+      <Nav locale={locale} path="/" />
+      <div className="wrap">
+        <section className="hero">
+          <div className="prompt">
+            <span className="dot" /> soma@eipl:~$ whoami
+            <span className="cursor" />
+          </div>
+          <h1>
+            {cv.name}
+            <br />
+            <span className="accent">{cv.title}</span>
+          </h1>
+          <div className="role">{cv.tagline} — {cv.contact.location}</div>
+          <p className="tagline">
+            {strings.hero.currentlyPrefix}
+            <b>{cv.experience[0].title}</b>
+            {strings.hero.currentlySuffix}
+          </p>
+
+          <div className="hero-row">
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img className="hero-photo" src="/profile-photo.jpg" alt={cv.name} />
+            <p className="lead">{cv.about[0]}</p>
+          </div>
+
+          <div className="hero-actions">
+            <a className="btn primary" href="/cv.pdf" download>
+              {strings.hero.downloadCv}
+            </a>
+            <Link className="btn" href={localePath(locale, "/projects")}>
+              {strings.hero.seeProject}
+            </Link>
+          </div>
+        </section>
+
+        <div className="divider">{strings.dividers.about}</div>
+        <section id="about">
+          {cv.about.slice(1).map((paragraph) => (
+            <p key={paragraph}>{paragraph}</p>
+          ))}
+          <p className="lead">{cv.lookingFor}</p>
+        </section>
+
+        <div className="divider">{strings.dividers.experience}</div>
+        <section id="work">
+          <div className="timeline">
+            {cv.experience.map((item) => (
+              <div className="titem" key={item.title}>
+                <div className="head">
+                  <h3>{item.title}</h3>
+                  <span className="when">{item.period}</span>
+                </div>
+                <div className="org">{item.org}</div>
+                <ul>
+                  {item.bullets.map((b) => (
+                    <li key={b}>{b}</li>
+                  ))}
+                </ul>
+              </div>
+            ))}
+          </div>
+        </section>
+
+        {project && (
+          <>
+            <div className="divider">{strings.dividers.featuredProject}</div>
+            <section>
+              <div className="project-card">
+                <h3>{project.title}</h3>
+                <p className="lead">{strings.featuredProject.lead}</p>
+                <div className="project-links">
+                  <Link href={localePath(locale, "/projects")}>{strings.featuredProject.fullWriteUp}</Link>
+                </div>
+              </div>
+            </section>
+          </>
+        )}
+
+        <div className="divider">{strings.dividers.skills}</div>
+        <section id="skills">
+          <div className="skill-groups">
+            <div className="skill-group">
+              <div className="gtitle">{strings.skillGroups.technical}</div>
+              {cv.skills.technical.map((s) => (
+                <span className="tag" key={s.text}>
+                  {s.text}
+                </span>
+              ))}
+            </div>
+            <div className="skill-group">
+              <div className="gtitle">{strings.skillGroups.professional}</div>
+              {cv.skills.professional.map((s) => (
+                <span className="tag" key={s}>
+                  {s}
+                </span>
+              ))}
+            </div>
+            <div className="skill-group">
+              <div className="gtitle">{strings.skillGroups.interpersonal}</div>
+              {cv.skills.interpersonal.map((s) => (
+                <span className="tag" key={s}>
+                  {s}
+                </span>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        <div className="divider">{strings.dividers.background}</div>
+        <section id="background">
+          <div className="gtitle" style={{ marginBottom: 10 }}>{strings.background.education}</div>
+          <div className="timeline">
+            {cv.education.map((item) => (
+              <div className="titem" key={item.degree}>
+                <div className="head">
+                  <h3>{item.degree}</h3>
+                  <span className="when">{item.period}</span>
+                </div>
+                <div className="org">{item.org}</div>
+              </div>
+            ))}
+          </div>
+
+          <div className="gtitle" style={{ margin: "30px 0 10px" }}>{strings.background.certifications}</div>
+          <div className="timeline">
+            {cv.certifications.map((item) => (
+              <div className="titem" key={item.title}>
+                <div className="head">
+                  <h3>{item.title}</h3>
+                  <span className="when">{item.date}</span>
+                </div>
+                <div className="org">{item.org}</div>
+              </div>
+            ))}
+          </div>
+
+          <p className="tagline" style={{ marginTop: 30 }}>
+            {cv.languages} · {cv.drivingLicence}
+          </p>
+        </section>
+      </div>
+      <SiteFooter locale={locale} />
+    </>
+  )
+}

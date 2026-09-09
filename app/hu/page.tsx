@@ -2,13 +2,13 @@ import type { Metadata } from "next"
 import { getCv } from "@/lib/cv"
 import { HomeContent } from "@/components/home-content"
 
-const cv = getCv("en")
+const cv = getCv("hu")
 
 export const metadata: Metadata = {
   title: `${cv.name} — ${cv.title}`,
   description: cv.tagline,
   alternates: {
-    canonical: "/",
+    canonical: "/hu",
     languages: {
       en: "/",
       hu: "/hu",
@@ -16,6 +16,6 @@ export const metadata: Metadata = {
   },
 }
 
-export default function Home() {
-  return <HomeContent locale="en" />
+export default function HomeHu() {
+  return <HomeContent locale="hu" />
 }

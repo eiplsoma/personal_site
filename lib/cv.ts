@@ -1,5 +1,14 @@
-import cvData from "@/content/cv.json"
+import cvEn from "@/content/cv.en.json"
+import cvHu from "@/content/cv.hu.json"
+import type { Locale } from "@/lib/i18n"
 
-export type CV = typeof cvData
+export type CV = typeof cvEn
 
-export const cv: CV = cvData
+const cvByLocale: Record<Locale, CV> = {
+  en: cvEn,
+  hu: cvHu,
+}
+
+export function getCv(locale: Locale): CV {
+  return cvByLocale[locale]
+}

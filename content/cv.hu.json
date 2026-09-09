@@ -1,0 +1,172 @@
+{
+  "name": "Soma Eipl",
+  "title": "IT rendszermérnök",
+  "tagline": "Linux · Docker · CI/CD · Cloud & DNS",
+  "contact": {
+    "location": "Bicske, Magyarország",
+    "email": "soma.eipl@gmail.com"
+  },
+  "about": [
+    "IT rendszermérnök, gyakorlati tapasztalattal Linux adminisztráció, konténerizáció és CI/CD automatizálás terén, amit napi szintű operatív támogatás és saját tervezésű, végponttól-végpontig általam üzemeltetett infrastruktúra-projektek során szereztem.",
+    "Napi szinten VPS infrastruktúrát konfigurálok és hibaelhárítok, DNS és Cloudflare routingot kezelek, valamint email rendszer migrációkat végzek, a stabilitásra és biztonság-orientált konfigurációra fókuszálva.",
+    "Emellett saját projekteket is építek és üzemeltetek: Dockerizált alkalmazásokat, automatizált VPS deploy-t végző GitHub Actions pipeline-okat, nginx/TLS beállítást, és strukturált, deploy utáni biztonsági auditokat.",
+    "Strukturált adatrendszerekkel is foglalkozom - könyvelési adatmodellek köré épített riportolási logika újratervezésével, valamint legacy MDB/DLL forrásokból származó számított mezők újraépítésével dashboard riportokhoz."
+  ],
+  "lookingFor": "Jelenleg infrastruktúra- és biztonság-fókuszú szerepek felé fejlődöm, ahol végponttól-végpontig sajátomként kezelhetek rendszereket - pont olyan munka felé, amit ennek az oldalnak a saját deploy pipeline-ja és VPS hardeningje is képvisel.",
+  "experience": [
+    {
+      "title": "IT support szakértő",
+      "org": "Magyarország",
+      "period": "2024 - jelenleg",
+      "bulletsLabel": "Feladatok:",
+      "bullets": [
+        "Rendszerszintű hibaelhárítás és infrastruktúra-támogatás a napi operáció során",
+        "Belső digitális megoldások és munkafolyamat-automatizálás tervezése és megvalósítása"
+      ]
+    },
+    {
+      "title": "Self-Hosted CI/CD Pipeline - Next.js egy VPS-en",
+      "org": "Saját projekt",
+      "period": "2026",
+      "bulletsLabel": "Kiemelt pontok:",
+      "bullets": [
+        "Multi-stage Docker image + GitHub Actions pipeline automatizált SSH deploy-jal",
+        "Diagnosztizáltam egy Cloudflare bot-mitigation konfliktust (HTTP 403), ami megtörte az automatizált health checkeket, majd újraterveztem őket, hogy a VPS-en belülről fussanak",
+        "Végponttól-végpontig hardeneltem egy friss VPS-t: non-root sudo hozzáférés, csak SSH-kulcsos authentikáció, UFW firewall, fail2ban, automatikus biztonsági patchelés",
+        "Minden bejövő portot lezártam a 80/443 kivételével azzal, hogy az SSH-t Cloudflare Zero Trust Tunnel mögé helyeztem, és a tunnelen keresztül ellenőriztem ugyanazt a host-key ujjlenyomatot, hogy kizárjak egy MITM-et"
+      ]
+    }
+  ],
+  "education": [
+    {
+      "degree": "Gazdaságinformatika, BSc",
+      "org": "Debreceni Egyetem",
+      "period": "2019 - 2025",
+      "highlight": true
+    },
+    {
+      "degree": "Középiskola",
+      "org": "Fazekas Mihály Gimnázium, Debrecen",
+      "period": "2014 - 2019",
+      "highlight": false
+    }
+  ],
+  "certifications": [
+    {
+      "title": "IT Specialist - Python",
+      "org": "Certiport",
+      "date": "2024.02.13"
+    },
+    {
+      "title": "Angol középfokú (B2) komplex nyelvvizsga",
+      "org": "ELTE Origó Nyelvi Centrum Kft.",
+      "date": "2019.05.08"
+    }
+  ],
+  "skills": {
+    "professional": [
+      "Incidens diagnosztika szerver-oldali logok alapján",
+      "Üzemeltetési dokumentáció és runbookok",
+      "Rendszerszintű analitikus gondolkodás",
+      "Strukturált technikai problémamegoldás",
+      "Kereszt-funkcionális technikai együttműködés"
+    ],
+    "technical": [
+      {
+        "text": "Linux adminisztráció és CLI hibaelhárítás",
+        "bold": false
+      },
+      {
+        "text": "Docker: multi-stage buildek és Compose",
+        "bold": true
+      },
+      {
+        "text": "CI/CD pipeline-ok GitHub Actionsszel",
+        "bold": true
+      },
+      {
+        "text": "nginx reverse proxy és TLS (Let's Encrypt/certbot)",
+        "bold": false
+      },
+      {
+        "text": "DNS és Cloudflare konfiguráció",
+        "bold": false
+      },
+      {
+        "text": "SQL adatmodellek és adatbázis-kezelés",
+        "bold": false
+      },
+      {
+        "text": "VPS deploy és üzemeltetés",
+        "bold": false
+      },
+      {
+        "text": "VirtualBox virtualizáció",
+        "bold": false
+      },
+      {
+        "text": "Email infrastruktúra kezelés (Zoho migrációval)",
+        "bold": false
+      },
+      {
+        "text": "Adatstrukturálás és transzformáció",
+        "bold": false
+      },
+      {
+        "text": "PHP",
+        "bold": false
+      },
+      {
+        "text": "Tranzakciós email API-k (Brevo)",
+        "bold": false
+      },
+      {
+        "text": "Reverse engineering és dekompiláció",
+        "bold": false
+      },
+      {
+        "text": "AI-asszisztált fejlesztési workflow-k (Claude Code)",
+        "bold": false
+      },
+      {
+        "text": "Cloudflare Zero Trust és Tunnel",
+        "bold": true
+      },
+      {
+        "text": "UFW firewall és fail2ban",
+        "bold": false
+      },
+      {
+        "text": "Self-hosted Vaultwarden",
+        "bold": false
+      },
+      {
+        "text": "Bash scriptelés",
+        "bold": false
+      },
+      {
+        "text": "Biztonsági alapok (privilege escalation, etikus hackelés koncepciók)",
+        "bold": false
+      },
+      {
+        "text": "Bootstrap",
+        "bold": false
+      }
+    ],
+    "interpersonal": [
+      "Analitikus és rendszer-szemléletű gondolkodás",
+      "Strukturált technikai problémamegoldás",
+      "Magas szintű figyelem a technikai részletekre",
+      "Megbízhatóság üzemeltetési környezetben",
+      "Alkalmazkodóképesség a változó technikai követelményekhez",
+      "Hatékony csapatmunka"
+    ]
+  },
+  "languages": "Magyar (anyanyelv) · Angol (B2) · Német (A2)",
+  "drivingLicence": "Kategóriák: AM, B",
+  "footer": {
+    "email": "soma.eipl@gmail.com",
+    "github": "github.com/eiplsoma",
+    "linkedin": "linkedin.com/in/eiplsoma"
+  }
+}

@@ -116,6 +116,17 @@ nav .links a:hover,
 nav .links a:focus-visible {
   color: var(--fg);
 }
+nav .links a.lang-switch {
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  padding: 3px 8px;
+  color: var(--fg);
+}
+nav .links a.lang-switch:hover,
+nav .links a.lang-switch:focus-visible {
+  border-color: var(--accent);
+  color: var(--accent);
+}
 
 /* ---------- hero ---------- */
 .hero {

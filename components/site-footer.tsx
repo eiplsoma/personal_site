@@ -1,6 +1,10 @@
-import { cv } from "@/lib/cv"
+import { getCv } from "@/lib/cv"
+import { t, type Locale } from "@/lib/i18n"
 
-export function SiteFooter() {
+export function SiteFooter({ locale }: { locale: Locale }) {
+  const cv = getCv(locale)
+  const strings = t(locale)
+
   return (
     <footer id="contact">
       <div className="wrap row">
@@ -14,7 +18,7 @@ export function SiteFooter() {
           </a>
         </div>
         <div className="deploy">
-          <span className="dot" /> built with Next.js · deployed via GitHub Actions
+          <span className="dot" /> {strings.footer.builtWith}
         </div>
       </div>
     </footer>
