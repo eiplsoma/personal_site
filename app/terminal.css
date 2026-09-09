@@ -1,0 +1,33 @@
+.term-page {
+  height: 100vh;
+  background: #0b0d0f;
+  padding: 16px;
+  padding-top: 56px;
+  box-sizing: border-box;
+}
+
+.term-xterm {
+  height: 100%;
+  width: 100%;
+}
+
+.term-skip {
+  position: fixed;
+  top: 16px;
+  right: 16px;
+  color: #d4f5d4;
+  background: #14201a;
+  border: 1px solid #2a3a2a;
+  border-radius: 6px;
+  padding: 8px 14px;
+  font-size: 13px;
+  font-family: "IBM Plex Mono", ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  text-decoration: none;
+  z-index: 10;
+}
+
+.term-skip:hover,
+.term-skip:focus-visible {
+  border-color: #5fbf7a;
+  color: #5fbf7a;
+}

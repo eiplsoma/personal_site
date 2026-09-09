@@ -4,7 +4,12 @@ export const locales: Locale[] = ["en", "hu"]
 export const defaultLocale: Locale = "en"
 
 export function localePath(locale: Locale, path: string) {
-  return locale === defaultLocale ? path : `/hu${path === "/" ? "" : path}`
+  if (locale === defaultLocale) {
+    // "/" is now the interactive terminal landing page, not the regular
+    // site - the English regular site lives at /site instead.
+    return path === "/" ? "/site" : path
+  }
+  return `/hu${path === "/" ? "" : path}`
 }
 
 const dict = {

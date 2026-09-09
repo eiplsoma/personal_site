@@ -1,6 +1,6 @@
 import type { Metadata } from "next"
 import { getCv } from "@/lib/cv"
-import { HomeContent } from "@/components/home-content"
+import { TerminalLab } from "@/components/terminal-lab"
 
 const cv = getCv("en")
 
@@ -9,13 +9,9 @@ export const metadata: Metadata = {
   description: cv.tagline,
   alternates: {
     canonical: "/",
-    languages: {
-      en: "/",
-      hu: "/hu",
-    },
   },
 }
 
 export default function Home() {
-  return <HomeContent locale="en" />
+  return <TerminalLab />
 }
