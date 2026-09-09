@@ -106,9 +106,14 @@ jobs:
           ssh vps 'set -e; cd ~/personal-site; echo "IMAGE_TAG='"$IMAGE_SHA"'" > .env; docker compose pull; docker compose up -d; docker image prune -f'
 
       - name: Smoke test
+        # Runs from inside the VPS, not against the public https://eiplsoma.hu
+        # from this runner - the same Cloudflare bot-mitigation 403 already
+        # documented on the sibling CICD demo project hits any automated
+        # external check here too. Checking localhost on the VPS sidesteps
+        # Cloudflare entirely.
         run: |
           sleep 5
-          status=$(curl -s -o /dev/null -w "%{http_code}" --max-time 10 https://eiplsoma.hu/)
+          status=$(ssh vps 'curl -s -o /dev/null -w "%{http_code}" --max-time 10 http://localhost/')
           echo "HTTP status: $status"
           if [ "$status" != "200" ]; then
             echo "Smoke test failed: site did not return 200. Check the personal-site container on the VPS (docker ps / docker logs personal-site) and the proxy's nginx config."
