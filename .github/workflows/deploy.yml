@@ -62,7 +62,7 @@ jobs:
 
       - name: Install cloudflared
         run: |
-          curl -fsSL --proto '=https' --tlsv1.2 --retry 3 -o /usr/local/bin/cloudflared https://github.com/cloudflare/cloudflared/releases/download/2026.8.3/cloudflared-linux-amd64
+          curl -fsSL --proto '=https' --proto-redir '=https' --tlsv1.2 --retry 3 -o /usr/local/bin/cloudflared https://github.com/cloudflare/cloudflared/releases/download/2026.8.3/cloudflared-linux-amd64
           echo "f29324fe934d1e100617484c78deef803c4dc2cd351d645bbde42e96b4fccc5e  /usr/local/bin/cloudflared" | sha256sum -c -
           chmod +x /usr/local/bin/cloudflared
 
@@ -100,8 +100,10 @@ jobs:
           scp deploy/docker-compose.yml vps:~/personal-site/docker-compose.yml
 
       - name: Deploy on VPS
+        env:
+          IMAGE_SHA: ${{ github.sha }}
         run: |
-          ssh vps 'set -e; cd ~/personal-site; echo "IMAGE_TAG=${{ github.sha }}" > .env; docker compose pull; docker compose up -d; docker image prune -f'
+          ssh vps 'set -e; cd ~/personal-site; echo "IMAGE_TAG='"$IMAGE_SHA"'" > .env; docker compose pull; docker compose up -d; docker image prune -f'
 
       - name: Smoke test
         run: |
@@ -109,6 +111,6 @@ jobs:
           status=$(curl -s -o /dev/null -w "%{http_code}" --max-time 10 https://eiplsoma.hu/)
           echo "HTTP status: $status"
           if [ "$status" != "200" ]; then
-            echo "Smoke test failed — site did not return 200, see docs/deploy-runbook.md"
+            echo "Smoke test failed: site did not return 200. Check the personal-site container on the VPS (docker ps / docker logs personal-site) and the proxy's nginx config."
             exit 1
           fi
