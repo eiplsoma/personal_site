@@ -75,14 +75,14 @@ function runCommand(cmd: string, history: string[]): Action {
     }
     case "cd": {
       if (arg === "projects") return { kind: "navigate", href: "/projects" }
-      if (arg === "site" || arg === "..") return { kind: "navigate", href: "/site" }
+      if (arg === "site" || arg === "..") return { kind: "navigate", href: "/concept" }
       return { kind: "print", lines: [`cd: ${arg || "(missing operand)"}: No such directory`] }
     }
     case "projects":
       return { kind: "navigate", href: "/projects" }
     case "site":
     case "exit":
-      return { kind: "navigate", href: "/site" }
+      return { kind: "navigate", href: "/concept" }
     case "clear":
       return { kind: "clear" }
     case "sudo":
@@ -244,7 +244,7 @@ export function TerminalLab() {
 
   return (
     <div className="term-page">
-      <a href="/site" className="term-skip">
+      <a href="/concept" className="term-skip">
         Skip to full site →
       </a>
       <div ref={containerRef} className="term-xterm" />
