@@ -85,6 +85,39 @@ function runCommand(cmd: string, history: string[]): Action {
       return { kind: "navigate", href: "/site" }
     case "clear":
       return { kind: "clear" }
+    case "sudo":
+      return { kind: "print", lines: ["Permission denied: you're not root here either."] }
+    case "ping":
+      return { kind: "print", lines: ["pong"] }
+    case "abracadabra":
+      return { kind: "print", lines: ["Nothing happens. You're not a wizard, Harry."] }
+    case "hello":
+      if (arg === "world") {
+        return { kind: "print", lines: ["Hello, World!"] }
+      }
+      return { kind: "print", lines: ["Hi."] }
+    case "418":
+      return { kind: "print", lines: ["I'm a teapot."] }
+    case "bug":
+      return {
+        kind: "print",
+        lines: ["First bug ever found: an actual moth, stuck in a relay of the Harvard Mark II (1947, Grace Hopper's team). That's where \"debugging\" comes from."],
+      }
+    case ":q":
+    case ":wq":
+      return { kind: "print", lines: ["This isn't vim. (There is no escape.)"] }
+    case "hack":
+      if (arg === "nasa") {
+        return { kind: "print", lines: ["Access granted. (Please don't sue me, NASA.)"] }
+      }
+      return { kind: "print", lines: [`command not found: ${c} (try "help")`] }
+    case "rm":
+      return { kind: "print", lines: ["Nice try. Nothing to delete on a static export."] }
+    case "sl":
+      return {
+        kind: "print",
+        lines: ["    ====        ________                ___________", "_D _|  |_______/        \\__I_I_____===__|_________|", " |(_)---  |   H\\________/ |   |        =|___ ___|", " /     |  |   H  |  |     |   |         ||_| |_||", "|      |  |   H  |__--------------------| [___] |", "| ________|___H__/__|_____/[][]~\\___/[][]      |", "|/ |   |-----------I_____I [][] []  D   |=======|__", "", "(you meant \"ls\")"],
+      }
     default:
       if (Object.hasOwn(bareFileAlias, word)) {
         return { kind: "print", lines: FILES[bareFileAlias[word]]() }
@@ -212,7 +245,7 @@ export function TerminalLab() {
   return (
     <div className="term-page">
       <a href="/site" className="term-skip">
-        skip to full site →
+        Skip to full site →
       </a>
       <div ref={containerRef} className="term-xterm" />
     </div>

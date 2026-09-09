@@ -15,19 +15,22 @@
   position: fixed;
   top: 16px;
   right: 16px;
-  color: #d4f5d4;
-  background: #14201a;
-  border: 1px solid #2a3a2a;
-  border-radius: 6px;
-  padding: 8px 14px;
-  font-size: 13px;
+  color: #14151a;
+  background: #ff5b69;
+  border: none;
+  border-radius: 999px;
+  padding: 16px 28px;
+  font-size: 17px;
+  font-weight: 600;
   font-family: "IBM Plex Mono", ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
   text-decoration: none;
+  box-shadow: 0 4px 18px rgba(255, 91, 105, 0.4);
   z-index: 10;
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
 }
 
 .term-skip:hover,
 .term-skip:focus-visible {
-  border-color: #5fbf7a;
-  color: #5fbf7a;
+  transform: translateY(-1px);
+  box-shadow: 0 6px 22px rgba(255, 91, 105, 0.55);
 }
