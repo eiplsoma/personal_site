@@ -68,9 +68,10 @@ function runCommand(cmd: string, history: string[]): Action {
     case "history":
       return { kind: "print", lines: history.map((h, i) => `  ${i + 1}  ${h}`) }
     case "cat": {
-      const file = FILES[arg]
-      if (!file) return { kind: "print", lines: [`cat: ${arg || "(missing operand)"}: No such file`] }
-      return { kind: "print", lines: file() }
+      if (!Object.hasOwn(FILES, arg)) {
+        return { kind: "print", lines: [`cat: ${arg || "(missing operand)"}: No such file`] }
+      }
+      return { kind: "print", lines: FILES[arg]() }
     }
     case "cd": {
       if (arg === "projects") return { kind: "navigate", href: "/projects" }
@@ -85,7 +86,9 @@ function runCommand(cmd: string, history: string[]): Action {
     case "clear":
       return { kind: "clear" }
     default:
-      if (bareFileAlias[word]) return { kind: "print", lines: FILES[bareFileAlias[word]]() }
+      if (Object.hasOwn(bareFileAlias, word)) {
+        return { kind: "print", lines: FILES[bareFileAlias[word]]() }
+      }
       return { kind: "print", lines: [`command not found: ${c} (try "help")`] }
   }
 }
@@ -118,6 +121,7 @@ export function TerminalLab() {
     term.loadAddon(fitAddon)
     term.open(containerRef.current)
     fitAddon.fit()
+    term.focus()
     termRef.current = term
 
     let line = ""
