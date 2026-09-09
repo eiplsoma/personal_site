@@ -64,9 +64,13 @@ jobs:
           persist-credentials: false
 
       - name: Install cloudflared
+        # Pinned to 2026.5.1, not latest: 2026.6.0+ has a confirmed regression
+        # where `access ssh`/`access tcp` ignores service-token credentials
+        # entirely and falls back to interactive browser auth on every
+        # connection (cloudflare/cloudflared#1673). No fix exists yet upstream.
         run: |
-          curl -sL -o /usr/local/bin/cloudflared https://github.com/cloudflare/cloudflared/releases/download/2026.8.3/cloudflared-linux-amd64
-          echo "f29324fe934d1e100617484c78deef803c4dc2cd351d645bbde42e96b4fccc5e  /usr/local/bin/cloudflared" | sha256sum -c -
+          curl -sL -o /usr/local/bin/cloudflared https://github.com/cloudflare/cloudflared/releases/download/2026.5.1/cloudflared-linux-amd64
+          echo "3c6a5ba995a258dbe90f98e5fdb2c2620b7be72c3ca761614f6eb52aee252cea  /usr/local/bin/cloudflared" | sha256sum -c -
           chmod +x /usr/local/bin/cloudflared
 
       - name: Set up SSH over Cloudflare Access
