@@ -37,10 +37,7 @@ export function HomeContent({ locale }: { locale: Locale }) {
           </div>
 
           <div className="hero-actions">
-            <a className="btn primary" href="/cv.pdf" download>
-              {strings.hero.downloadCv}
-            </a>
-            <Link className="btn" href={localePath(locale, "/projects")}>
+            <Link className="btn primary" href={localePath(locale, "/projects")}>
               {strings.hero.seeProject}
             </Link>
           </div>
