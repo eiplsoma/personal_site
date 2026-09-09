@@ -46,16 +46,16 @@ export function HomeContent({ locale }: { locale: Locale }) {
           </div>
         </section>
 
-        <div className="divider">{strings.dividers.about}</div>
-        <section id="about">
+        <div className="divider" id="about">{strings.dividers.about}</div>
+        <section>
           {cv.about.slice(1).map((paragraph) => (
             <p key={paragraph}>{paragraph}</p>
           ))}
           <p className="lead">{cv.lookingFor}</p>
         </section>
 
-        <div className="divider">{strings.dividers.experience}</div>
-        <section id="work">
+        <div className="divider" id="work">{strings.dividers.experience}</div>
+        <section>
           <div className="timeline">
             {cv.experience.map((item) => (
               <div className="titem" key={item.title}>
@@ -89,8 +89,8 @@ export function HomeContent({ locale }: { locale: Locale }) {
           </>
         )}
 
-        <div className="divider">{strings.dividers.skills}</div>
-        <section id="skills">
+        <div className="divider" id="skills">{strings.dividers.skills}</div>
+        <section>
           <div className="skill-groups">
             <div className="skill-group">
               <div className="gtitle">{strings.skillGroups.technical}</div>
@@ -119,8 +119,8 @@ export function HomeContent({ locale }: { locale: Locale }) {
           </div>
         </section>
 
-        <div className="divider">{strings.dividers.background}</div>
-        <section id="background">
+        <div className="divider" id="background">{strings.dividers.background}</div>
+        <section>
           <div className="gtitle" style={{ marginBottom: 10 }}>{strings.background.education}</div>
           <div className="timeline">
             {cv.education.map((item) => (
