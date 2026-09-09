@@ -6,8 +6,12 @@ export const defaultLocale: Locale = "en"
 export function localePath(locale: Locale, path: string) {
   if (locale === defaultLocale) {
     // "/" is now the interactive terminal landing page, not the regular
-    // site - the English regular site lives at /site instead.
-    return path === "/" ? "/site" : path
+    // site - the English regular site lives at /site instead. Anchor
+    // links like "/#about" need the same prefix, or they'd resolve to
+    // the terminal page with a dangling hash instead of /site#about.
+    if (path === "/") return "/site"
+    if (path.startsWith("/#")) return `/site${path}`
+    return path
   }
   return `/hu${path === "/" ? "" : path}`
 }
