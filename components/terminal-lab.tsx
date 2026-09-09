@@ -35,7 +35,7 @@ const HELP_LINES = [
   "whoami",
   "pwd",
   "history",
-  "clear              (or cls)",
+  "clear",
 ]
 
 function runCommand(cmd: string, history: string[]): Action {
@@ -83,7 +83,6 @@ function runCommand(cmd: string, history: string[]): Action {
     case "exit":
       return { kind: "navigate", href: "/site" }
     case "clear":
-    case "cls":
       return { kind: "clear" }
     default:
       if (bareFileAlias[word]) return { kind: "print", lines: FILES[bareFileAlias[word]]() }
