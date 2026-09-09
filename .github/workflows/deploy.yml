@@ -4,6 +4,9 @@ on:
   push:
     branches: [main]
 
+permissions:
+  contents: read
+
 concurrency:
   group: deploy-production
   cancel-in-progress: false
@@ -17,6 +20,8 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
 
       - name: Setup pnpm
         uses: pnpm/action-setup@ea17c68df8912ef543352723c149a84f56e3d413 # v6.1.0
@@ -109,11 +114,16 @@ jobs:
         # Runs from inside the VPS, not against the public https://eiplsoma.hu
         # from this runner - the same Cloudflare bot-mitigation 403 already
         # documented on the sibling CICD demo project hits any automated
-        # external check here too. Checking localhost on the VPS sidesteps
-        # Cloudflare entirely.
+        # external check here too. Checking locally on the VPS sidesteps
+        # Cloudflare entirely. --resolve forces the connection to 127.0.0.1
+        # while still sending the real SNI/Host, so this hits the actual
+        # eiplsoma.hu vhost on the shared proxy - not just "whatever nginx
+        # answers on localhost", which could be an unrelated site on this
+        # box. Only checks for a 200 for now, not page content, since the
+        # proxy still serves a placeholder until the nginx cutover happens.
         run: |
           sleep 5
-          status=$(ssh vps 'curl -sk -o /dev/null -w "%{http_code}" --max-time 10 -H "Host: eiplsoma.hu" https://localhost/')
+          status=$(ssh vps 'curl -sk -o /dev/null -w "%{http_code}" --max-time 10 --resolve eiplsoma.hu:443:127.0.0.1 https://eiplsoma.hu/')
           echo "HTTP status: $status"
           if [ "$status" != "200" ]; then
             echo "Smoke test failed: site did not return 200. Check the personal-site container on the VPS (docker ps / docker logs personal-site) and the proxy's nginx config."
