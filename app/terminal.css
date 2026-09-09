@@ -34,3 +34,19 @@
   transform: translateY(-1px);
   box-shadow: 0 6px 22px rgba(255, 91, 105, 0.55);
 }
+
+.term-concept-link {
+  position: fixed;
+  top: 76px;
+  right: 16px;
+  color: #6b7a70;
+  font-size: 12px;
+  font-family: "IBM Plex Mono", ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  text-decoration: none;
+  z-index: 10;
+}
+
+.term-concept-link:hover,
+.term-concept-link:focus-visible {
+  color: #9fd4b0;
+}

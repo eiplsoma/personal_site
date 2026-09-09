@@ -249,6 +249,9 @@ export function TerminalLab() {
       <a href="/site" className="term-skip">
         Skip to full site →
       </a>
+      <a href="/concept" className="term-concept-link">
+        or see the concept version →
+      </a>
       <div ref={containerRef} className="term-xterm" />
     </div>
   )
