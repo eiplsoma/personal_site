@@ -1,3 +1,4 @@
+import Image from "next/image"
 import Link from "next/link"
 import { getCv } from "@/lib/cv"
 import { localePath, t, type Locale } from "@/lib/i18n"
@@ -31,8 +32,14 @@ export function HomeContent({ locale }: { locale: Locale }) {
           </p>
 
           <div className="hero-row">
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img className="hero-photo" src="/profile-photo.jpg" alt={cv.name} />
+            <Image
+              className="hero-photo"
+              src="/profile-photo.webp"
+              alt={cv.name}
+              width={1200}
+              height={1600}
+              priority
+            />
             <p className="lead">{cv.about[0]}</p>
           </div>
 
