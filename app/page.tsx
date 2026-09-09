@@ -41,6 +41,14 @@ export default function Home() {
           </div>
         </section>
 
+        <div className="divider"># about</div>
+        <section id="about">
+          {cv.about.slice(1).map((paragraph) => (
+            <p key={paragraph}>{paragraph}</p>
+          ))}
+          <p className="lead">{cv.lookingFor}</p>
+        </section>
+
         <div className="divider"># experience</div>
         <section id="work">
           <div className="timeline">

@@ -12,6 +12,7 @@
     "On the side, I build and deploy my own projects: Dockerized applications, GitHub Actions pipelines with automated VPS deployment, nginx/TLS setup, and structured post-deploy security audits.",
     "I also work with structured data systems - redesigning reporting logic around bookkeeping data models and rebuilding calculated fields from legacy MDB/DLL sources for dashboard reporting."
   ],
+  "lookingFor": "Right now, I'm growing toward infrastructure- and security-focused roles where I can own systems end to end - the kind of work this site's own deploy pipeline and VPS hardening already represent.",
   "experience": [
     {
       "title": "IT Support Specialist",

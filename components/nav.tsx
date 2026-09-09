@@ -8,6 +8,7 @@ export function Nav() {
           soma<span>@</span>eipl
         </Link>
         <div className="links">
+          <Link href="/#about">about</Link>
           <Link href="/#work">work</Link>
           <Link href="/projects">projects</Link>
           <Link href="/#skills">skills</Link>
