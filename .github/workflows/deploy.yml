@@ -60,30 +60,38 @@ jobs:
         with:
           persist-credentials: false
 
+      - name: Install cloudflared
+        run: |
+          curl -sL -o /usr/local/bin/cloudflared https://github.com/cloudflare/cloudflared/releases/download/2026.8.3/cloudflared-linux-amd64
+          echo "f29324fe934d1e100617484c78deef803c4dc2cd351d645bbde42e96b4fccc5e  /usr/local/bin/cloudflared" | sha256sum -c -
+          chmod +x /usr/local/bin/cloudflared
+
+      - name: Set up SSH over Cloudflare Access
+        env:
+          CF_ACCESS_CLIENT_ID: ${{ secrets.CF_ACCESS_CLIENT_ID }}
+          CF_ACCESS_CLIENT_SECRET: ${{ secrets.CF_ACCESS_CLIENT_SECRET }}
+        run: |
+          mkdir -p ~/.ssh
+          chmod 700 ~/.ssh
+          echo "${{ secrets.VPS_SSH_KEY }}" > ~/.ssh/deploy_key
+          chmod 600 ~/.ssh/deploy_key
+          echo "ssh.eiplsoma.hu ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIJMaOYsuKBX5ds4PtTwoayoSsvk7ggIaMJ8eWchJZb3l" > ~/.ssh/known_hosts
+          cat >> ~/.ssh/config <<EOF
+          Host vps
+            HostName ssh.eiplsoma.hu
+            User ${{ secrets.VPS_USER }}
+            IdentityFile ~/.ssh/deploy_key
+            ProxyCommand cloudflared access ssh --hostname %h --service-token-id=$CF_ACCESS_CLIENT_ID --service-token-secret=$CF_ACCESS_CLIENT_SECRET
+            StrictHostKeyChecking yes
+          EOF
+          chmod 600 ~/.ssh/config
+
       - name: Copy compose file to VPS
-        uses: appleboy/scp-action@ff85246acaad7bdce478db94a363cd2bf7c90345 # v1.0.0
-        with:
-          host: ${{ secrets.VPS_HOST }}
-          username: ${{ secrets.VPS_USER }}
-          key: ${{ secrets.VPS_SSH_KEY }}
-          source: "deploy/docker-compose.yml"
-          target: "personal-site"
-          strip_components: 1
+        run: scp deploy/docker-compose.yml vps:~/personal-site/docker-compose.yml
 
       - name: Deploy on VPS
-        uses: appleboy/ssh-action@0ff4204d59e8e51228ff73bce53f80d53301dee2 # v1.2.5
-        with:
-          host: ${{ secrets.VPS_HOST }}
-          username: ${{ secrets.VPS_USER }}
-          key: ${{ secrets.VPS_SSH_KEY }}
-          envs: GITHUB_SHA
-          script: |
-            set -e
-            cd ~/personal-site
-            echo "IMAGE_TAG=$GITHUB_SHA" > .env
-            docker compose pull
-            docker compose up -d
-            docker image prune -f
+        run: |
+          ssh vps 'set -e; cd ~/personal-site; echo "IMAGE_TAG=${{ github.sha }}" > .env; docker compose pull; docker compose up -d; docker image prune -f'
 
       - name: Smoke test
         run: |
