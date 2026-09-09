@@ -113,7 +113,7 @@ jobs:
         # Cloudflare entirely.
         run: |
           sleep 5
-          status=$(ssh vps 'curl -s -o /dev/null -w "%{http_code}" --max-time 10 http://localhost/')
+          status=$(ssh vps 'curl -sk -o /dev/null -w "%{http_code}" --max-time 10 -H "Host: eiplsoma.hu" https://localhost/')
           echo "HTTP status: $status"
           if [ "$status" != "200" ]; then
             echo "Smoke test failed: site did not return 200. Check the personal-site container on the VPS (docker ps / docker logs personal-site) and the proxy's nginx config."
