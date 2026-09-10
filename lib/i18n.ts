@@ -42,8 +42,7 @@ const dict = {
       projects: "# projects",
     },
     featuredProject: {
-      lead: "A Next.js app deployed to a production VPS through a pipeline I built and debugged myself — including the parts that didn't go to plan.",
-      fullWriteUp: "Full write-up →",
+      fullWriteUp: "See all projects →",
     },
     skillGroups: {
       technical: "Technical",
@@ -69,7 +68,7 @@ const dict = {
       extraFeatured: [
         {
           title: "This site — VPS & Cloudflare hardening",
-          lead: "Discovered the origin server was directly reachable, bypassing the CDN, and built layered defenses against it (network-level restriction + cryptographic authentication between CDN and origin), and hardened the deploy pipeline and SSH access.",
+          lead: "Ran a security audit and hardening pass on this site's own infrastructure: layered network and cryptographic protections between the CDN and origin, plus deploy pipeline and SSH access hardening.",
           tags: ["Docker", "Cloudflare", "GitHub Actions", "nginx"],
           github: "https://github.com/eiplsoma/personal_site",
         },
@@ -130,8 +129,7 @@ const dict = {
       projects: "# projektek",
     },
     featuredProject: {
-      lead: "Egy Next.js alkalmazás, amit egy éles VPS-re deployoltam a saját magam által épített és debugolt pipeline-on keresztül — beleértve azt is, ami nem a terv szerint alakult.",
-      fullWriteUp: "Teljes leírás →",
+      fullWriteUp: "Az összes projekt →",
     },
     skillGroups: {
       technical: "Technikai",
@@ -157,7 +155,7 @@ const dict = {
       extraFeatured: [
         {
           title: "Ez az oldal — VPS & Cloudflare hardening",
-          lead: "Felfedeztem, hogy az origin szerver közvetlenül is elérhető volt a CDN megkerülésével, és rétegzett védelmet építettem ki ellene (hálózati szintű korlátozás + kriptográfiai hitelesítés a CDN és az origin között), valamint megkeményítettem a deploy-pipeline-t és az SSH-hozzáférést.",
+          lead: "Biztonsági auditot és hardening-kört futtattam ennek az oldalnak a saját infrastruktúráján: rétegzett hálózati és kriptográfiai védelem a CDN és az origin között, valamint deploy-pipeline és SSH-hozzáférés megkeményítése.",
           tags: ["Docker", "Cloudflare", "GitHub Actions", "nginx"],
           github: "https://github.com/eiplsoma/personal_site",
         },

@@ -1,8 +1,14 @@
 import { getCv } from "@/lib/cv"
+import { t } from "@/lib/i18n"
 import "@/app/concept/concept.css"
 
 export function ConceptContent() {
   const cv = getCv("en")
+  const strings = t("en").projectsPage
+  const changelog = [
+    { title: strings.cardTitle, summary: strings.cardLead },
+    ...strings.extraFeatured.map((p) => ({ title: p.title, summary: p.lead })),
+  ]
 
   return (
     <div className="concept-page">
@@ -70,17 +76,13 @@ export function ConceptContent() {
 
           <div className="dash-card">
             <h2>Changelog</h2>
-            {cv.experience.map((e) => (
+            {changelog.map((e) => (
               <div className="deploy-entry" key={e.title}>
                 <div className="deploy-head">
                   <span className="title">{e.title}</span>
-                  <span className="period">{e.period}</span>
                 </div>
-                <div className="deploy-org">{e.org}</div>
                 <ul>
-                  {e.bullets.map((b) => (
-                    <li key={b}>{b}</li>
-                  ))}
+                  <li>{e.summary}</li>
                 </ul>
               </div>
             ))}
@@ -92,6 +94,9 @@ export function ConceptContent() {
             <a href={`mailto:${cv.footer.email}`}>{cv.footer.email}</a>
             <a href={`https://${cv.footer.github}`} target="_blank" rel="noreferrer">
               {cv.footer.github}
+            </a>
+            <a href={`https://${cv.footer.linkedin}`} target="_blank" rel="noreferrer">
+              {cv.footer.linkedin}
             </a>
           </div>
           <div>{cv.languages}</div>

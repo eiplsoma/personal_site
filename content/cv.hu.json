@@ -23,18 +23,6 @@
         "Rendszerszintű hibaelhárítás és infrastruktúra-támogatás a napi operáció során",
         "Belső digitális megoldások és munkafolyamat-automatizálás tervezése és megvalósítása"
       ]
-    },
-    {
-      "title": "Self-Hosted CI/CD Pipeline - Next.js egy VPS-en",
-      "org": "Saját projekt",
-      "period": "2026",
-      "bulletsLabel": "Kiemelt pontok:",
-      "bullets": [
-        "Multi-stage Docker image + GitHub Actions pipeline automatizált SSH deploy-jal",
-        "Diagnosztizáltam egy Cloudflare bot-mitigation konfliktust (HTTP 403), ami megtörte az automatizált health checkeket, majd újraterveztem őket, hogy a VPS-en belülről fussanak",
-        "Végponttól-végpontig hardeneltem egy friss VPS-t: non-root sudo hozzáférés, csak SSH-kulcsos authentikáció, UFW firewall, fail2ban, automatikus biztonsági patchelés",
-        "Minden bejövő portot lezártam a 80/443 kivételével azzal, hogy az SSH-t Cloudflare Zero Trust Tunnel mögé helyeztem, és a tunnelen keresztül ellenőriztem ugyanazt a host-key ujjlenyomatot, hogy kizárjak egy MITM-et"
-      ]
     }
   ],
   "education": [

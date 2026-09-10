@@ -23,18 +23,6 @@
         "System-level troubleshooting and infrastructure support in daily operations",
         "Design and implement internal digital solutions and workflow automation"
       ]
-    },
-    {
-      "title": "Self-Hosted CI/CD Pipeline - Next.js on a VPS",
-      "org": "Personal Project",
-      "period": "2026",
-      "bulletsLabel": "Highlights:",
-      "bullets": [
-        "Multi-stage Docker image + GitHub Actions pipeline with automated SSH deploy",
-        "Diagnosed a Cloudflare bot-mitigation conflict (HTTP 403) breaking automated health checks, and redesigned them to run from inside the VPS",
-        "Hardened a fresh VPS end to end: non-root sudo access, SSH key-only auth, UFW firewall, fail2ban, automatic security patching",
-        "Closed every inbound port except 80/443 by moving SSH behind a Cloudflare Zero Trust Tunnel, verifying the same host-key fingerprint through the tunnel to rule out a MITM"
-      ]
     }
   ],
   "education": [

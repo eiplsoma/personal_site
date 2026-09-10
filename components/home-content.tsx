@@ -8,7 +8,6 @@ import { SiteFooter } from "@/components/site-footer"
 export function HomeContent({ locale }: { locale: Locale }) {
   const cv = getCv(locale)
   const strings = t(locale)
-  const project = cv.experience.find((e) => e.org === "Personal Project" || e.org === "Saját projekt")
 
   return (
     <>
@@ -78,20 +77,18 @@ export function HomeContent({ locale }: { locale: Locale }) {
           </div>
         </section>
 
-        {project && (
-          <>
-            <div className="divider">{strings.dividers.featuredProject}</div>
-            <section>
-              <div className="project-card">
-                <h3>{project.title}</h3>
-                <p className="lead">{strings.featuredProject.lead}</p>
-                <div className="project-links">
-                  <Link href={localePath(locale, "/projects")}>{strings.featuredProject.fullWriteUp}</Link>
-                </div>
-              </div>
-            </section>
-          </>
-        )}
+        <div className="divider">{strings.dividers.featuredProject}</div>
+        <section>
+          <div className="project-card">
+            <h3>{strings.projectsPage.cardTitle}</h3>
+            <p className="lead">{strings.projectsPage.cardLead}</p>
+            <div className="hero-actions" style={{ marginTop: 20 }}>
+              <Link className="btn primary" href={localePath(locale, "/projects")}>
+                {strings.featuredProject.fullWriteUp}
+              </Link>
+            </div>
+          </div>
+        </section>
 
         <div className="divider" id="skills">{strings.dividers.skills}</div>
         <section>
