@@ -57,3 +57,21 @@
   border-color: #9fd4b0;
   background: rgba(159, 212, 176, 0.1);
 }
+
+@media (max-width: 480px) {
+  .term-page {
+    padding-top: 112px;
+  }
+  .term-skip {
+    top: 10px;
+    right: 10px;
+    padding: 10px 18px;
+    font-size: 14px;
+  }
+  .term-concept-link {
+    top: 60px;
+    right: 10px;
+    padding: 8px 14px;
+    font-size: 12px;
+  }
+}

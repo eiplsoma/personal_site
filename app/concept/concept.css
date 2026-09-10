@@ -170,6 +170,13 @@
   }
 }
 
+@media (max-width: 480px) {
+  .concept-nav {
+    flex-wrap: wrap;
+    gap: 6px 12px;
+  }
+}
+
 .dash-card {
   background: var(--surface);
   border: 1px solid var(--border);
