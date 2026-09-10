@@ -111,24 +111,20 @@ jobs:
         env:
           IMAGE_SHA: ${{ github.sha }}
         run: |
-          ssh vps 'set -e; cd ~/personal-site; echo "IMAGE_TAG='"$IMAGE_SHA"'" > .env; docker compose pull; docker compose up -d; docker image prune -f'
+          ssh vps 'set -e; cd ~/personal-site; echo "IMAGE_TAG='"$IMAGE_SHA"'" > .env; docker compose pull; docker compose up -d; docker image prune -af'
 
       - name: Smoke test
-        # Runs from inside the VPS, not against the public https://eiplsoma.hu
-        # from this runner - the same Cloudflare bot-mitigation 403 already
-        # documented on the sibling CICD demo project hits any automated
-        # external check here too. Checking locally on the VPS sidesteps
-        # Cloudflare entirely. --resolve forces the connection to 127.0.0.1
-        # while still sending the real SNI/Host, so this hits the actual
-        # eiplsoma.hu vhost on the shared proxy - not just "whatever nginx
-        # answers on localhost", which could be an unrelated site on this
-        # box. Only checks for a 200 for now, not page content, since the
-        # proxy still serves a placeholder until the nginx cutover happens.
+        # Checks the personal-site container directly over the internal `web`
+        # docker network (via the proxy container, which has wget) rather than
+        # through the public https://eiplsoma.hu path. The edge proxy enforces
+        # a Cloudflare-only IP allowlist and Authenticated Origin Pulls (mTLS),
+        # so a plain request from this runner would get rejected there
+        # regardless of whether personal-site itself is healthy - that edge
+        # protection is verified separately, manually, from outside Cloudflare.
+        # This step only confirms the freshly deployed container is serving.
         run: |
           sleep 5
-          status=$(ssh vps 'curl -sk -o /dev/null -w "%{http_code}" --max-time 10 --resolve eiplsoma.hu:443:127.0.0.1 https://eiplsoma.hu/')
-          echo "HTTP status: $status"
-          if [ "$status" != "200" ]; then
-            echo "Smoke test failed: site did not return 200. Check the personal-site container on the VPS (docker ps / docker logs personal-site) and the proxy's nginx config."
+          if ! ssh vps 'docker exec proxy-nginx-1 wget --spider -q http://personal-site:80/index.html'; then
+            echo "Smoke test failed: personal-site container did not respond. Check docker ps / docker logs personal-site on the VPS."
             exit 1
           fi
