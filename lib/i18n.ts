@@ -103,6 +103,16 @@ const dict = {
     footer: {
       builtWith: "built with Next.js · deployed via GitHub Actions",
     },
+    concept: {
+      backToTerminal: "← terminal",
+      classicSite: "classic site →",
+      infraStats: [
+        "inbound ports open (80/443)",
+        "this site's own deploy pipeline",
+        "SSH behind a Cloudflare Tunnel",
+        "firewall & intrusion prevention",
+      ],
+    },
   },
   hu: {
     nav: {
@@ -189,6 +199,16 @@ const dict = {
     },
     footer: {
       builtWith: "built with Next.js · deployed via GitHub Actions",
+    },
+    concept: {
+      backToTerminal: "← terminál",
+      classicSite: "klasszikus oldal →",
+      infraStats: [
+        "nyitott bejövő port (80/443)",
+        "ennek az oldalnak a saját deploy pipeline-ja",
+        "SSH Cloudflare Tunnel mögött",
+        "tűzfal és behatolás-védelem",
+      ],
     },
   },
 } as const

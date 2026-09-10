@@ -1,14 +1,16 @@
 import { getCv } from "@/lib/cv"
-import { t } from "@/lib/i18n"
+import { localePath, t, type Locale } from "@/lib/i18n"
 import "@/app/concept/concept.css"
 
-export function ConceptContent() {
-  const cv = getCv("en")
-  const strings = t("en").projectsPage
+export function ConceptContent({ locale = "en" }: { locale?: Locale }) {
+  const cv = getCv(locale)
+  const strings = t(locale)
+  const projects = strings.projectsPage
   const changelog = [
-    { title: strings.cardTitle, summary: strings.cardLead },
-    ...strings.extraFeatured.map((p) => ({ title: p.title, summary: p.lead })),
+    { title: projects.cardTitle, summary: projects.cardLead },
+    ...projects.extraFeatured.map((p) => ({ title: p.title, summary: p.lead })),
   ]
+  const otherLocale: Locale = locale === "en" ? "hu" : "en"
 
   return (
     <div className="concept-page">
@@ -16,7 +18,9 @@ export function ConceptContent() {
         <nav className="concept-nav">
           <span>eiplsoma.hu / concept</span>
           <span>
-            <a href="/">← terminal</a> &nbsp;·&nbsp; <a href="/site">classic site →</a>
+            <a href="/">{strings.concept.backToTerminal}</a> &nbsp;·&nbsp;{" "}
+            <a href={localePath(locale, "/site")}>{strings.concept.classicSite}</a> &nbsp;·&nbsp;{" "}
+            <a href={localePath(otherLocale, "/concept")}>{locale === "en" ? "HU" : "EN"}</a>
           </span>
         </nav>
 
@@ -46,19 +50,19 @@ export function ConceptContent() {
         <div className="infra-stats">
           <div className="infra-stat">
             <span className="num">2</span>
-            <span className="label">inbound ports open (80/443)</span>
+            <span className="label">{strings.concept.infraStats[0]}</span>
           </div>
           <div className="infra-stat">
             <span className="num">Actions → GHCR → VPS</span>
-            <span className="label">this site's own deploy pipeline</span>
+            <span className="label">{strings.concept.infraStats[1]}</span>
           </div>
           <div className="infra-stat">
             <span className="num">Zero Trust</span>
-            <span className="label">SSH behind a Cloudflare Tunnel</span>
+            <span className="label">{strings.concept.infraStats[2]}</span>
           </div>
           <div className="infra-stat">
             <span className="num">UFW + fail2ban</span>
-            <span className="label">firewall & intrusion prevention</span>
+            <span className="label">{strings.concept.infraStats[3]}</span>
           </div>
         </div>
 

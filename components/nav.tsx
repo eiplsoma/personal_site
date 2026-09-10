@@ -14,7 +14,7 @@ export function Nav({ locale, path = "/" }: { locale: Locale; path?: string }) {
           </Link>
           <span className="view-switch">
             <a href="/">terminal</a>
-            <a href="/concept">concept</a>
+            <a href={localePath(locale, "/concept")}>concept</a>
           </span>
         </div>
         <div className="links">
