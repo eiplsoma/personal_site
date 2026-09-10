@@ -44,6 +44,15 @@
   box-sizing: border-box;
 }
 
+html {
+  /* Next.js's <Link> hash navigation ignores sticky/fixed elements when
+     computing its scroll target, so per-element scroll-margin-top isn't
+     respected here - scroll-padding-top on the scroll container is the
+     documented way to offset for a sticky header instead
+     (https://github.com/vercel/next.js/issues/49612). Value matches the
+     nav's height at each breakpoint (see the mobile override below). */
+  scroll-padding-top: 80px;
+}
 html,
 body {
   padding: 0;
@@ -562,6 +571,11 @@ footer .deploy .dot {
 }
 
 @media (max-width: 680px) {
+  html {
+    /* Mobile nav wraps to 2-3 rows, so it's taller than the desktop
+       single-row nav - matches its actual stacked height. */
+    scroll-padding-top: 150px;
+  }
   nav .row {
     flex-wrap: wrap;
     row-gap: 10px;

@@ -1,8 +1,10 @@
 import Link from "next/link"
+import { getCv } from "@/lib/cv"
 import { localePath, t, type Locale } from "@/lib/i18n"
 
 export function Nav({ locale, path = "/" }: { locale: Locale; path?: string }) {
   const strings = t(locale)
+  const cv = getCv(locale)
   const otherLocale: Locale = locale === "en" ? "hu" : "en"
 
   return (
@@ -23,7 +25,7 @@ export function Nav({ locale, path = "/" }: { locale: Locale; path?: string }) {
           <Link href={localePath(locale, "/projects")}>{strings.nav.projects}</Link>
           <Link href={localePath(locale, "/#skills")}>{strings.nav.skills}</Link>
           <Link href={localePath(locale, "/#background")}>{strings.nav.background}</Link>
-          <Link href={localePath(locale, "/#contact")}>{strings.nav.contact}</Link>
+          <a href={`mailto:${cv.footer.email}`}>{strings.nav.contact}</a>
           {/* Reserved: a future "CV Tool" nav entry goes here once the
               admin + public CV generator project is built (separate,
               later spec — see docs/superpowers/specs/). No route/auth
