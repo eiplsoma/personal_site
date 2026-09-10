@@ -18,7 +18,10 @@ export function SiteFooter({ locale }: { locale: Locale }) {
           </a>
         </div>
         <div className="deploy">
-          <span className="dot" /> {strings.footer.builtWith}
+          <div>© {new Date().getFullYear()} {cv.name}</div>
+          <div>
+            <span className="dot" /> {strings.footer.builtWith}
+          </div>
         </div>
       </div>
     </footer>
