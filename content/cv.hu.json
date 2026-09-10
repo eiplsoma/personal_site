@@ -1,6 +1,6 @@
 {
   "name": "Soma Eipl",
-  "title": "IT rendszermérnök",
+  "title": "Infrastruktúra & DevOps mérnök",
   "tagline": "Linux · Docker · CI/CD · Cloud & DNS",
   "contact": {
     "location": "Bicske, Magyarország",
@@ -73,10 +73,6 @@
     ],
     "technical": [
       {
-        "text": "Linux adminisztráció és CLI hibaelhárítás",
-        "bold": false
-      },
-      {
         "text": "Docker: multi-stage buildek és Compose",
         "bold": true
       },
@@ -85,15 +81,15 @@
         "bold": true
       },
       {
+        "text": "Cloudflare hardening: Zero Trust Tunnel, WAF és mTLS",
+        "bold": true
+      },
+      {
+        "text": "Linux adminisztráció, CLI és Bash scriptelés",
+        "bold": false
+      },
+      {
         "text": "nginx reverse proxy és TLS (Let's Encrypt/certbot)",
-        "bold": false
-      },
-      {
-        "text": "DNS és Cloudflare konfiguráció",
-        "bold": false
-      },
-      {
-        "text": "SQL adatmodellek és adatbázis-kezelés",
         "bold": false
       },
       {
@@ -101,11 +97,11 @@
         "bold": false
       },
       {
-        "text": "VirtualBox virtualizáció",
+        "text": "Biztonsági hardening: UFW, fail2ban, minimál jogosultság",
         "bold": false
       },
       {
-        "text": "Email infrastruktúra kezelés (Zoho migrációval)",
+        "text": "SQL adatmodellek és adatbázis-kezelés",
         "bold": false
       },
       {
@@ -113,11 +109,11 @@
         "bold": false
       },
       {
-        "text": "PHP",
+        "text": "PHP és tranzakciós email API integráció (Brevo)",
         "bold": false
       },
       {
-        "text": "Tranzakciós email API-k (Brevo)",
+        "text": "Email infrastruktúra kezelés (Zoho migrációval)",
         "bold": false
       },
       {
@@ -125,31 +121,11 @@
         "bold": false
       },
       {
+        "text": "Self-hosted secretkezelés (zero-open-port)",
+        "bold": false
+      },
+      {
         "text": "AI-asszisztált fejlesztési workflow-k (Claude Code)",
-        "bold": false
-      },
-      {
-        "text": "Cloudflare Zero Trust és Tunnel",
-        "bold": true
-      },
-      {
-        "text": "UFW firewall és fail2ban",
-        "bold": false
-      },
-      {
-        "text": "Self-hosted Vaultwarden",
-        "bold": false
-      },
-      {
-        "text": "Bash scriptelés",
-        "bold": false
-      },
-      {
-        "text": "Biztonsági alapok (privilege escalation, etikus hackelés koncepciók)",
-        "bold": false
-      },
-      {
-        "text": "Bootstrap",
         "bold": false
       }
     ],
@@ -162,6 +138,16 @@
       "Hatékony csapatmunka"
     ]
   },
+  "principles": [
+    { "name": "Fail fast", "desc": "A problémákat minél korábban felszínre hozni, nem elrejteni." },
+    { "name": "Keep it simple (KISS)", "desc": "A legegyszerűbb megoldás, ami tényleg megoldja a problémát, semmi több." },
+    { "name": "Defense in depth", "desc": "Több, egymástól független védelmi réteg, nem egyetlen kontrollra hagyatkozva." },
+    { "name": "Least privilege", "desc": "Csak annyi hozzáférés, amennyi ténylegesen szükséges egy komponensnek vagy kulcsnak." },
+    { "name": "Single source of truth", "desc": "Egy adatot/configot egy hely birtokol, minden más onnan olvas." },
+    { "name": "Idempotency", "desc": "Egy művelet újrafuttatása biztonságos, és ugyanazt az eredményt adja." },
+    { "name": "Root cause, not symptoms", "desc": "A hibát a valódi okáig visszavezetni, mielőtt megkerülnénk." },
+    { "name": "Reversibility", "desc": "Backup, branch és commit úgy, hogy egy hiba olcsón visszavonható legyen." }
+  ],
   "languages": "Magyar (anyanyelv) · Angol (B2) · Német (A2)",
   "drivingLicence": "Kategóriák: AM, B",
   "footer": {

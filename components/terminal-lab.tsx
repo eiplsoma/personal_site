@@ -250,7 +250,7 @@ export function TerminalLab() {
         Skip to full site →
       </a>
       <a href="/concept" className="term-concept-link">
-        or see the concept version →
+        Try the concept dashboard →
       </a>
       <div ref={containerRef} className="term-xterm" />
     </div>

@@ -84,12 +84,40 @@ a {
 /* ---------- nav ---------- */
 nav {
   border-bottom: 1px solid var(--border);
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  background: var(--bg);
+}
+nav .view-switch {
+  display: flex;
+  gap: 8px;
+  font-family: var(--mono);
+  font-size: 12px;
+}
+nav .view-switch a {
+  color: var(--muted);
+  text-decoration: none;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  padding: 2px 10px;
+}
+nav .view-switch a:hover,
+nav .view-switch a:focus-visible {
+  color: var(--accent);
+  border-color: var(--accent);
 }
 nav .row {
   display: flex;
   align-items: center;
   justify-content: space-between;
+  gap: 20px;
   padding: 22px 0;
+}
+nav .brand-group {
+  display: flex;
+  align-items: center;
+  gap: 10px;
 }
 nav .brand {
   font-family: var(--mono);
@@ -422,14 +450,49 @@ section p.lead {
   display: inline-block;
 }
 
+/* ---------- principles ---------- */
+.principle-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 16px;
+}
+.principle-card {
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 14px 16px;
+  background: var(--surface-2);
+}
+.principle-card .pname {
+  font-family: var(--mono);
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--accent);
+  margin-bottom: 6px;
+}
+.principle-card p {
+  font-size: 13.5px;
+  color: var(--muted);
+  line-height: 1.5;
+}
+
 /* ---------- page header (non-home pages) ---------- */
 .page-header {
   padding: 56px 0 8px;
 }
-.page-header .eyebrow {
+.eyebrow {
   font-family: var(--mono);
   font-size: 13px;
   color: var(--muted);
+  margin-bottom: 10px;
+}
+.additional-list {
+  margin-top: 14px;
+  padding-left: 20px;
+}
+.additional-list li {
+  font-size: 14px;
+  color: var(--muted);
+  line-height: 1.6;
   margin-bottom: 10px;
 }
 .page-header h1 {

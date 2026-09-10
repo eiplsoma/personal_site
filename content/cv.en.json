@@ -1,16 +1,16 @@
 {
   "name": "Soma Eipl",
-  "title": "IT Systems Engineer",
+  "title": "Infrastructure & DevOps Engineer",
   "tagline": "Linux · Docker · CI/CD · Cloud & DNS",
   "contact": {
     "location": "Bicske, Hungary",
     "email": "soma.eipl@gmail.com"
   },
   "about": [
-    "IT Systems Engineer with hands-on experience across Linux administration, containerization, and CI/CD automation, built through day-to-day operational support and through infrastructure projects I design and run myself end to end.",
-    "Day to day, I configure and troubleshoot VPS infrastructure, manage DNS and Cloudflare routing, and handle mail system migrations, with a focus on stability and security-oriented configuration.",
-    "On the side, I build and deploy my own projects: Dockerized applications, GitHub Actions pipelines with automated VPS deployment, nginx/TLS setup, and structured post-deploy security audits.",
-    "I also work with structured data systems - redesigning reporting logic around bookkeeping data models and rebuilding calculated fields from legacy MDB/DLL sources for dashboard reporting."
+    "Working toward infrastructure and DevOps-focused roles, with my strongest hands-on comfort in Python, VPS/Linux operations, and Cloudflare & DNS management. I build and extend the rest of my skill set through real side projects - often working alongside AI tooling, but always making sure I understand what the pieces are actually doing.",
+    "I regularly configure and troubleshoot VPS infrastructure, manage DNS and Cloudflare routing, and have handled mail system migrations, with a focus on stability and security-oriented configuration.",
+    "On the side, I build and deploy my own projects: Dockerized applications, GitHub Actions pipelines with automated VPS deployment, and structured post-deploy security audits - a mix of things I'm confident in and things I'm still actively learning.",
+    "I've also touched structured data systems - redesigning reporting logic around bookkeeping data models and rebuilding calculated fields from legacy MDB/DLL sources for dashboard reporting."
   ],
   "lookingFor": "Right now, I'm growing toward infrastructure- and security-focused roles where I can own systems end to end - the kind of work this site's own deploy pipeline and VPS hardening already represent.",
   "experience": [
@@ -73,10 +73,6 @@
     ],
     "technical": [
       {
-        "text": "Linux administration & CLI troubleshooting",
-        "bold": false
-      },
-      {
         "text": "Docker: multi-stage builds & Compose",
         "bold": true
       },
@@ -85,15 +81,15 @@
         "bold": true
       },
       {
+        "text": "Cloudflare hardening: Zero Trust Tunnel, WAF & mTLS",
+        "bold": true
+      },
+      {
+        "text": "Linux administration, CLI & Bash scripting",
+        "bold": false
+      },
+      {
         "text": "nginx reverse proxy & TLS (Let's Encrypt/certbot)",
-        "bold": false
-      },
-      {
-        "text": "DNS & Cloudflare configuration",
-        "bold": false
-      },
-      {
-        "text": "SQL data models & database management",
         "bold": false
       },
       {
@@ -101,11 +97,11 @@
         "bold": false
       },
       {
-        "text": "VirtualBox virtualization",
+        "text": "Security hardening: UFW, fail2ban, least-privilege access",
         "bold": false
       },
       {
-        "text": "Mail infrastructure management (incl. Zoho migration)",
+        "text": "SQL data models & database management",
         "bold": false
       },
       {
@@ -113,11 +109,11 @@
         "bold": false
       },
       {
-        "text": "PHP",
+        "text": "PHP & transactional email API integration (Brevo)",
         "bold": false
       },
       {
-        "text": "Transactional email APIs (Brevo)",
+        "text": "Mail infrastructure management (incl. Zoho migration)",
         "bold": false
       },
       {
@@ -125,31 +121,11 @@
         "bold": false
       },
       {
+        "text": "Self-hosted secrets management (zero-open-port)",
+        "bold": false
+      },
+      {
         "text": "AI-assisted development workflows (Claude Code)",
-        "bold": false
-      },
-      {
-        "text": "Cloudflare Zero Trust & Tunnel",
-        "bold": true
-      },
-      {
-        "text": "UFW firewall & fail2ban",
-        "bold": false
-      },
-      {
-        "text": "Self-hosted Vaultwarden",
-        "bold": false
-      },
-      {
-        "text": "Bash scripting",
-        "bold": false
-      },
-      {
-        "text": "Security fundamentals (privilege escalation, ethical hacking concepts)",
-        "bold": false
-      },
-      {
-        "text": "Bootstrap",
         "bold": false
       }
     ],
@@ -162,6 +138,16 @@
       "Effective team collaboration"
     ]
   },
+  "principles": [
+    { "name": "Fail fast", "desc": "Surface problems early instead of letting them hide." },
+    { "name": "Keep it simple (KISS)", "desc": "The simplest solution that actually solves the problem, nothing more." },
+    { "name": "Defense in depth", "desc": "Layer independent protections instead of relying on a single control." },
+    { "name": "Least privilege", "desc": "Grant only the access a component or key actually needs." },
+    { "name": "Single source of truth", "desc": "One place owns a piece of data or config; everything else reads from it." },
+    { "name": "Idempotency", "desc": "Re-running an operation should be safe and produce the same result." },
+    { "name": "Root cause, not symptoms", "desc": "Trace a bug to its actual cause before patching around it." },
+    { "name": "Reversibility", "desc": "Back up, branch, and commit so mistakes are cheap to undo." }
+  ],
   "languages": "Hungarian (Native) · English (B2) · German (A2)",
   "drivingLicence": "Categories: AM, B",
   "footer": {

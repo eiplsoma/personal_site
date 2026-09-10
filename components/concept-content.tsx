@@ -63,13 +63,13 @@ export function ConceptContent() {
               <div className="status-row" key={s.text}>
                 <span className="status-dot" />
                 <span className="name">{s.text}</span>
-                <span className="badge">operational</span>
+                <span className="badge">active</span>
               </div>
             ))}
           </div>
 
           <div className="dash-card">
-            <h2>Deploy log</h2>
+            <h2>Changelog</h2>
             {cv.experience.map((e) => (
               <div className="deploy-entry" key={e.title}>
                 <div className="deploy-head">

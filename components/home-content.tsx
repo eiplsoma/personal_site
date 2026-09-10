@@ -123,6 +123,18 @@ export function HomeContent({ locale }: { locale: Locale }) {
           </div>
         </section>
 
+        <div className="divider" id="principles">{strings.dividers.principles}</div>
+        <section>
+          <div className="principle-grid">
+            {cv.principles.map((p) => (
+              <div className="principle-card" key={p.name}>
+                <div className="pname">{p.name}</div>
+                <p>{p.desc}</p>
+              </div>
+            ))}
+          </div>
+        </section>
+
         <div className="divider" id="background">{strings.dividers.background}</div>
         <section>
           <div className="gtitle" style={{ marginBottom: 10 }}>{strings.background.education}</div>

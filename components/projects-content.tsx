@@ -53,6 +53,52 @@ export function ProjectsContent({ locale }: { locale: Locale }) {
               </a>
             </div>
           </div>
+
+          {strings.extraFeatured.map((p) => (
+            <div className="project-card" key={p.title}>
+              <h3>{p.title}</h3>
+              <p className="lead">{p.lead}</p>
+              <div className="project-tags">
+                {p.tags.map((tag) => (
+                  <span className="tag" key={tag}>
+                    {tag}
+                  </span>
+                ))}
+              </div>
+              <div className="project-links">
+                {"live" in p && p.live && (
+                  <a href={p.live} target="_blank" rel="noreferrer">
+                    {strings.liveDemo}
+                  </a>
+                )}
+                {"github" in p && p.github && (
+                  <a href={p.github} target="_blank" rel="noreferrer">
+                    {strings.sourceOnGithub}
+                  </a>
+                )}
+              </div>
+            </div>
+          ))}
+        </section>
+
+        <section style={{ marginTop: 50 }}>
+          <div className="eyebrow">{strings.sectionConfidential}</div>
+          <p className="lead" style={{ marginTop: 6 }}>{strings.confidentialNote}</p>
+          {strings.confidential.map((c) => (
+            <div className="project-card" key={c.title}>
+              <h3>{c.title}</h3>
+              <p className="lead">{c.desc}</p>
+            </div>
+          ))}
+        </section>
+
+        <section style={{ marginTop: 50 }}>
+          <div className="eyebrow">{strings.sectionAdditional}</div>
+          <ul className="additional-list">
+            {strings.additional.map((item) => (
+              <li key={item}>{item}</li>
+            ))}
+          </ul>
         </section>
       </div>
       <SiteFooter locale={locale} />
