@@ -6,7 +6,7 @@ const http = require("http")
 const fs = require("fs")
 const path = require("path")
 
-const ROOT = path.join(__dirname, "..", "out")
+const ROOT = path.resolve(__dirname, "..", "out")
 const USER = process.env.PREVIEW_USER || "guest"
 const PASS = process.env.PREVIEW_PASS || ""
 
@@ -31,7 +31,13 @@ http
     }
 
     const urlPath = decodeURIComponent(req.url.split("?")[0])
-    const base = path.join(ROOT, urlPath === "/" ? "index.html" : urlPath)
+    const base = path.resolve(ROOT, urlPath === "/" ? "index.html" : `.${urlPath}`)
+    // Path-traversal guard: reject anything that resolves outside ROOT
+    // (e.g. "/../render-server.js") before ever touching the filesystem.
+    if (base !== ROOT && !base.startsWith(ROOT + path.sep)) {
+      res.writeHead(403)
+      return res.end("Forbidden")
+    }
     const isFile = (p) => fs.existsSync(p) && fs.statSync(p).isFile()
     const found = [base, `${base}.html`, path.join(base, "index.html")].find(isFile)
     const filePath = found || path.join(ROOT, "404.html")
