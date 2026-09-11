@@ -65,7 +65,15 @@ const dict = {
         "The plan didn't survive first contact with the real environment: a shared VPS with nginx already on 80/443, a domain behind Cloudflare with delegated nameservers, and a CDN feature that broke the automated health check — resolved by moving the check inside the VPS instead of over the public internet.",
       liveDemo: "Live demo →",
       sourceOnGithub: "Source on GitHub →",
+      useIt: "Use it →",
       extraFeatured: [
+        {
+          title: "CV Tool — client-side CV builder",
+          lead: "A one-page CV editor and PDF exporter that runs entirely in your browser: fixed A4 layout, per-field character limits so nothing overflows, and no server — your data is saved to this browser only, never sent anywhere.",
+          tags: ["Next.js", "localStorage", "window.print()"],
+          useLink: "/cv-tool",
+          github: "https://github.com/eiplsoma/personal_site",
+        },
         {
           title: "This site — VPS & Cloudflare hardening",
           lead: "Ran a security audit and hardening pass on this site's own infrastructure: layered network and cryptographic protections between the CDN and origin, plus deploy pipeline and SSH access hardening.",
@@ -162,7 +170,15 @@ const dict = {
         "A terv nem élte túl az első találkozást a valós környezettel: egy megosztott VPS, amin már fut az nginx a 80/443-on, egy domain Cloudflare mögött delegált névszerverekkel, és egy CDN funkció, ami megtörte az automatizált health checket — a megoldás az volt, hogy a checket a nyilvános internet helyett a VPS-en belülre költöztettem.",
       liveDemo: "Élő demó →",
       sourceOnGithub: "Forráskód GitHubon →",
+      useIt: "Kipróbálom →",
       extraFeatured: [
+        {
+          title: "CV Tool — böngészőben futó CV-építő",
+          lead: "Egy egyoldalas CV-szerkesztő és PDF-exportáló, ami teljesen a böngésződben fut: fix A4 elrendezés, mezőnkénti karakterlimit, hogy semmi ne csorduljon túl, és nincs szerver — az adataid csak ebben a böngészőben mentődnek, sehova nem kerülnek fel.",
+          tags: ["Next.js", "localStorage", "window.print()"],
+          useLink: "/cv-tool",
+          github: "https://github.com/eiplsoma/personal_site",
+        },
         {
           title: "Ez az oldal — VPS & Cloudflare hardening",
           lead: "Biztonsági auditot és hardening-kört futtattam ennek az oldalnak a saját infrastruktúráján: rétegzett hálózati és kriptográfiai védelem a CDN és az origin között, valamint deploy-pipeline és SSH-hozzáférés megkeményítése.",

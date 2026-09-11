@@ -1,3 +1,4 @@
+import Link from "next/link"
 import { Nav } from "@/components/nav"
 import { SiteFooter } from "@/components/site-footer"
 import { t, type Locale } from "@/lib/i18n"
@@ -66,6 +67,7 @@ export function ProjectsContent({ locale }: { locale: Locale }) {
                 ))}
               </div>
               <div className="project-links">
+                {"useLink" in p && p.useLink && <Link href={p.useLink}>{strings.useIt}</Link>}
                 {"live" in p && p.live && (
                   <a href={p.live} target="_blank" rel="noreferrer">
                     {strings.liveDemo}
