@@ -566,6 +566,13 @@ export function CvEditorForm({
           maxLength={LIMITS.email}
           onChange={(v) => patch({ footer: { ...cv.footer, linkedin: v } })}
         />
+        <Field
+          label={strings.website}
+          value={cv.footer.website}
+          placeholder={sample.footer.website}
+          maxLength={LIMITS.website}
+          onChange={(v) => patch({ footer: { ...cv.footer, website: v } })}
+        />
       </div>
     </div>
   )

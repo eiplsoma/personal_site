@@ -34,7 +34,13 @@ export const SAMPLE_CV_EN: CvData = {
   },
   languages: "Language (Level) · Language (Level)",
   drivingLicence: "Categories: B",
-  footer: { email: "jane@example.com", phone: "+00 000 000 000", github: "github.com/username", linkedin: "linkedin.com/in/username" },
+  footer: {
+    email: "jane@example.com",
+    phone: "+00 000 000 000",
+    github: "github.com/username",
+    linkedin: "linkedin.com/in/username",
+    website: "yourwebsite.com",
+  },
   photoDataUrl: null,
 }
 
@@ -72,6 +78,7 @@ export const SAMPLE_CV_HU: CvData = {
     phone: "+36 00 000 0000",
     github: "github.com/felhasznalonev",
     linkedin: "linkedin.com/in/felhasznalonev",
+    website: "sajatweboldalad.hu",
   },
   photoDataUrl: null,
 }
@@ -103,6 +110,6 @@ export const EMPTY_CV: CvData = {
   },
   languages: "",
   drivingLicence: "",
-  footer: { email: "", phone: "", github: "", linkedin: "" },
+  footer: { email: "", phone: "", github: "", linkedin: "", website: "" },
   photoDataUrl: null,
 }

@@ -1,6 +1,6 @@
 import type { CvData } from "./cv-tool-types"
 import { cvToolStrings, type CvToolLocale } from "./cv-tool-i18n"
-import { MapPinIcon, PhoneIcon, MailIcon, GithubIcon, LinkedinIcon } from "./cv-icons"
+import { MapPinIcon, PhoneIcon, MailIcon, GithubIcon, LinkedinIcon, GlobeIcon } from "./cv-icons"
 
 // Falls back to the sample text (styled as a muted hint) while a field is
 // still empty, so the preview doesn't go blank before the user fills
@@ -221,6 +221,10 @@ export function CvTemplate({ cv, sample, locale = "en" }: { cv: CvData; sample: 
         <span className="item">
           <LinkedinIcon />
           <Hint value={cv.footer.linkedin} sample={sample.footer.linkedin} />
+        </span>
+        <span className="item">
+          <GlobeIcon />
+          <Hint value={cv.footer.website} sample={sample.footer.website} />
         </span>
       </div>
     </div>

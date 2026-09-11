@@ -15,7 +15,7 @@ export type CvData = {
   skills: { professional: string[]; technical: TechSkill[]; interpersonal: string[] }
   languages: string
   drivingLicence: string
-  footer: { email: string; phone: string; github: string; linkedin: string }
+  footer: { email: string; phone: string; github: string; linkedin: string; website: string }
   photoDataUrl: string | null
 }
 
@@ -47,6 +47,7 @@ export const LIMITS = {
   skillItem: 90,
   languages: 70,
   drivingLicence: 40,
+  website: 45,
 } as const
 
 // Generous sanity ceilings on repeatable items - only to stop unbounded

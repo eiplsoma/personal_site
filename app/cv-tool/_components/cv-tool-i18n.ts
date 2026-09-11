@@ -60,6 +60,7 @@ export const cvToolStrings = {
       footer: "Footer",
       github: "GitHub",
       linkedin: "LinkedIn",
+      website: "Website",
     },
     template: {
       contact: "Contact Me",
@@ -129,6 +130,7 @@ export const cvToolStrings = {
       footer: "Lábléc",
       github: "GitHub",
       linkedin: "LinkedIn",
+      website: "Weboldal",
     },
     template: {
       contact: "Elérhetőségeim",

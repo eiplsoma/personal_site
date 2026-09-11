@@ -109,6 +109,7 @@ export function sanitizeCv(raw: unknown, fallback: CvData): CvData {
       phone: str(footer.phone, fallback.footer.phone, LIMITS.phone),
       github: str(footer.github, fallback.footer.github, LIMITS.email),
       linkedin: str(footer.linkedin, fallback.footer.linkedin, LIMITS.email),
+      website: str(footer.website, fallback.footer.website, LIMITS.website),
     },
     photoDataUrl: sanitizePhoto(r.photoDataUrl),
   }
