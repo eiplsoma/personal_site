@@ -1,10 +1,11 @@
 import type { CvData } from "./cv-tool-types"
 import type { CvToolLocale } from "./cv-tool-i18n"
 
-// Generic, placeholder starting points - deliberately contain no real
-// person's data. Whoever uses the tool fills in their own details, which
-// only ever live in their browser (localStorage), never in this repo.
-export const DEFAULT_CV_EN: CvData = {
+// Shown as native <input>/<textarea> placeholder text, and as a muted
+// fallback in the live preview when a field is still empty. Never the actual
+// starting value - so there's nothing to select or backspace, exactly like a
+// real HTML placeholder. Deliberately generic, no real person's data.
+export const SAMPLE_CV_EN: CvData = {
   name: "Jane Doe",
   title: "Job Title",
   tagline: "Skill · Skill · Skill · Skill",
@@ -37,7 +38,7 @@ export const DEFAULT_CV_EN: CvData = {
   photoDataUrl: null,
 }
 
-export const DEFAULT_CV_HU: CvData = {
+export const SAMPLE_CV_HU: CvData = {
   name: "Kovács Anna",
   title: "Munkakör",
   tagline: "Készség · Készség · Készség · Készség",
@@ -75,17 +76,33 @@ export const DEFAULT_CV_HU: CvData = {
   photoDataUrl: null,
 }
 
-// Kept for existing imports - the English placeholder is the overall default.
-export const DEFAULT_CV = DEFAULT_CV_EN
-
-export function defaultCvFor(locale: CvToolLocale): CvData {
-  return locale === "hu" ? DEFAULT_CV_HU : DEFAULT_CV_EN
+export function sampleCvFor(locale: CvToolLocale): CvData {
+  return locale === "hu" ? SAMPLE_CV_HU : SAMPLE_CV_EN
 }
 
-// True only while the form still holds one of the untouched placeholder
-// datasets - used to decide whether switching language may also swap the
-// sample content, without ever touching real user-entered data.
-export function isPristineDefault(cv: CvData): boolean {
-  const asJson = JSON.stringify(cv)
-  return asJson === JSON.stringify(DEFAULT_CV_EN) || asJson === JSON.stringify(DEFAULT_CV_HU)
+// The actual starting state: same shape as the sample (one entry per
+// repeatable section, so the form's structure is visible right away) but
+// every leaf string is empty, since this is real data, not a hint. Doesn't
+// vary by locale - there's nothing to translate in an empty string.
+export const EMPTY_CV: CvData = {
+  name: "",
+  title: "",
+  tagline: "",
+  contact: { location: "", phone: "", email: "" },
+  about: [""],
+  experience: [{ title: "", org: "", period: "", bulletsLabel: "", bullets: ["", ""] }],
+  education: [{ degree: "", org: "", period: "", highlight: true }],
+  certifications: [{ title: "", org: "", date: "" }],
+  skills: {
+    professional: ["", ""],
+    technical: [
+      { text: "", bold: true },
+      { text: "", bold: false },
+    ],
+    interpersonal: ["", ""],
+  },
+  languages: "",
+  drivingLicence: "",
+  footer: { email: "", phone: "", github: "", linkedin: "" },
+  photoDataUrl: null,
 }

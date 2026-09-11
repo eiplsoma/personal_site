@@ -93,11 +93,18 @@
   font-family: var(--sans);
   box-sizing: border-box;
 }
-/* Sample/placeholder text - looks like a native placeholder (muted, not
-   real content) until the first keystroke replaces it. */
-input.cv-tool-sample-value,
-textarea.cv-tool-sample-value {
+.cv-field input::placeholder,
+.cv-field textarea::placeholder,
+.cv-tool-row input::placeholder,
+.cv-tool-row textarea::placeholder {
   color: var(--muted);
+  opacity: 1;
+}
+/* Same fallback-to-sample-text shown in the live preview when a field is
+   still empty - styled as a hint, never mistaken for real content. */
+.cv-hint {
+  color: #9a9a9a;
+  font-style: italic;
 }
 .cv-section {
   margin-bottom: 22px;

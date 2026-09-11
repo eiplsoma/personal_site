@@ -4,7 +4,7 @@ import { useEffect, useRef, useState } from "react"
 import Link from "next/link"
 import { CvEditorForm } from "./_components/cv-editor-form"
 import { CvTemplate } from "./_components/cv-template"
-import { DEFAULT_CV, defaultCvFor, isPristineDefault } from "./_components/default-cv"
+import { EMPTY_CV, sampleCvFor } from "./_components/default-cv"
 import { sanitizeCv } from "./_components/sanitize-cv"
 import { STORAGE_KEY, type CvData } from "./_components/cv-tool-types"
 import { CV_TOOL_LOCALE_KEY, cvToolStrings, type CvToolLocale } from "./_components/cv-tool-i18n"
@@ -20,7 +20,7 @@ function measureOverflow(container: Element | null): number {
 }
 
 export function CvToolClient() {
-  const [cv, setCv] = useState<CvData>(DEFAULT_CV)
+  const [cv, setCv] = useState<CvData>(EMPTY_CV)
   const [locale, setLocale] = useState<CvToolLocale>("en")
   const [loaded, setLoaded] = useState(false)
   const [status, setStatus] = useState("")
@@ -28,6 +28,7 @@ export function CvToolClient() {
   const fileInputRef = useRef<HTMLInputElement>(null)
   const previewRef = useRef<HTMLDivElement>(null)
   const strings = cvToolStrings[locale].toolbar
+  const sample = sampleCvFor(locale)
 
   useEffect(() => {
     let initialLocale: CvToolLocale = "en"
@@ -38,12 +39,10 @@ export function CvToolClient() {
 
       const raw = localStorage.getItem(STORAGE_KEY)
       if (raw) {
-        setCv(sanitizeCv(JSON.parse(raw), defaultCvFor(initialLocale)))
-      } else {
-        setCv(defaultCvFor(initialLocale))
+        setCv(sanitizeCv(JSON.parse(raw), EMPTY_CV))
       }
     } catch {
-      // corrupt or inaccessible storage - fall back to defaults
+      // corrupt or inaccessible storage - fall back to the empty default
     }
     setLoaded(true)
   }, [])
@@ -102,7 +101,7 @@ export function CvToolClient() {
     reader.onload = () => {
       try {
         const parsed = JSON.parse(reader.result as string)
-        setCv(sanitizeCv(parsed, defaultCvFor(locale)))
+        setCv(sanitizeCv(parsed, EMPTY_CV))
         setStatus(strings.imported)
       } catch {
         setStatus(strings.importError)
@@ -113,15 +112,7 @@ export function CvToolClient() {
 
   const handleReset = () => {
     if (!confirm(strings.resetConfirm)) return
-    setCv(defaultCvFor(locale))
-  }
-
-  const handleLocaleToggle = () => {
-    const next: CvToolLocale = locale === "en" ? "hu" : "en"
-    // Only swap the sample content if the form still holds an untouched
-    // placeholder - real, user-entered data is never rewritten by this toggle.
-    if (isPristineDefault(cv)) setCv(defaultCvFor(next))
-    setLocale(next)
+    setCv(EMPTY_CV)
   }
 
   if (!loaded) return null
@@ -135,7 +126,7 @@ export function CvToolClient() {
           <button onClick={handleExport}>{strings.exportJson}</button>
           <button onClick={handleImportClick}>{strings.importJson}</button>
           <button onClick={handleReset}>{strings.reset}</button>
-          <button onClick={handleLocaleToggle}>{locale === "en" ? "HU" : "EN"}</button>
+          <button onClick={() => setLocale(locale === "en" ? "hu" : "en")}>{locale === "en" ? "HU" : "EN"}</button>
           <input
             ref={fileInputRef}
             type="file"
@@ -153,11 +144,11 @@ export function CvToolClient() {
           <div className="cv-tool-overflow-warning">{strings.overflowWarning.replace("{px}", String(overflowPx))}</div>
         ) : null}
         <div className="cv-tool-form">
-          <CvEditorForm cv={cv} locale={locale} pristine={isPristineDefault(cv)} onChange={setCv} />
+          <CvEditorForm cv={cv} sample={sample} locale={locale} onChange={setCv} />
         </div>
       </div>
       <div className="cv-tool-preview-pane" ref={previewRef}>
-        <CvTemplate cv={cv} locale={locale} />
+        <CvTemplate cv={cv} sample={sample} locale={locale} />
       </div>
     </div>
   )
