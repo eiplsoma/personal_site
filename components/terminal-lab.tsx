@@ -160,6 +160,7 @@ export function TerminalLab() {
     termRef.current = term
 
     let line = ""
+    let cursorPos = 0
     const history: string[] = []
     let historyIndex = -1
 
@@ -172,6 +173,7 @@ export function TerminalLab() {
       term.write("\r\x1b[K")
       term.write(PROMPT + newLine)
       line = newLine
+      cursorPos = newLine.length
     }
 
     function handleCommand(cmd: string) {
@@ -208,11 +210,15 @@ export function TerminalLab() {
         historyIndex = history.length
         handleCommand(line)
         line = ""
+        cursorPos = 0
         writePrompt()
       } else if (data === "\x7f") {
-        if (line.length > 0) {
-          line = line.slice(0, -1)
-          term.write("\b \b")
+        if (cursorPos > 0) {
+          const before = line.slice(0, cursorPos - 1)
+          const after = line.slice(cursorPos)
+          line = before + after
+          cursorPos -= 1
+          term.write("\b" + after + " " + "\b".repeat(after.length + 1))
         }
       } else if (data === "\x1b[A") {
         if (historyIndex > 0) {
@@ -227,9 +233,31 @@ export function TerminalLab() {
           historyIndex = history.length
           redrawLine("")
         }
+      } else if (data === "\x1b[D") {
+        if (cursorPos > 0) {
+          cursorPos -= 1
+          term.write("\x1b[D")
+        }
+      } else if (data === "\x1b[C") {
+        if (cursorPos < line.length) {
+          cursorPos += 1
+          term.write("\x1b[C")
+        }
+      } else if (data === "\x1b[3~") {
+        // Delete key - removes the character at (not before) the cursor.
+        if (cursorPos < line.length) {
+          const before = line.slice(0, cursorPos)
+          const after = line.slice(cursorPos + 1)
+          line = before + after
+          term.write(after + " " + "\b".repeat(after.length + 1))
+        }
       } else if (data >= " " && data !== "\x7f") {
-        line += data
-        term.write(data)
+        const before = line.slice(0, cursorPos)
+        const after = line.slice(cursorPos)
+        line = before + data + after
+        cursorPos += data.length
+        term.write(data + after)
+        if (after.length > 0) term.write(`\x1b[${after.length}D`)
       }
     })
 
