@@ -179,8 +179,17 @@
   display: flex;
   flex-direction: column;
   flex: none;
-  font-family: var(--sans);
+  font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
   color: #1a1a1a;
+}
+/* The site's own globals.css sets h1-h3 to the mono font unscoped - override
+   it back to inherit so CV headings use the same font as everything else in
+   the template instead of a much wider monospace face. */
+.cv-page h1,
+.cv-page h2,
+.cv-page h3,
+.cv-page h4 {
+  font-family: inherit;
 }
 .cv-body {
   display: grid;
@@ -248,11 +257,11 @@
   margin-top: 0;
 }
 .cv-main {
-  padding: 24px 24px 8px;
+  padding: 16px 24px 6px;
   overflow: hidden;
   display: flex;
   flex-direction: column;
-  gap: 4px;
+  gap: 5px;
 }
 .cv-name-wrap {
   position: relative;
@@ -305,7 +314,7 @@
   color: #1a1a1a;
 }
 .cv-entry {
-  margin-bottom: 8px;
+  margin-bottom: 6px;
 }
 .cv-entry-head {
   display: flex;
@@ -351,9 +360,6 @@
 .cv-entry ul li {
   margin-bottom: 2px;
 }
-.cv-skills-wrap {
-  margin-top: 12px;
-}
 .cv-skills-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -364,7 +370,7 @@
   background: #fff;
   border: 1px solid #e5e7eb;
   border-radius: 8px;
-  padding: 10px;
+  padding: 12px;
   box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
   display: flex;
   flex-direction: column;
@@ -376,7 +382,7 @@
   letter-spacing: 0.025em;
   border-bottom: 2px solid #ff4757;
   padding-bottom: 2px;
-  margin: 0 0 4px;
+  margin: 0 0 8px;
   color: #1a1a1a;
 }
 .cv-skill-box ul {
@@ -391,7 +397,7 @@
   display: flex;
   align-items: flex-start;
   gap: 4px;
-  margin-bottom: 2px;
+  margin-bottom: 4px;
 }
 .cv-skill-box li::before {
   content: "•";
@@ -402,13 +408,13 @@
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 12px;
-  margin-top: 4px;
+  margin-bottom: 8px;
 }
 .cv-bottom-grid .box {
   background: #fff;
   border: 1px solid #e5e7eb;
   border-radius: 8px;
-  padding: 8px;
+  padding: 10px;
   font-size: 12px;
   box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
 }
@@ -419,19 +425,18 @@
   letter-spacing: 0.025em;
   border-bottom: 2px solid #ff4757;
   padding-bottom: 4px;
-  margin: 0 0 4px;
+  margin: 0 0 8px;
   color: #1a1a1a;
 }
 .cv-footer-bar {
   margin-top: auto;
   background: #5a5a5a;
   color: #fff;
-  height: 44px;
   display: flex;
   align-items: center;
   justify-content: center;
   gap: 24px;
-  padding: 0 24px;
+  padding: 4px 24px;
   flex: none;
 }
 .cv-footer-bar .item {
