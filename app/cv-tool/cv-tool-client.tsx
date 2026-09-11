@@ -6,6 +6,7 @@ import { CvEditorForm } from "./_components/cv-editor-form"
 import { CvTemplate } from "./_components/cv-template"
 import { EMPTY_CV, sampleCvFor } from "./_components/default-cv"
 import { sanitizeCv } from "./_components/sanitize-cv"
+import { extractTranslatable, applyTranslatable, buildTranslationPrompt, type TranslatablePayload } from "./_components/translate-payload"
 import { STORAGE_KEY, type CvData } from "./_components/cv-tool-types"
 import { CV_TOOL_LOCALE_KEY, cvToolStrings, type CvToolLocale } from "./_components/cv-tool-i18n"
 import "./cv-tool.css"
@@ -115,6 +116,29 @@ export function CvToolClient() {
     setCv(EMPTY_CV)
   }
 
+  const handleCopyForAi = async () => {
+    const targetLanguage = locale === "en" ? "Hungarian" : "English"
+    const prompt = buildTranslationPrompt(extractTranslatable(cv), targetLanguage)
+    try {
+      await navigator.clipboard.writeText(prompt)
+      setStatus(strings.copiedForAi)
+    } catch {
+      setStatus(strings.copyForAiError)
+    }
+  }
+
+  const handlePasteAiTranslation = () => {
+    const pasted = window.prompt(strings.pasteAiPrompt)
+    if (!pasted) return
+    try {
+      const translated = JSON.parse(pasted) as TranslatablePayload
+      setCv(applyTranslatable(cv, translated))
+      setStatus(strings.pasteAiSuccess)
+    } catch {
+      setStatus(strings.pasteAiError)
+    }
+  }
+
   if (!loaded) return null
 
   return (
@@ -126,6 +150,8 @@ export function CvToolClient() {
           <button onClick={handleExport}>{strings.exportJson}</button>
           <button onClick={handleImportClick}>{strings.importJson}</button>
           <button onClick={handleReset}>{strings.reset}</button>
+          <button onClick={handleCopyForAi}>{strings.copyForAi}</button>
+          <button onClick={handlePasteAiTranslation}>{strings.pasteAiTranslation}</button>
           <button onClick={() => setLocale(locale === "en" ? "hu" : "en")}>{locale === "en" ? "HU" : "EN"}</button>
           <input
             ref={fileInputRef}
