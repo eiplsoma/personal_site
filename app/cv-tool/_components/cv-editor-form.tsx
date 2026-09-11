@@ -21,6 +21,12 @@ function selectOnFocusIfPristine(pristine: boolean) {
   }
 }
 
+// Styles the sample text like a native placeholder (muted colour) while the
+// CV is still untouched - purely visual, paired with selectOnFocusIfPristine.
+function placeholderClass(pristine: boolean): string | undefined {
+  return pristine ? "cv-tool-sample-value" : undefined
+}
+
 function Field({
   label,
   value,
@@ -45,9 +51,22 @@ function Field({
         </span>
       </span>
       {textarea ? (
-        <textarea rows={3} value={value} maxLength={maxLength} onChange={(e) => onChange(e.target.value)} onFocus={onFocus} />
+        <textarea
+          rows={3}
+          value={value}
+          maxLength={maxLength}
+          onChange={(e) => onChange(e.target.value)}
+          onFocus={onFocus}
+          className={placeholderClass(pristine)}
+        />
       ) : (
-        <input value={value} maxLength={maxLength} onChange={(e) => onChange(e.target.value)} onFocus={onFocus} />
+        <input
+          value={value}
+          maxLength={maxLength}
+          onChange={(e) => onChange(e.target.value)}
+          onFocus={onFocus}
+          className={placeholderClass(pristine)}
+        />
       )}
     </label>
   )
@@ -68,7 +87,8 @@ function StringListEditor({
   addLabel: string
   onChange: (items: string[]) => void
 }) {
-  const onFocus = selectOnFocusIfPristine(useContext(PristineContext))
+  const pristine = useContext(PristineContext)
+  const onFocus = selectOnFocusIfPristine(pristine)
   return (
     <div className="cv-section">
       <h3>{label}</h3>
@@ -77,6 +97,7 @@ function StringListEditor({
           <input
             value={item}
             maxLength={maxLength}
+            className={placeholderClass(pristine)}
             onChange={(e) => {
               const next = [...items]
               next[i] = e.target.value
@@ -107,7 +128,8 @@ function TechSkillsEditor({
   strings: FormStrings
   onChange: (items: TechSkill[]) => void
 }) {
-  const onFocus = selectOnFocusIfPristine(useContext(PristineContext))
+  const pristine = useContext(PristineContext)
+  const onFocus = selectOnFocusIfPristine(pristine)
   return (
     <div className="cv-section">
       <h3>{strings.technicalSkills}</h3>
@@ -116,6 +138,7 @@ function TechSkillsEditor({
           <input
             value={item.text}
             maxLength={LIMITS.skillItem}
+            className={placeholderClass(pristine)}
             onChange={(e) => {
               const next = [...items]
               next[i] = { ...next[i], text: e.target.value }
@@ -163,7 +186,8 @@ function ExperienceEditor({
     next[i] = { ...next[i], ...patch }
     onChange(next)
   }
-  const onFocus = selectOnFocusIfPristine(useContext(PristineContext))
+  const pristine = useContext(PristineContext)
+  const onFocus = selectOnFocusIfPristine(pristine)
   return (
     <div className="cv-section">
       <h3>{strings.experience}</h3>
@@ -197,6 +221,7 @@ function ExperienceEditor({
                 rows={2}
                 value={b}
                 maxLength={LIMITS.bullet}
+                className={placeholderClass(pristine)}
                 onChange={(e) => {
                   const bullets = [...entry.bullets]
                   bullets[bi] = e.target.value

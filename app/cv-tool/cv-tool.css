@@ -80,7 +80,9 @@
   justify-content: space-between;
 }
 .cv-field input,
-.cv-field textarea {
+.cv-field textarea,
+.cv-tool-row input,
+.cv-tool-row textarea {
   width: 100%;
   padding: 6px 8px;
   font-size: 13px;
@@ -90,6 +92,12 @@
   color: var(--fg);
   font-family: var(--sans);
   box-sizing: border-box;
+}
+/* Sample/placeholder text - looks like a native placeholder (muted, not
+   real content) until the first keystroke replaces it. */
+input.cv-tool-sample-value,
+textarea.cv-tool-sample-value {
+  color: var(--muted);
 }
 .cv-section {
   margin-bottom: 22px;
