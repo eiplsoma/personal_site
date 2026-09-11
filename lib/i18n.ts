@@ -31,6 +31,7 @@ const dict = {
       currentlySuffix: ", building self-hosted infrastructure on the side.",
       downloadCv: "↓ Download CV (PDF)",
       seeProject: "See the CI/CD project →",
+      buildCv: "Build your own CV →",
     },
     dividers: {
       about: "# about",
@@ -136,6 +137,7 @@ const dict = {
       currentlySuffix: ", mellette saját self-hosted infrastruktúrát építek.",
       downloadCv: "↓ CV letöltése (PDF)",
       seeProject: "A CI/CD projekt →",
+      buildCv: "Készítsd el a saját CV-det →",
     },
     dividers: {
       about: "# rólam",

@@ -46,6 +46,9 @@ export function HomeContent({ locale }: { locale: Locale }) {
             <Link className="btn primary" href={localePath(locale, "/projects")}>
               {strings.hero.seeProject}
             </Link>
+            <Link className="btn" href="/cv-tool">
+              {strings.hero.buildCv}
+            </Link>
           </div>
         </section>
 
