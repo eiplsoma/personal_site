@@ -72,7 +72,7 @@ const dict = {
           lead: "A one-page CV editor and PDF exporter that runs entirely in your browser: fixed A4 layout, per-field character limits so nothing overflows, and no server — your data is saved to this browser only, never sent anywhere.",
           tags: ["Next.js", "localStorage", "window.print()"],
           useLink: "/cv-tool",
-          github: "https://github.com/eiplsoma/personal_site",
+          github: "https://github.com/eiplsoma/personal_site/tree/main/app/cv-tool",
         },
         {
           title: "This site — VPS & Cloudflare hardening",
@@ -177,7 +177,7 @@ const dict = {
           lead: "Egy egyoldalas CV-szerkesztő és PDF-exportáló, ami teljesen a böngésződben fut: fix A4 elrendezés, mezőnkénti karakterlimit, hogy semmi ne csorduljon túl, és nincs szerver — az adataid csak ebben a böngészőben mentődnek, sehova nem kerülnek fel.",
           tags: ["Next.js", "localStorage", "window.print()"],
           useLink: "/cv-tool",
-          github: "https://github.com/eiplsoma/personal_site",
+          github: "https://github.com/eiplsoma/personal_site/tree/main/app/cv-tool",
         },
         {
           title: "Ez az oldal — VPS & Cloudflare hardening",
