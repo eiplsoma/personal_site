@@ -44,7 +44,7 @@ export const LIMITS = {
   certTitle: 55,
   certOrg: 45,
   certDate: 20,
-  skillItem: 60,
+  skillItem: 90,
   languages: 70,
   drivingLicence: 40,
 } as const
