@@ -2,11 +2,11 @@
 
 import { useEffect, useRef, useState } from "react"
 import Link from "next/link"
-import { CvEditorForm } from "@/components/cv-tool/cv-editor-form"
-import { CvTemplate } from "@/components/cv-tool/cv-template"
-import { DEFAULT_CV, defaultCvFor, isPristineDefault } from "@/components/cv-tool/default-cv"
-import { STORAGE_KEY, type CvData } from "@/components/cv-tool/cv-tool-types"
-import { CV_TOOL_LOCALE_KEY, cvToolStrings, type CvToolLocale } from "@/components/cv-tool/cv-tool-i18n"
+import { CvEditorForm } from "./_components/cv-editor-form"
+import { CvTemplate } from "./_components/cv-template"
+import { DEFAULT_CV, defaultCvFor, isPristineDefault } from "./_components/default-cv"
+import { STORAGE_KEY, type CvData } from "./_components/cv-tool-types"
+import { CV_TOOL_LOCALE_KEY, cvToolStrings, type CvToolLocale } from "./_components/cv-tool-i18n"
 import "./cv-tool.css"
 
 // How far short of the container's bottom edge the last child sits (negative
