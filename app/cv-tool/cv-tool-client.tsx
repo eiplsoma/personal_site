@@ -5,6 +5,7 @@ import Link from "next/link"
 import { CvEditorForm } from "./_components/cv-editor-form"
 import { CvTemplate } from "./_components/cv-template"
 import { DEFAULT_CV, defaultCvFor, isPristineDefault } from "./_components/default-cv"
+import { sanitizeCv } from "./_components/sanitize-cv"
 import { STORAGE_KEY, type CvData } from "./_components/cv-tool-types"
 import { CV_TOOL_LOCALE_KEY, cvToolStrings, type CvToolLocale } from "./_components/cv-tool-i18n"
 import "./cv-tool.css"
@@ -37,7 +38,7 @@ export function CvToolClient() {
 
       const raw = localStorage.getItem(STORAGE_KEY)
       if (raw) {
-        setCv({ ...defaultCvFor(initialLocale), ...JSON.parse(raw) })
+        setCv(sanitizeCv(JSON.parse(raw), defaultCvFor(initialLocale)))
       } else {
         setCv(defaultCvFor(initialLocale))
       }
@@ -101,7 +102,7 @@ export function CvToolClient() {
     reader.onload = () => {
       try {
         const parsed = JSON.parse(reader.result as string)
-        setCv({ ...defaultCvFor(locale), ...parsed })
+        setCv(sanitizeCv(parsed, defaultCvFor(locale)))
         setStatus(strings.imported)
       } catch {
         setStatus(strings.importError)
