@@ -83,7 +83,7 @@ export function buildTranslationPrompt(payload: TranslatablePayload, targetLangu
   return [
     `Translate the string values in this JSON into natural, professional, HR-friendly ${targetLanguage} suitable for a CV.`,
     `Translate idiomatically, not word-for-word - phrase it the way a native speaker would naturally write it for a CV in that language.`,
-    `Try to keep each translated string roughly the same character length as the original (within about 15%), since this text has to fit fixed spaces on a printed page.`,
+    `Try to keep each translated string roughly the same character length as the original (within about 5-7%), since this text has to fit fixed spaces on a printed page.`,
     `Keep the exact same JSON structure and keys, and keep the array lengths and order unchanged - translate each string in place.`,
     `Do not translate anything outside the given JSON. Return only the translated JSON, nothing else.`,
     "",
