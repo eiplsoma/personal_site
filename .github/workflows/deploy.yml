@@ -102,29 +102,17 @@ jobs:
           VPS_SSH_KEY: ${{ secrets.VPS_SSH_KEY }}
           VPS_USER: ${{ secrets.VPS_USER }}
 
-      - name: Copy compose file to VPS
-        run: |
-          ssh vps 'mkdir -p ~/personal-site'
-          scp deploy/docker-compose.yml vps:~/personal-site/docker-compose.yml
-
       - name: Deploy on VPS
+        # personal-site-deploy is now a forced-command key (authorized_keys
+        # on the VPS runs /home/deploy/personal-site-deploy.sh regardless of
+        # what's sent here) - the wrapper script extracts IMAGE_TAG from
+        # $SSH_ORIGINAL_COMMAND (must be a 40-hex-char SHA, anything else is
+        # rejected), then does the pull/up/prune/smoke-test itself. The
+        # compose file is no longer scp'd per-deploy: it rarely changes and
+        # scp can't work through a forced-command key anyway. A reference
+        # copy stays at deploy/docker-compose.yml; copy it to the VPS by
+        # hand if it changes (see docs/RUNBOOK.md-equivalent for this repo).
         env:
           IMAGE_SHA: ${{ github.sha }}
         run: |
-          ssh vps 'set -e; cd ~/personal-site; echo "IMAGE_TAG='"$IMAGE_SHA"'" > .env; docker compose pull; docker compose up -d; docker image prune -af'
-
-      - name: Smoke test
-        # Checks the personal-site container directly over the internal `web`
-        # docker network (via the proxy container, which has wget) rather than
-        # through the public https://eiplsoma.hu path. The edge proxy enforces
-        # a Cloudflare-only IP allowlist and Authenticated Origin Pulls (mTLS),
-        # so a plain request from this runner would get rejected there
-        # regardless of whether personal-site itself is healthy - that edge
-        # protection is verified separately, manually, from outside Cloudflare.
-        # This step only confirms the freshly deployed container is serving.
-        run: |
-          sleep 5
-          if ! ssh vps 'docker exec proxy-nginx-1 wget --spider -q http://personal-site:80/index.html'; then
-            echo "Smoke test failed: personal-site container did not respond. Check docker ps / docker logs personal-site on the VPS."
-            exit 1
-          fi
+          ssh vps "IMAGE_TAG=$IMAGE_SHA"
