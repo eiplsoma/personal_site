@@ -466,4 +466,19 @@
     size: A4;
     margin: 0;
   }
+
+  /* The sample placeholder text is only a typing guide on screen - it must
+     never print as if it were real content. A field left blank just prints
+     blank instead of fabricating an answer (e.g. a driving licence someone
+     doesn't have). Where a whole row/box/item exists only to show one such
+     value (contact row, bottom-grid box, footer item), drop the empty
+     container too rather than leaving a blank line or an empty card. */
+  .cv-hint {
+    display: none;
+  }
+  .cv-sidebar .row:has(.cv-hint),
+  .cv-bottom-grid .box:has(.cv-hint),
+  .cv-footer-bar .item:has(.cv-hint) {
+    display: none;
+  }
 }
