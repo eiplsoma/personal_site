@@ -46,7 +46,7 @@ export function ProjectsContent({ locale }: { locale: Locale }) {
             </div>
 
             <div className="project-links">
-              <a href="https://cicd-demo.woollydesign.hu" target="_blank" rel="noreferrer">
+              <a href="https://cicd-demo.eiplsoma.hu" target="_blank" rel="noreferrer">
                 {strings.liveDemo}
               </a>
               <a href="https://github.com/eiplsoma/cicd-nextjs-vps-demo" target="_blank" rel="noreferrer">
