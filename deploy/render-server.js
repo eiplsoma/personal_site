@@ -5,6 +5,7 @@
 const http = require("http")
 const fs = require("fs")
 const path = require("path")
+const crypto = require("crypto")
 
 const ROOT = path.resolve(__dirname, "..", "out")
 const USER = process.env.PREVIEW_USER || "guest"
@@ -22,10 +23,51 @@ const MIME = {
   ".ico": "image/x-icon",
 }
 
+// Constant-time comparison so a wrong Basic Auth header can't be distinguished
+// from a right one by response timing.
+function safeEqual(a, b) {
+  const bufA = Buffer.from(a)
+  const bufB = Buffer.from(b)
+  if (bufA.length !== bufB.length) return false
+  return crypto.timingSafeEqual(bufA, bufB)
+}
+
+// Minimal in-memory brute-force throttle: 10 failed attempts per IP per
+// 5-minute window, then 429. Map is capped so a flood of spoofed IPs can't
+// grow it unbounded on this long-running free-tier process.
+const RATE_LIMIT_WINDOW_MS = 5 * 60 * 1000
+const RATE_LIMIT_MAX = 10
+const RATE_LIMIT_MAP_CAP = 1000
+const failedAttempts = new Map()
+
+function isRateLimited(ip) {
+  const entry = failedAttempts.get(ip)
+  if (!entry || Date.now() - entry.windowStart > RATE_LIMIT_WINDOW_MS) return false
+  return entry.count >= RATE_LIMIT_MAX
+}
+
+function recordFailedAttempt(ip) {
+  const now = Date.now()
+  const entry = failedAttempts.get(ip)
+  if (!entry || now - entry.windowStart > RATE_LIMIT_WINDOW_MS) {
+    if (failedAttempts.size >= RATE_LIMIT_MAP_CAP) failedAttempts.clear()
+    failedAttempts.set(ip, { count: 1, windowStart: now })
+  } else {
+    entry.count++
+  }
+}
+
 http
   .createServer((req, res) => {
+    const ip = (req.headers["x-forwarded-for"] || req.socket.remoteAddress || "unknown").split(",")[0].trim()
+    if (isRateLimited(ip)) {
+      res.writeHead(429, { "Retry-After": "300" })
+      return res.end("Too many attempts")
+    }
+
     const expected = "Basic " + Buffer.from(`${USER}:${PASS}`).toString("base64")
-    if (!PASS || req.headers.authorization !== expected) {
+    if (!PASS || !safeEqual(req.headers.authorization || "", expected)) {
+      recordFailedAttempt(ip)
       res.writeHead(401, { "WWW-Authenticate": 'Basic realm="preview"' })
       return res.end("Authentication required")
     }
