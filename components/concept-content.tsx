@@ -1,3 +1,4 @@
+import Link from "next/link"
 import { getCv } from "@/lib/cv"
 import { localePath, t, type Locale } from "@/lib/i18n"
 import "@/app/concept/concept.css"
@@ -18,7 +19,7 @@ export function ConceptContent({ locale = "en" }: { locale?: Locale }) {
         <nav className="concept-nav">
           <span>eiplsoma.hu / concept</span>
           <span>
-            <a href="/">{strings.concept.backToTerminal}</a> &nbsp;·&nbsp;{" "}
+            <Link href="/">{strings.concept.backToTerminal}</Link> &nbsp;·&nbsp;{" "}
             <a href={localePath(locale, "/site")}>{strings.concept.classicSite}</a> &nbsp;·&nbsp;{" "}
             <a href={localePath(otherLocale, "/concept")}>{locale === "en" ? "HU" : "EN"}</a>
           </span>

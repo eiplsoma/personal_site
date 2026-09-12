@@ -36,6 +36,9 @@ export function CvToolClient() {
     try {
       const savedLocale = localStorage.getItem(CV_TOOL_LOCALE_KEY)
       if (savedLocale === "en" || savedLocale === "hu") initialLocale = savedLocale
+      // localStorage is only readable client-side, so hydrating from it has
+      // to happen in an effect - there's no render-time alternative here.
+      // eslint-disable-next-line react-hooks/set-state-in-effect
       setLocale(initialLocale)
 
       const raw = localStorage.getItem(STORAGE_KEY)
@@ -61,6 +64,9 @@ export function CvToolClient() {
     if (!loaded) return
     try {
       localStorage.setItem(STORAGE_KEY, JSON.stringify(cv))
+      // Status reflects the outcome of the write above (success/timestamp or
+      // the catch below) - it can't be computed at render time.
+      // eslint-disable-next-line react-hooks/set-state-in-effect
       setStatus(`${cvToolStrings[locale].toolbar.savedPrefix}${new Date().toLocaleTimeString()}`)
     } catch {
       setStatus(cvToolStrings[locale].toolbar.saveError)

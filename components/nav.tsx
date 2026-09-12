@@ -15,7 +15,7 @@ export function Nav({ locale, path = "/" }: { locale: Locale; path?: string }) {
             soma<span>@</span>eipl
           </Link>
           <span className="view-switch">
-            <a href="/">terminal</a>
+            <Link href="/">terminal</Link>
             <a href={localePath(locale, "/concept")}>concept</a>
           </span>
         </div>
