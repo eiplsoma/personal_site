@@ -115,6 +115,14 @@
       {
         "text": "AI-asszisztált fejlesztési workflow-k (Claude Code)",
         "bold": false
+      },
+      {
+        "text": "Függőség-sérülékenység kezelés (CVE-triázs és elhárítás)",
+        "bold": false
+      },
+      {
+        "text": "Statikus kódelemzés és CI minőségi kapuk (ESLint)",
+        "bold": false
       }
     ],
     "interpersonal": [

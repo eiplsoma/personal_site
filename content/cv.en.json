@@ -115,6 +115,14 @@
       {
         "text": "AI-assisted development workflows (Claude Code)",
         "bold": false
+      },
+      {
+        "text": "Dependency vulnerability management (CVE triage & remediation)",
+        "bold": false
+      },
+      {
+        "text": "Static analysis & CI quality gates (ESLint)",
+        "bold": false
       }
     ],
     "interpersonal": [
