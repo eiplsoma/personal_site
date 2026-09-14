@@ -13,11 +13,14 @@ import "./cv-tool.css"
 
 // How far short of the container's bottom edge the last child sits (negative
 // = comfortable slack, positive = actually overflowing the fixed A4 page).
-function measureOverflow(container: Element | null): number {
+// getBoundingClientRect() reflects the on-screen preview scale (see
+// previewScale below) while clientHeight doesn't, so the rect-based distance
+// has to be normalized back to natural units before comparing the two.
+function measureOverflow(container: Element | null, scale: number): number {
   if (!container || !container.lastElementChild) return 0
   const top = container.getBoundingClientRect().top
   const bottom = container.lastElementChild.getBoundingClientRect().bottom
-  return Math.round(bottom - top - (container as HTMLElement).clientHeight)
+  return Math.round((bottom - top) / scale - (container as HTMLElement).clientHeight)
 }
 
 export function CvToolClient() {
@@ -26,6 +29,9 @@ export function CvToolClient() {
   const [loaded, setLoaded] = useState(false)
   const [status, setStatus] = useState("")
   const [overflowPx, setOverflowPx] = useState(0)
+  // The A4 preview is a fixed 210mm wide - this shrinks it to fit narrower
+  // panes (e.g. a 13" laptop) instead of forcing a horizontal scrollbar.
+  const [previewScale, setPreviewScale] = useState(1)
   const fileInputRef = useRef<HTMLInputElement>(null)
   const previewRef = useRef<HTMLDivElement>(null)
   const strings = cvToolStrings[locale].toolbar
@@ -81,7 +87,7 @@ export function CvToolClient() {
     const measure = () => {
       const main = container.querySelector(".cv-main")
       const sidebar = container.querySelector(".cv-sidebar")
-      setOverflowPx(Math.max(measureOverflow(main), measureOverflow(sidebar), 0))
+      setOverflowPx(Math.max(measureOverflow(main, previewScale), measureOverflow(sidebar, previewScale), 0))
     }
 
     // Fonts/images can still be settling right after a render; re-measure
@@ -89,7 +95,26 @@ export function CvToolClient() {
     measure()
     const raf = requestAnimationFrame(measure)
     return () => cancelAnimationFrame(raf)
-  }, [cv, loaded])
+  }, [cv, loaded, previewScale])
+
+  useEffect(() => {
+    if (!loaded) return
+    const pane = previewRef.current
+    if (!pane) return
+
+    const computeScale = () => {
+      const cvPage = pane.querySelector(".cv-page") as HTMLElement | null
+      if (!cvPage || !cvPage.offsetWidth) return
+      const style = getComputedStyle(pane)
+      const available = pane.clientWidth - parseFloat(style.paddingLeft) - parseFloat(style.paddingRight)
+      setPreviewScale(Math.min(1, available / cvPage.offsetWidth))
+    }
+
+    computeScale()
+    const observer = new ResizeObserver(computeScale)
+    observer.observe(pane)
+    return () => observer.disconnect()
+  }, [loaded])
 
   const handleExport = () => {
     const blob = new Blob([JSON.stringify(cv, null, 2)], { type: "application/json" })
@@ -180,7 +205,9 @@ export function CvToolClient() {
         </div>
       </div>
       <div className="cv-tool-preview-pane" ref={previewRef}>
-        <CvTemplate cv={cv} sample={sample} locale={locale} />
+        <div className="cv-page-scale-wrap" style={{ "--cv-scale": previewScale } as React.CSSProperties}>
+          <CvTemplate cv={cv} sample={sample} locale={locale} />
+        </div>
       </div>
     </div>
   )

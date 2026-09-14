@@ -67,6 +67,21 @@
   display: flex;
   justify-content: center;
 }
+/* .cv-page below is a fixed 210mm/297mm A4 sheet - on a narrow pane (e.g. a
+   13" laptop split view) that no longer fits, so it's scaled down visually
+   via --cv-scale (set from JS, see cv-tool-client.tsx). transform doesn't
+   affect layout size, so this wrapper is sized explicitly to the scaled
+   footprint - otherwise the pane would still need a scrollbar for the
+   full-size (but visually shrunk) box underneath. */
+.cv-page-scale-wrap {
+  flex: none;
+  width: calc(210mm * var(--cv-scale, 1));
+  height: calc(297mm * var(--cv-scale, 1));
+}
+.cv-page-scale-wrap .cv-page {
+  transform: scale(var(--cv-scale, 1));
+  transform-origin: top left;
+}
 
 .cv-field {
   display: block;
@@ -455,12 +470,21 @@
   .cv-page * {
     visibility: visible;
   }
+  .cv-page-scale-wrap {
+    width: auto;
+    height: auto;
+  }
   .cv-page {
     position: absolute;
     top: 0;
     left: 0;
     box-shadow: none;
     margin: 0;
+  }
+  /* Matches the ".cv-page-scale-wrap .cv-page" specificity of the on-screen
+     scale rule above, otherwise that rule wins the cascade even in print. */
+  .cv-page-scale-wrap .cv-page {
+    transform: none;
   }
   @page {
     size: A4;
