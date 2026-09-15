@@ -6,7 +6,14 @@ import { CvEditorForm } from "./_components/cv-editor-form"
 import { CvTemplate } from "./_components/cv-template"
 import { EMPTY_CV, sampleCvFor } from "./_components/default-cv"
 import { sanitizeCv } from "./_components/sanitize-cv"
-import { extractTranslatable, applyTranslatable, buildTranslationPrompt, type TranslatablePayload } from "./_components/translate-payload"
+import {
+  extractTranslatable,
+  applyTranslatable,
+  buildTranslationPrompt,
+  looksLikeFullCvData,
+  looksLikeTranslatablePayload,
+  type TranslatablePayload,
+} from "./_components/translate-payload"
 import { STORAGE_KEY, type CvData } from "./_components/cv-tool-types"
 import { CV_TOOL_LOCALE_KEY, cvToolStrings, type CvToolLocale } from "./_components/cv-tool-i18n"
 import "./cv-tool.css"
@@ -162,11 +169,31 @@ export function CvToolClient() {
     const pasted = window.prompt(strings.pasteAiPrompt)
     if (!pasted) return
     try {
-      const translated = JSON.parse(pasted) as TranslatablePayload
-      setCv(applyTranslatable(cv, translated))
+      const parsed: unknown = JSON.parse(pasted)
+      if (looksLikeFullCvData(parsed)) {
+        setStatus(strings.pasteAiWrongShape)
+        return
+      }
+      setCv(applyTranslatable(cv, parsed as TranslatablePayload))
       setStatus(strings.pasteAiSuccess)
     } catch {
       setStatus(strings.pasteAiError)
+    }
+  }
+
+  const handlePasteJsonImport = () => {
+    const pasted = window.prompt(strings.pasteJsonPrompt)
+    if (!pasted) return
+    try {
+      const parsed: unknown = JSON.parse(pasted)
+      if (looksLikeTranslatablePayload(parsed)) {
+        setStatus(strings.pasteJsonWrongShape)
+        return
+      }
+      setCv(sanitizeCv(parsed, EMPTY_CV))
+      setStatus(strings.pasteJsonSuccess)
+    } catch {
+      setStatus(strings.pasteJsonError)
     }
   }
 
@@ -180,6 +207,7 @@ export function CvToolClient() {
           <button onClick={() => window.print()}>{strings.exportPdf}</button>
           <button onClick={handleExport}>{strings.exportJson}</button>
           <button onClick={handleImportClick}>{strings.importJson}</button>
+          <button onClick={handlePasteJsonImport}>{strings.pasteJson}</button>
           <button onClick={handleReset}>{strings.reset}</button>
           <button onClick={handleCopyForAi}>{strings.copyForAi}</button>
           <button onClick={handlePasteAiTranslation}>{strings.pasteAiTranslation}</button>

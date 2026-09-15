@@ -79,13 +79,36 @@ export function applyTranslatable(cv: CvData, translated: TranslatablePayload): 
   }
 }
 
+// A full CvData export has "name" (a plain string) and "education" (an
+// array) - TranslatablePayload never has either key. Pasting a full export
+// into the translation box used to silently fall through applyTranslatable's
+// per-field type checks (e.g. technical skills as {text,bold} objects instead
+// of plain strings) and leave every untouched field blank - this catches that
+// mistake up front with a clear message instead of a quietly half-empty CV.
+export function looksLikeFullCvData(v: unknown): boolean {
+  if (!v || typeof v !== "object") return false
+  const r = v as Record<string, unknown>
+  return typeof r.name === "string" && Array.isArray(r.education)
+}
+
+// The reverse mistake: pasting a narrow translation payload (no "name", no
+// "education") into the full-CV import. sanitizeCv would silently fall back
+// to blank/default values for every field the payload doesn't carry, which
+// looks identical to a corrupt file - flag it up front instead.
+export function looksLikeTranslatablePayload(v: unknown): boolean {
+  if (!v || typeof v !== "object") return false
+  const r = v as Record<string, unknown>
+  return r.name === undefined && r.education === undefined && Array.isArray(r.about) && typeof r.skills === "object"
+}
+
 export function buildTranslationPrompt(payload: TranslatablePayload, targetLanguage: string): string {
   return [
     `Translate the string values in this JSON into natural, professional, HR-friendly ${targetLanguage} suitable for a CV.`,
     `Translate idiomatically, not word-for-word - phrase it the way a native speaker would naturally write it for a CV in that language.`,
     `Try to keep each translated string roughly the same character length as the original (within about 5-7%), since this text has to fit fixed spaces on a printed page.`,
     `Keep the exact same JSON structure and keys, and keep the array lengths and order unchanged - translate each string in place.`,
-    `Do not translate anything outside the given JSON. Return only the translated JSON, nothing else.`,
+    `The JSON below has exactly these top-level keys: title, tagline, about, experience, skills, languages, drivingLicence. Your reply must have exactly the same top-level keys, nothing added and nothing removed - in particular, do NOT add "name", "contact", "education", "certifications", or "footer": this is a partial payload, not a full CV export, and adding those keys will break the import.`,
+    `Do not translate anything outside the given JSON. Return only the translated JSON, nothing else - no markdown code fences, no commentary.`,
     "",
     JSON.stringify(payload, null, 2),
   ].join("\n")

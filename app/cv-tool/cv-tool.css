@@ -219,7 +219,7 @@
   overflow: hidden;
   display: flex;
   flex-direction: column;
-  gap: 20px;
+  gap: 12px;
 }
 .cv-photo-frame-wrap {
   display: flex;
@@ -265,18 +265,18 @@
 .cv-sidebar p {
   font-size: 12px;
   color: #e5e7eb;
-  line-height: 1.6;
-  margin: 8px 0 0;
+  line-height: 1.45;
+  margin: 6px 0 0;
 }
 .cv-sidebar p:first-child {
   margin-top: 0;
 }
 .cv-main {
-  padding: 16px 24px 6px;
+  padding: 13px 24px 6px;
   overflow: hidden;
   display: flex;
   flex-direction: column;
-  gap: 5px;
+  gap: 3px;
 }
 .cv-name-wrap {
   position: relative;
@@ -325,7 +325,7 @@
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.025em;
-  margin: 0 0 8px;
+  margin: 0 0 5px;
   color: #1a1a1a;
 }
 .cv-entry {
@@ -336,7 +336,7 @@
   justify-content: space-between;
   align-items: flex-start;
   gap: 8px;
-  margin-bottom: 4px;
+  margin-bottom: 2px;
 }
 .cv-entry-head h3 {
   font-size: 14px;
