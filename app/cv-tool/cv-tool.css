@@ -272,7 +272,7 @@
   margin-top: 0;
 }
 .cv-main {
-  padding: 13px 24px 6px;
+  padding: 13px 24px 3px;
   overflow: hidden;
   display: flex;
   flex-direction: column;
@@ -299,7 +299,7 @@
   font-size: 30px;
   line-height: 1.2;
   font-weight: 700;
-  margin: 0 0 4px;
+  margin: 0 0 1px;
   color: #1a1a1a;
 }
 .cv-main .cv-title {
