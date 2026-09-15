@@ -99,7 +99,7 @@ export function HomeContent({ locale }: { locale: Locale }) {
             <div className="skill-group">
               <div className="gtitle">{strings.skillGroups.technical}</div>
               {cv.skills.technical.map((s) => (
-                <span className="tag" key={s.text}>
+                <span className={`tag${s.bold ? " featured" : ""}`} key={s.text}>
                   {s.text}
                 </span>
               ))}
@@ -146,6 +146,11 @@ export function HomeContent({ locale }: { locale: Locale }) {
                   <span className="when">{item.period}</span>
                 </div>
                 <div className="org">{item.org}</div>
+                {item.courses?.length ? (
+                  <div className="courses">
+                    <span className="clabel">{item.coursesLabel}</span> {item.courses.join(", ")}
+                  </div>
+                ) : null}
               </div>
             ))}
           </div>
@@ -159,6 +164,7 @@ export function HomeContent({ locale }: { locale: Locale }) {
                   <span className="when">{item.date}</span>
                 </div>
                 <div className="org">{item.org}</div>
+                {item.detail ? <div className="detail">{item.detail}</div> : null}
               </div>
             ))}
           </div>

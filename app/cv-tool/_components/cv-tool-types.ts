@@ -1,7 +1,7 @@
 export type TechSkill = { text: string; bold: boolean }
 export type ExperienceEntry = { title: string; org: string; period: string; bulletsLabel: string; bullets: string[] }
-export type EduEntry = { degree: string; org: string; period: string; highlight: boolean }
-export type CertEntry = { title: string; org: string; date: string }
+export type EduEntry = { degree: string; org: string; period: string; highlight: boolean; courses: string[] }
+export type CertEntry = { title: string; org: string; date: string; detail: string }
 
 export type CvData = {
   name: string
@@ -41,9 +41,11 @@ export const LIMITS = {
   eduDegree: 55,
   eduOrg: 55,
   eduPeriod: 20,
+  eduCourse: 140,
   certTitle: 55,
   certOrg: 45,
   certDate: 20,
+  certDetail: 70,
   skillItem: 90,
   languages: 70,
   drivingLicence: 40,
@@ -61,6 +63,7 @@ export const MAX_ITEMS = {
   experienceEntries: 8,
   bulletsPerExperience: 8,
   educationEntries: 6,
+  coursesPerEducation: 6,
   certifications: 6,
   skillItems: 12,
 } as const

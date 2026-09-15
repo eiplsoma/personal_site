@@ -52,6 +52,7 @@ function sanitizeEducation(v: unknown, fb: EduEntry[]): EduEntry[] {
       org: str(e.org, "", LIMITS.eduOrg),
       period: str(e.period, "", LIMITS.eduPeriod),
       highlight: bool(e.highlight, false),
+      courses: strArray(e.courses, [], LIMITS.eduCourse, MAX_ITEMS.coursesPerEducation),
     }
   })
 }
@@ -60,7 +61,12 @@ function sanitizeCertifications(v: unknown, fb: CertEntry[]): CertEntry[] {
   if (!Array.isArray(v)) return fb
   return v.slice(0, MAX_ITEMS.certifications).map((entry) => {
     const e = asRecord(entry)
-    return { title: str(e.title, "", LIMITS.certTitle), org: str(e.org, "", LIMITS.certOrg), date: str(e.date, "", LIMITS.certDate) }
+    return {
+      title: str(e.title, "", LIMITS.certTitle),
+      org: str(e.org, "", LIMITS.certOrg),
+      date: str(e.date, "", LIMITS.certDate),
+      detail: str(e.detail, "", LIMITS.certDetail),
+    }
   })
 }
 

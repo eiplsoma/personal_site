@@ -126,6 +126,11 @@ export function CvTemplate({ cv, sample, locale = "en" }: { cv: CvData; sample: 
                   <p className="org" style={{ fontWeight: e.highlight ? 700 : 600 }}>
                     <Hint value={e.org} sample={es?.org ?? ""} />
                   </p>
+                  {e.courses.length > 0 ? (
+                    <p className="cv-edu-courses">
+                      <span className="cv-edu-courses-label">{s.relevantCourses}</span> {e.courses.join(", ")}
+                    </p>
+                  ) : null}
                 </div>
               )
             })}
@@ -148,6 +153,7 @@ export function CvTemplate({ cv, sample, locale = "en" }: { cv: CvData; sample: 
                   <p className="org" style={{ fontWeight: 700 }}>
                     <Hint value={c.org} sample={cs?.org ?? ""} />
                   </p>
+                  {c.detail ? <p className="cv-edu-courses">{c.detail}</p> : null}
                 </div>
               )
             })}

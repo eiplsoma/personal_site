@@ -22,8 +22,16 @@ export const SAMPLE_CV_EN: CvData = {
       bullets: ["What you did or built.", "A concrete result or detail worth mentioning."],
     },
   ],
-  education: [{ degree: "Degree, Field", org: "Institution", period: "2019 - 2023", highlight: true }],
-  certifications: [{ title: "Certification Name", org: "Issuing Organization", date: "01/01/2024" }],
+  education: [
+    {
+      degree: "Degree, Field",
+      org: "Institution",
+      period: "2019 - 2023",
+      highlight: true,
+      courses: ["Relevant course one", "Relevant course two"],
+    },
+  ],
+  certifications: [{ title: "Certification Name", org: "Issuing Organization", date: "01/01/2024", detail: "Mode of learning: Online" }],
   skills: {
     professional: ["Skill area one", "Skill area two"],
     technical: [
@@ -61,8 +69,16 @@ export const SAMPLE_CV_HU: CvData = {
       bullets: ["Amit csináltál vagy építettél.", "Egy konkrét eredmény vagy említésre méltó részlet."],
     },
   ],
-  education: [{ degree: "Végzettség, szakterület", org: "Intézmény", period: "2019 - 2023", highlight: true }],
-  certifications: [{ title: "Tanúsítvány neve", org: "Kiállító szervezet", date: "2024.01.01." }],
+  education: [
+    {
+      degree: "Végzettség, szakterület",
+      org: "Intézmény",
+      period: "2019 - 2023",
+      highlight: true,
+      courses: ["Releváns tárgy egy", "Releváns tárgy kettő"],
+    },
+  ],
+  certifications: [{ title: "Tanúsítvány neve", org: "Kiállító szervezet", date: "2024.01.01.", detail: "Tanulási mód: Online" }],
   skills: {
     professional: ["Szakterület egy", "Szakterület kettő"],
     technical: [
@@ -98,8 +114,8 @@ export const EMPTY_CV: CvData = {
   contact: { location: "", phone: "", email: "" },
   about: [""],
   experience: [{ title: "", org: "", period: "", bulletsLabel: "", bullets: ["", ""] }],
-  education: [{ degree: "", org: "", period: "", highlight: true }],
-  certifications: [{ title: "", org: "", date: "" }],
+  education: [{ degree: "", org: "", period: "", highlight: true, courses: [] }],
+  certifications: [{ title: "", org: "", date: "", detail: "" }],
   skills: {
     professional: ["", ""],
     technical: [

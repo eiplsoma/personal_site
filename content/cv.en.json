@@ -29,26 +29,38 @@
     {
       "degree": "Business Informatics, BSc",
       "org": "University of Debrecen",
-      "period": "2019 - 2025",
-      "highlight": true
+      "period": "2021 - 2025",
+      "highlight": true,
+      "coursesLabel": "Relevant coursework:",
+      "courses": [
+        "Operating Systems & Infrastructure Fundamentals",
+        "Fundamentals of IT Security",
+        "Advanced Data Security",
+        "Ethical Hacking I",
+        "Practical IT Service Implementation in an Enterprise Environment (in partnership with Deutsche Telekom)"
+      ]
     },
     {
       "degree": "Secondary School",
       "org": "Fazekas Mihály Secondary School of Debrecen",
       "period": "2014 - 2019",
-      "highlight": false
+      "highlight": false,
+      "coursesLabel": "",
+      "courses": []
     }
   ],
   "certifications": [
     {
       "title": "IT Specialist - Python",
       "org": "Certiport",
-      "date": "13/02/2024"
+      "date": "13/02/2024",
+      "detail": "Mode of learning: Online"
     },
     {
       "title": "English Intermediate (B2) Combined Language Exam",
       "org": "ELTE Origó Nyelvi Centrum Kft.",
-      "date": "08/05/2019"
+      "date": "08/05/2019",
+      "detail": "Presential · Serial Number: 2035024"
     }
   ],
   "skills": {

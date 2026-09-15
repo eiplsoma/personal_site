@@ -29,26 +29,38 @@
     {
       "degree": "Gazdaságinformatika, BSc",
       "org": "Debreceni Egyetem",
-      "period": "2019 - 2025",
-      "highlight": true
+      "period": "2021 - 2025",
+      "highlight": true,
+      "coursesLabel": "Releváns tárgyak:",
+      "courses": [
+        "Operációs rendszerek és infrastrukturális alapok",
+        "Informatikai biztonság alapjai",
+        "Haladó adatbiztonság",
+        "Etikus hackelés I.",
+        "IT szolgáltatások gyakorlati megvalósítása nagyvállalati környezetben (Deutsche Telekom-partnerségben)"
+      ]
     },
     {
       "degree": "Középiskola",
       "org": "Fazekas Mihály Gimnázium, Debrecen",
       "period": "2014 - 2019",
-      "highlight": false
+      "highlight": false,
+      "coursesLabel": "",
+      "courses": []
     }
   ],
   "certifications": [
     {
       "title": "IT Specialist - Python",
       "org": "Certiport",
-      "date": "2024.02.13"
+      "date": "2024.02.13",
+      "detail": "Tanulási mód: Online"
     },
     {
       "title": "Angol középfokú (B2) komplex nyelvvizsga",
       "org": "ELTE Origó Nyelvi Centrum Kft.",
-      "date": "2019.05.08"
+      "date": "2019.05.08",
+      "detail": "Jelenléti (presential) · Sorozatszám: 2035024"
     }
   ],
   "skills": {

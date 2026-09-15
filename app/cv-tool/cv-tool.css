@@ -329,7 +329,7 @@
   color: #1a1a1a;
 }
 .cv-entry {
-  margin-bottom: 6px;
+  margin-bottom: 4px;
 }
 .cv-entry-head {
   display: flex;
@@ -357,6 +357,16 @@
   text-transform: uppercase;
   font-weight: 600;
   margin: 0;
+}
+.cv-entry .cv-edu-courses {
+  font-size: 11px;
+  color: #4b5563;
+  margin: 3px 0 0;
+  line-height: 1.4;
+}
+.cv-entry .cv-edu-courses-label {
+  color: #1a1a1a;
+  font-weight: 600;
 }
 .cv-entry .bullets-label {
   font-size: 12px;

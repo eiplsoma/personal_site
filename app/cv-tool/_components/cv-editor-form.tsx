@@ -244,7 +244,7 @@ function ExperienceEditor({
   )
 }
 
-const emptyEdu: EduEntry = { degree: "", org: "", period: "", highlight: false }
+const emptyEdu: EduEntry = { degree: "", org: "", period: "", highlight: false, courses: [] }
 
 function EducationEditor({
   items,
@@ -298,13 +298,40 @@ function EducationEditor({
               maxLength={LIMITS.eduPeriod}
               onChange={(v) => update(i, { period: v })}
             />
+            <div className="cv-field">
+              <span className="label">
+                <span>{strings.relevantCourses}</span>
+              </span>
+              {entry.courses.map((course, ci) => (
+                <div key={ci} className="cv-tool-row">
+                  <input
+                    value={course}
+                    placeholder={sample.courses[ci] ?? sample.courses[0] ?? ""}
+                    maxLength={LIMITS.eduCourse}
+                    onChange={(e) => {
+                      const courses = [...entry.courses]
+                      courses[ci] = e.target.value
+                      update(i, { courses })
+                    }}
+                  />
+                  <button className="cv-tool-x" onClick={() => update(i, { courses: entry.courses.filter((_, idx) => idx !== ci) })}>
+                    ✕
+                  </button>
+                </div>
+              ))}
+              {entry.courses.length < MAX_ITEMS.coursesPerEducation ? (
+                <button className="cv-tool-add" onClick={() => update(i, { courses: [...entry.courses, ""] })}>
+                  {strings.addCourse}
+                </button>
+              ) : null}
+            </div>
           </div>
         )
       })}
       {items.length < MAX_ITEMS.educationEntries ? (
         <button
           className="cv-tool-add"
-          onClick={() => onChange([...items, { degree: "", org: "", period: "", highlight: false }])}
+          onClick={() => onChange([...items, { degree: "", org: "", period: "", highlight: false, courses: [] }])}
         >
           {strings.addEducation}
         </button>
@@ -313,7 +340,7 @@ function EducationEditor({
   )
 }
 
-const emptyCert: CertEntry = { title: "", org: "", date: "" }
+const emptyCert: CertEntry = { title: "", org: "", date: "", detail: "" }
 
 function CertificationsEditor({
   items,
@@ -367,11 +394,18 @@ function CertificationsEditor({
               maxLength={LIMITS.certDate}
               onChange={(v) => update(i, { date: v })}
             />
+            <Field
+              label={strings.certDetail}
+              value={entry.detail}
+              placeholder={sample.detail}
+              maxLength={LIMITS.certDetail}
+              onChange={(v) => update(i, { detail: v })}
+            />
           </div>
         )
       })}
       {items.length < MAX_ITEMS.certifications ? (
-        <button className="cv-tool-add" onClick={() => onChange([...items, { title: "", org: "", date: "" }])}>
+        <button className="cv-tool-add" onClick={() => onChange([...items, { title: "", org: "", date: "", detail: "" }])}>
           {strings.addCertification}
         </button>
       ) : null}
