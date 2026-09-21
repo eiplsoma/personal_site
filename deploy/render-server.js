@@ -59,7 +59,14 @@ function recordFailedAttempt(ip) {
 
 http
   .createServer((req, res) => {
-    const ip = (req.headers["x-forwarded-for"] || req.socket.remoteAddress || "unknown").split(",")[0].trim()
+    // Render sets the FIRST entry of X-Forwarded-For to the real client IP
+    // itself (confirmed via Render staff, feedback.render.com/features/p/
+    // send-the-correct-xforwardedfor: "we set the first IP in the list to
+    // the real client IP") - it does not append like a standard reverse
+    // proxy. So position 0 is the one hop the client can't forge; anything
+    // after it is whatever the client itself sent and must not be trusted.
+    const xff = req.headers["x-forwarded-for"]
+    const ip = xff ? xff.split(",")[0].trim() : req.socket.remoteAddress || "unknown"
     if (isRateLimited(ip)) {
       res.writeHead(429, { "Retry-After": "300" })
       return res.end("Too many attempts")
@@ -72,7 +79,17 @@ http
       return res.end("Authentication required")
     }
 
-    const urlPath = decodeURIComponent(req.url.split("?")[0])
+    let urlPath
+    try {
+      urlPath = decodeURIComponent(req.url.split("?")[0])
+    } catch {
+      // Malformed percent-encoding throws synchronously and, uncaught,
+      // would crash this whole process (killing the site for every
+      // visitor) on a single bad request - a 400 is the correct response
+      // to a malformed request line, not a process crash.
+      res.writeHead(400)
+      return res.end("Bad request")
+    }
     const base = path.resolve(ROOT, urlPath === "/" ? "index.html" : `.${urlPath}`)
     // Path-traversal guard: reject anything that resolves outside ROOT
     // (e.g. "/../render-server.js") before ever touching the filesystem.
