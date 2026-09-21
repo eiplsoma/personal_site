@@ -4,6 +4,7 @@ import { getCv } from "@/lib/cv"
 import { localePath, t, type Locale } from "@/lib/i18n"
 import { Nav } from "@/components/nav"
 import { SiteFooter } from "@/components/site-footer"
+import { HtmlLang } from "@/components/html-lang"
 
 export function HomeContent({ locale }: { locale: Locale }) {
   const cv = getCv(locale)
@@ -11,6 +12,7 @@ export function HomeContent({ locale }: { locale: Locale }) {
 
   return (
     <>
+      <HtmlLang locale={locale} />
       <Nav locale={locale} path="/" />
       <div className="wrap">
         <section className="hero">

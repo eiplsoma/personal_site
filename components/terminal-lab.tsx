@@ -5,6 +5,7 @@ import { useRouter } from "next/navigation"
 import { Terminal } from "@xterm/xterm"
 import { FitAddon } from "@xterm/addon-fit"
 import { getCv } from "@/lib/cv"
+import { HtmlLang } from "@/components/html-lang"
 import "@xterm/xterm/css/xterm.css"
 import "@/app/terminal.css"
 
@@ -274,6 +275,7 @@ export function TerminalLab() {
 
   return (
     <div className="term-page">
+      <HtmlLang locale="en" />
       <a href="/site" className="term-skip">
         Skip to full site →
       </a>

@@ -1,6 +1,7 @@
 import Link from "next/link"
 import { getCv } from "@/lib/cv"
 import { localePath, t, type Locale } from "@/lib/i18n"
+import { HtmlLang } from "@/components/html-lang"
 import "@/app/concept/concept.css"
 
 export function ConceptContent({ locale = "en" }: { locale?: Locale }) {
@@ -15,6 +16,7 @@ export function ConceptContent({ locale = "en" }: { locale?: Locale }) {
 
   return (
     <div className="concept-page">
+      <HtmlLang locale={locale} />
       <div className="concept-wrap">
         <nav className="concept-nav">
           <span>eiplsoma.hu / concept</span>

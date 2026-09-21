@@ -1,6 +1,7 @@
 import Link from "next/link"
 import { Nav } from "@/components/nav"
 import { SiteFooter } from "@/components/site-footer"
+import { HtmlLang } from "@/components/html-lang"
 import { localePath, t, type Locale } from "@/lib/i18n"
 
 // One screenshot thumbnail per "main" project (the pipeline card + the 3
@@ -42,6 +43,7 @@ export function ProjectsContent({ locale }: { locale: Locale }) {
 
   return (
     <>
+      <HtmlLang locale={locale} />
       <Nav locale={locale} path="/projects" />
       <div className="wrap">
         <section className="page-header">
