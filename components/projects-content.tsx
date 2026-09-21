@@ -14,17 +14,24 @@ const mainProjectThumbs = ["cicd-demo", "cv-tool", "this-site", "woolly-demo"]
 // same priority order the text links below it already use.
 function ProjectThumb({ thumb, href, internal }: { thumb: string; href?: string; internal?: boolean }) {
   if (!href) return null
-  const img = (
-    // eslint-disable-next-line @next/next/no-img-element -- small fixed-size thumbnail, not the LCP
-    <img className="project-thumb" src={`/project-thumbs/${thumb}.webp`} alt="" />
+  const frame = (
+    <span className="project-thumb-frame">
+      <span className="project-thumb-bar">
+        <span className="dot" />
+        <span className="dot" />
+        <span className="dot" />
+      </span>
+      {/* eslint-disable-next-line @next/next/no-img-element -- small fixed-size thumbnail, not the LCP */}
+      <img className="project-thumb" src={`/project-thumbs/${thumb}.webp`} alt="" />
+    </span>
   )
   return internal ? (
     <Link href={href} className="project-thumb-link">
-      {img}
+      {frame}
     </Link>
   ) : (
     <a href={href} target="_blank" rel="noreferrer" className="project-thumb-link">
-      {img}
+      {frame}
     </a>
   )
 }

@@ -375,21 +375,42 @@ section p.lead {
 }
 .project-thumb-link {
   display: block;
+  width: fit-content;
   margin: 0 0 14px;
+}
+.project-thumb-frame {
+  display: block;
+  width: 260px;
+  max-width: 100%;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  overflow: hidden;
+  transition: border-color 0.15s ease;
+}
+.project-thumb-link:hover .project-thumb-frame {
+  border-color: var(--accent);
+}
+.project-thumb-bar {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  padding: 6px 8px;
+  background: var(--surface-2);
+  border-bottom: 1px solid var(--border);
+}
+.project-thumb-bar .dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--border);
 }
 .project-thumb {
   display: block;
   width: 100%;
-  max-width: 260px;
   aspect-ratio: 16 / 9;
   object-fit: cover;
+  object-position: top;
   background: var(--surface);
-  border: 1px solid var(--border);
-  border-radius: 8px;
-  transition: opacity 0.15s ease;
-}
-.project-thumb-link:hover .project-thumb {
-  opacity: 0.85;
 }
 .project-card h3 {
   font-size: 18px;
