@@ -13,6 +13,11 @@ export function localePath(locale: Locale, path: string) {
     if (path.startsWith("/#")) return `/site${path}`
     return path
   }
+  // Hungarian has no separate interactive-terminal page - /hu itself IS
+  // the "classic site" page, so a "/site" (or "/site#hash") request has
+  // to collapse onto /hu instead of the nonexistent /hu/site.
+  if (path === "/site") return "/hu"
+  if (path.startsWith("/site#")) return `/hu${path.slice("/site".length)}`
   return `/hu${path === "/" ? "" : path}`
 }
 
