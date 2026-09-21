@@ -11,6 +11,7 @@ function Hint({ value, sample }: { value: string; sample: string }) {
 
 export function CvTemplate({ cv, sample, locale = "en" }: { cv: CvData; sample: CvData; locale?: CvToolLocale }) {
   const s = cvToolStrings[locale].template
+  const photoLabel = cvToolStrings[locale].form.photo
 
   return (
     <div className="cv-page" id="cv-print-page">
@@ -20,7 +21,7 @@ export function CvTemplate({ cv, sample, locale = "en" }: { cv: CvData; sample: 
             <div className="cv-photo-frame">
               {cv.photoDataUrl ? (
                 // eslint-disable-next-line @next/next/no-img-element
-                <img src={cv.photoDataUrl} alt="" />
+                <img src={cv.photoDataUrl} alt={cv.name || photoLabel} />
               ) : null}
             </div>
           </div>
