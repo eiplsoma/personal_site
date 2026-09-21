@@ -586,19 +586,14 @@ footer .deploy .dot {
   }
 }
 
-@media (max-width: 680px) {
-  .hero-photo {
-    float: none;
-    width: 100%;
-    height: auto;
-    aspect-ratio: 3 / 4;
-    max-width: 320px;
-    margin: 0 0 16px;
-    object-position: 75% center;
-  }
+/* Nav's own breakpoint is wider than the rest of the mobile layout - the
+   HU link labels (rolam/munka/projektek/keszsegek/hatter/kapcsolat) are
+   long enough that nowrap still overflows at tablet widths (~700-900px),
+   well above the 680px cutoff everything else uses. */
+@media (max-width: 900px) {
   html {
-    /* Mobile nav wraps to 2-3 rows, so it's taller than the desktop
-       single-row nav - matches its actual stacked height. */
+    /* Wrapped nav is taller than the desktop single-row nav - matches
+       its actual stacked height so anchor-link scrolling lands below it. */
     scroll-padding-top: 150px;
   }
   nav .row {
@@ -618,5 +613,17 @@ footer .deploy .dot {
   }
   nav .links a.lang-switch {
     margin-left: auto;
+  }
+}
+
+@media (max-width: 680px) {
+  .hero-photo {
+    float: none;
+    width: 100%;
+    height: auto;
+    aspect-ratio: 3 / 4;
+    max-width: 320px;
+    margin: 0 0 16px;
+    object-position: 75% center;
   }
 }
