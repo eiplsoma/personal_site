@@ -35,6 +35,7 @@ export function CvToolClient() {
   const [locale, setLocale] = useState<CvToolLocale>("en")
   const [loaded, setLoaded] = useState(false)
   const [status, setStatus] = useState("")
+  const [mobileView, setMobileView] = useState<"editor" | "preview">("editor")
   const [overflowPx, setOverflowPx] = useState(0)
   // The A4 preview is a fixed 210mm wide - this shrinks it to fit narrower
   // panes (e.g. a 13" laptop) instead of forcing a horizontal scrollbar.
@@ -102,7 +103,7 @@ export function CvToolClient() {
     measure()
     const raf = requestAnimationFrame(measure)
     return () => cancelAnimationFrame(raf)
-  }, [cv, loaded, previewScale])
+  }, [cv, loaded, previewScale, mobileView])
 
   useEffect(() => {
     if (!loaded) return
@@ -120,8 +121,21 @@ export function CvToolClient() {
     computeScale()
     const observer = new ResizeObserver(computeScale)
     observer.observe(pane)
+    // On mobile the preview pane is display:none while the "editor" tab is
+    // active, so it has zero size and computeScale's own guard above skips
+    // it - switching to "preview" makes it visible again, but that alone
+    // doesn't guarantee a fresh resize observation lands before the next
+    // paint. Force one re-measure on the frame after the tab switch, once
+    // the display:none -> block change has actually been laid out.
+    if (mobileView === "preview") {
+      const raf = requestAnimationFrame(computeScale)
+      return () => {
+        cancelAnimationFrame(raf)
+        observer.disconnect()
+      }
+    }
     return () => observer.disconnect()
-  }, [loaded])
+  }, [loaded, mobileView])
 
   const handleExport = () => {
     const blob = new Blob([JSON.stringify(cv, null, 2)], { type: "application/json" })
@@ -200,7 +214,21 @@ export function CvToolClient() {
   if (!loaded) return null
 
   return (
-    <div className="cv-tool-page">
+    <div className="cv-tool-page" data-mobile-view={mobileView}>
+      <div className="cv-tool-mobile-tabs">
+        <button
+          className={mobileView === "editor" ? "active" : ""}
+          onClick={() => setMobileView("editor")}
+        >
+          {strings.editTab}
+        </button>
+        <button
+          className={mobileView === "preview" ? "active" : ""}
+          onClick={() => setMobileView("preview")}
+        >
+          {strings.previewTab}
+        </button>
+      </div>
       <div className="cv-tool-editor">
         <div className="cv-tool-toolbar">
           <Link href={locale === "hu" ? "/hu/projects" : "/projects"}>{strings.backToProjects}</Link>

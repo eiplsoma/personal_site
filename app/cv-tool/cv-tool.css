@@ -58,6 +58,9 @@
   overflow-y: auto;
   padding: 16px;
 }
+.cv-tool-mobile-tabs {
+  display: none;
+}
 .cv-tool-preview-pane {
   flex: 1;
   min-height: 0;
@@ -470,6 +473,58 @@
   gap: 5px;
   font-size: 11.5px;
   white-space: nowrap;
+}
+
+/* Below ~900px the 42%-wide editor pane (min-width 360px) and the A4
+   preview pane no longer both fit - stack them and show only the one
+   the mobile tab bar has selected, instead of squeezing both into an
+   unusable sliver. Both panes stay mounted (not unmounted) so the JS
+   state (form inputs, scroll position) survives switching tabs - only
+   `display` toggles, and cv-tool-client.tsx explicitly re-runs the
+   preview-scale measurement when switching to "preview", since a pane
+   coming back from display:none has zero width for ResizeObserver to
+   have measured while it was hidden. */
+@media (max-width: 900px) {
+  .cv-tool-page {
+    flex-direction: column;
+    height: 100dvh;
+  }
+  .cv-tool-mobile-tabs {
+    display: flex;
+    flex: none;
+    border-bottom: 1px solid var(--border);
+  }
+  .cv-tool-mobile-tabs button {
+    flex: 1;
+    padding: 12px;
+    font-family: var(--mono);
+    font-size: 13px;
+    border: none;
+    border-bottom: 2px solid transparent;
+    background: var(--surface);
+    color: var(--muted);
+    cursor: pointer;
+  }
+  .cv-tool-mobile-tabs button.active {
+    color: var(--fg);
+    border-bottom-color: var(--accent);
+  }
+  .cv-tool-editor {
+    width: 100%;
+    min-width: 0;
+    flex: 1;
+    height: auto;
+    border-right: none;
+  }
+  .cv-tool-preview-pane {
+    padding: 16px;
+  }
+  .cv-tool-page[data-mobile-view="editor"] .cv-tool-preview-pane {
+    display: none;
+  }
+  .cv-tool-page[data-mobile-view="preview"] .cv-tool-editor {
+    display: none;
+  }
 }
 
 @media print {

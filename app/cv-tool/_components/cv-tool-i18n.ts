@@ -32,6 +32,8 @@ export const cvToolStrings = {
       pasteAiSuccess: "Translation applied",
       pasteAiError: "That doesn't look like valid translated JSON",
       pasteAiWrongShape: 'That looks like a full CV export, not a translation payload - use "Import JSON" or "Paste JSON" instead.',
+      editTab: "Edit",
+      previewTab: "Preview",
     },
     form: {
       photo: "Photo",
@@ -119,6 +121,8 @@ export const cvToolStrings = {
       pasteAiSuccess: "Fordítás alkalmazva",
       pasteAiError: "Ez nem tűnik érvényes, lefordított JSON-nak",
       pasteAiWrongShape: 'Ez egy teljes CV exportnak tűnik, nem fordításnak - használd az "Import JSON"-t vagy a "JSON beillesztése"-t helyette.',
+      editTab: "Szerkesztés",
+      previewTab: "Előnézet",
     },
     form: {
       photo: "Fénykép",
