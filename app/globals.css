@@ -272,7 +272,8 @@ nav .links a.lang-switch:focus-visible {
   border-color: var(--accent);
   font-weight: 600;
 }
-.btn:hover {
+.btn:hover,
+.btn:focus-visible {
   border-color: var(--accent);
 }
 
@@ -387,7 +388,8 @@ section p.lead {
   overflow: hidden;
   transition: border-color 0.15s ease;
 }
-.project-thumb-link:hover .project-thumb-frame {
+.project-thumb-link:hover .project-thumb-frame,
+.project-thumb-link:focus-visible .project-thumb-frame {
   border-color: var(--accent);
 }
 .project-thumb-bar {
@@ -492,7 +494,8 @@ section p.lead {
   text-decoration: none;
   border-bottom: 1px solid var(--border);
 }
-.project-links a:hover {
+.project-links a:hover,
+.project-links a:focus-visible {
   color: var(--accent);
   border-color: var(--accent);
 }
@@ -599,7 +602,8 @@ footer .contacts a {
   text-decoration: none;
   font-size: 14px;
 }
-footer .contacts a:hover {
+footer .contacts a:hover,
+footer .contacts a:focus-visible {
   color: var(--accent);
 }
 footer .deploy {

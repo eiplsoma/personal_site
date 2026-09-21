@@ -36,7 +36,9 @@
   cursor: pointer;
 }
 .cv-tool-toolbar button:hover,
-.cv-tool-toolbar label.btn-like:hover {
+.cv-tool-toolbar button:focus-visible,
+.cv-tool-toolbar label.btn-like:hover,
+.cv-tool-toolbar label.btn-like:focus-within {
   border-color: var(--accent);
   color: var(--accent);
 }
