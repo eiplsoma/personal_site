@@ -284,10 +284,20 @@
   color: var(--muted);
 }
 
+.concept-footer > * {
+  min-width: 0;
+}
+
+.concept-footer > div:first-child {
+  display: flex;
+  flex-wrap: wrap;
+}
+
 .concept-footer a {
   color: var(--fg);
   text-decoration: none;
   margin-right: 16px;
+  overflow-wrap: anywhere;
 }
 
 .concept-footer a:hover {
