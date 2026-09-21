@@ -230,18 +230,21 @@ nav .links a.lang-switch:focus-visible {
 }
 
 .hero-row {
-  display: flex;
-  gap: 28px;
-  align-items: flex-start;
   margin-top: 34px;
 }
+.hero-row::after {
+  content: "";
+  display: table;
+  clear: both;
+}
 .hero-photo {
-  width: 84px;
-  height: 84px;
+  width: 300px;
+  height: 400px;
   border-radius: 10px;
   object-fit: cover;
-  flex: none;
   border: 1px solid var(--border);
+  float: left;
+  margin: 0 28px 12px 0;
 }
 .hero-actions {
   display: flex;
@@ -576,9 +579,6 @@ footer .deploy .dot {
 }
 
 @media (max-width: 560px) {
-  .hero-row {
-    flex-direction: column;
-  }
   .titem .head {
     flex-direction: column;
     align-items: flex-start;
@@ -587,6 +587,15 @@ footer .deploy .dot {
 }
 
 @media (max-width: 680px) {
+  .hero-photo {
+    float: none;
+    width: 100%;
+    height: auto;
+    aspect-ratio: 3 / 4;
+    max-width: 320px;
+    margin: 0 0 16px;
+    object-position: 75% center;
+  }
   html {
     /* Mobile nav wraps to 2-3 rows, so it's taller than the desktop
        single-row nav - matches its actual stacked height. */

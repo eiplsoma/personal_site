@@ -35,11 +35,12 @@ export function HomeContent({ locale }: { locale: Locale }) {
               className="hero-photo"
               src="/profile-photo.webp"
               alt={cv.name}
-              width={1200}
-              height={1600}
+              width={900}
+              height={1200}
               priority
             />
             <p className="lead">{cv.about[0]}</p>
+            {cv.about[1] ? <p className="lead">{cv.about[1]}</p> : null}
           </div>
 
           <div className="hero-actions">
@@ -54,7 +55,7 @@ export function HomeContent({ locale }: { locale: Locale }) {
 
         <div className="divider" id="about">{strings.dividers.about}</div>
         <section>
-          {cv.about.slice(1).map((paragraph) => (
+          {cv.about.slice(2).map((paragraph) => (
             <p key={paragraph}>{paragraph}</p>
           ))}
           <p className="lead">{cv.lookingFor}</p>
