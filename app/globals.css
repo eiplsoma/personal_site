@@ -373,6 +373,24 @@ section p.lead {
   border-radius: 10px;
   padding: 26px 28px;
 }
+.project-thumb-link {
+  display: block;
+  margin: 0 0 14px;
+}
+.project-thumb {
+  display: block;
+  width: 100%;
+  max-width: 260px;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  transition: opacity 0.15s ease;
+}
+.project-thumb-link:hover .project-thumb {
+  opacity: 0.85;
+}
 .project-card h3 {
   font-size: 18px;
   margin-bottom: 8px;
