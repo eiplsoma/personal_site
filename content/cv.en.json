@@ -73,7 +73,7 @@
     ],
     "technical": [
       {
-        "text": "Docker: multi-stage builds & Compose",
+        "text": "Docker: image builds & Compose",
         "bold": true
       },
       {

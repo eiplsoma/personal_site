@@ -34,7 +34,6 @@ const dict = {
     hero: {
       currentlyPrefix: "Currently: ",
       currentlySuffix: ", building self-hosted infrastructure on the side.",
-      downloadCv: "↓ Download CV (PDF)",
       seeProject: "See the CI/CD project →",
       buildCv: "Build your own CV →",
     },
@@ -140,7 +139,6 @@ const dict = {
     hero: {
       currentlyPrefix: "Jelenleg: ",
       currentlySuffix: ", mellette saját self-hosted infrastruktúrát építek.",
-      downloadCv: "↓ CV letöltése (PDF)",
       seeProject: "A CI/CD projekt →",
       buildCv: "Készítsd el a saját CV-det →",
     },
@@ -188,13 +186,13 @@ const dict = {
         },
         {
           title: "Ez az oldal — VPS & Cloudflare hardening",
-          lead: "Biztonsági auditot és hardening-kört futtattam ennek az oldalnak a saját infrastruktúráján: rétegzett hálózati és kriptográfiai védelem a CDN és az origin között, deploy-pipeline és SSH-hozzáférés megkeményítése, automatizált CI lint-kapu, és függőség-sérülékenység monitorozás.",
+          lead: "Biztonsági auditot és hardening-kört futtattam ennek az oldalnak a saját infrastruktúráján: rétegzett hálózati és kriptográfiai védelem a CDN és az origin között, deploy-pipeline és SSH-hozzáférés megerősítése, automatizált CI lint-kapu, és függőség-sérülékenység monitorozás.",
           tags: ["Docker", "Cloudflare", "GitHub Actions", "nginx", "Dependabot"],
           github: "https://github.com/eiplsoma/personal_site",
         },
         {
           title: "Woolly Design — ügyfél landing oldal",
-          lead: "Egy v0.dev-generált prototípus, élő domainre kiadva biztonsági megkeményítéssel: bot-védelem, szerver oldali input-validáció és XSS-szűrés, tranzakciós email-küldés, és a GDPR-oldalak, amikre egy kisvállalkozásnak szüksége van. Az eredeti ügyfél-domain már nem aktív, az alábbi link egy csak-megtekinthető demo-újratelepítés.",
+          lead: "Egy v0.dev-generált prototípus, élő domainre kiadva biztonsági megerősítéssel: bot-védelem, szerveroldali input-validáció és XSS-szűrés, tranzakciós email-küldés, és a GDPR-oldalak, amikre egy kisvállalkozásnak szüksége van. Az eredeti ügyfél-domain már nem aktív, az alábbi link egy csak-megtekinthető demo-újratelepítés.",
           tags: ["Next.js", "Cloudflare Turnstile", "Nodemailer", "GDPR"],
           live: "https://woolly-demo.eiplsoma.hu",
           github: "https://github.com/eiplsoma/woolly-landing",

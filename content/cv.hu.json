@@ -7,8 +7,8 @@
     "email": "soma.eipl@gmail.com"
   },
   "about": [
-    "IT rendszermérnök, gyakorlati tapasztalattal Linux adminisztráció, konténerizáció és CI/CD automatizálás terén, amit napi szintű operatív támogatás és saját tervezésű, végponttól-végpontig általam üzemeltetett infrastruktúra-projektek során szereztem.",
-    "Napi szinten VPS infrastruktúrát konfigurálok és hibaelhárítok, DNS és Cloudflare routingot kezelek, valamint email rendszer migrációkat végzek, a stabilitásra és biztonság-orientált konfigurációra fókuszálva.",
+    "Infrastruktúra- és DevOps-fókuszú szerepek felé haladok, leginkább Python, VPS/Linux üzemeltetés, valamint Cloudflare- és DNS-kezelés terén érzem magam a legotthonosabban. A többi képességemet valódi saját projekteken keresztül építem tovább - gyakran AI-eszközök segítségével, de mindig megértve, hogy az egyes elemek valójában mit csinálnak.",
+    "Rendszeresen konfigurálok és hárítok el hibákat VPS infrastruktúrán, DNS-t és Cloudflare routingot kezelek, és email rendszer migrációkat is végeztem már, a stabilitásra és biztonság-orientált konfigurációra fókuszálva.",
     "Emellett saját projekteket is építek és üzemeltetek: Dockerizált alkalmazásokat, automatizált VPS deploy-t végző GitHub Actions pipeline-okat, nginx/TLS beállítást, és strukturált, deploy utáni biztonsági auditokat.",
     "Strukturált adatrendszerekkel is foglalkozom - könyvelési adatmodellek köré épített riportolási logika újratervezésével, valamint legacy MDB/DLL forrásokból származó számított mezők újraépítésével dashboard riportokhoz."
   ],
@@ -65,7 +65,7 @@
   ],
   "skills": {
     "professional": [
-      "Incidens diagnosztika szerver-oldali logok alapján",
+      "Incidens diagnosztika szerveroldali logok alapján",
       "Üzemeltetési dokumentáció és runbookok",
       "Rendszerszintű analitikus gondolkodás",
       "Strukturált technikai problémamegoldás",
@@ -73,11 +73,11 @@
     ],
     "technical": [
       {
-        "text": "Docker: multi-stage buildek és Compose",
+        "text": "Docker: image-buildelés és Compose",
         "bold": true
       },
       {
-        "text": "CI/CD pipeline-ok GitHub Actionsszel",
+        "text": "CI/CD pipeline-ok GitHub Actions használatával",
         "bold": true
       },
       {
@@ -97,7 +97,7 @@
         "bold": false
       },
       {
-        "text": "Biztonsági hardening: UFW, fail2ban, minimál jogosultság",
+        "text": "Biztonsági hardening: UFW, fail2ban, minimális jogosultság",
         "bold": false
       },
       {
@@ -121,7 +121,7 @@
         "bold": false
       },
       {
-        "text": "Self-hosted secretkezelés (zero-open-port)",
+        "text": "Self-hosted secrets-kezelés (zero-open-port)",
         "bold": false
       },
       {

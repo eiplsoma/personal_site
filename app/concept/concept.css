@@ -262,20 +262,6 @@
   font-size: 14px;
 }
 
-.deploy-head .period {
-  font-family: var(--mono);
-  font-size: 12px;
-  color: var(--muted);
-  white-space: nowrap;
-}
-
-.deploy-org {
-  font-family: var(--mono);
-  font-size: 12px;
-  color: var(--accent);
-  margin: 2px 0 8px;
-}
-
 .deploy-entry ul {
   margin: 0;
   padding-left: 18px;
