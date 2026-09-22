@@ -1,7 +1,7 @@
 "use client"
 
 import type { CvData, ExperienceEntry, EduEntry, CertEntry, TechSkill } from "./cv-tool-types"
-import { LIMITS, MAX_ITEMS } from "./cv-tool-types"
+import { LIMITS, MAX_ITEMS, MAX_PHOTO_BYTES } from "./cv-tool-types"
 import { cvToolStrings, type CvToolLocale } from "./cv-tool-i18n"
 
 type Setter = (next: CvData) => void
@@ -450,7 +450,12 @@ export function CvEditorForm({
             style={{ display: "none" }}
             onChange={(e) => {
               const file = e.target.files?.[0]
+              e.target.value = ""
               if (!file) return
+              if (file.size > MAX_PHOTO_BYTES) {
+                alert(strings.photoTooLarge)
+                return
+              }
               const reader = new FileReader()
               reader.onload = () => patch({ photoDataUrl: reader.result as string })
               reader.readAsDataURL(file)

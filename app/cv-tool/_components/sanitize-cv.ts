@@ -1,5 +1,5 @@
 import type { CvData, ExperienceEntry, EduEntry, CertEntry, TechSkill } from "./cv-tool-types"
-import { LIMITS, MAX_ITEMS } from "./cv-tool-types"
+import { LIMITS, MAX_ITEMS, MAX_PHOTO_BYTES } from "./cv-tool-types"
 
 // Imported JSON is untrusted input - a hand-edited or corrupted file can
 // carry any shape. Without this, a wrong field type (e.g. experience as a
@@ -79,9 +79,13 @@ function sanitizeTechSkills(v: unknown, fb: TechSkill[]): TechSkill[] {
 }
 
 // Only a real data: URL is accepted - never a remote address, so importing a
-// file can't turn the tool into a tracking beacon.
+// file can't turn the tool into a tracking beacon. Also caps the string
+// length (base64 inflates raw bytes by ~4/3) so an imported/pasted payload
+// is held to the same effective size as a direct upload, not just the
+// upload path in cv-editor-form.tsx.
 function sanitizePhoto(v: unknown): string | null {
-  return typeof v === "string" && v.startsWith("data:image/") ? v : null
+  if (typeof v !== "string" || !v.startsWith("data:image/")) return null
+  return v.length <= MAX_PHOTO_BYTES * 1.4 ? v : null
 }
 
 export function sanitizeCv(raw: unknown, fallback: CvData): CvData {

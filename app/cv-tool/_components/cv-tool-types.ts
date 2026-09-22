@@ -68,4 +68,9 @@ export const MAX_ITEMS = {
   skillItems: 12,
 } as const
 
+// Uploaded photo is base64-encoded straight into this same localStorage
+// blob and into the printed page - an unbounded file would bloat both, so
+// it's rejected client-side before ever being read (see cv-editor-form.tsx).
+export const MAX_PHOTO_BYTES = 3 * 1024 * 1024
+
 export const STORAGE_KEY = "cv-tool-data-v1"
