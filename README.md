@@ -18,7 +18,9 @@ Source for [eiplsoma.hu](https://eiplsoma.hu), a personal portfolio site.
 - `/concept` — an alternate, "system status dashboard"-styled landing view.
 - `/projects` — standalone project write-ups.
 - `/cv-tool` — a client-side CV builder/editor (localStorage-backed, no
-  server), separate from the main portfolio content.
+  server): JSON import/export, an AI-translation round-trip (copy a prompt
+  out, paste the translated JSON back in), and print-to-PDF via the
+  browser's print dialog — separate from the main portfolio content.
 - `/hu` — Hungarian translation of `/site`, `/concept`, `/projects`.
 - `content/cv.en.json` / `content/cv.hu.json` — the CV content that both the
   terminal and the regular site render from.
