@@ -20,4 +20,4 @@ jobs:
           keep-n-tagged: 10
           delete-untagged: true
           delete-orphaned-images: true
-          dry-run: true
+          dry-run: false
