@@ -9,7 +9,7 @@
   "about": [
     "Infrastruktúra- és DevOps-fókuszú szerepek felé haladok, leginkább Python, VPS/Linux üzemeltetés, valamint Cloudflare- és DNS-kezelés terén érzem magam a legotthonosabban. A többi képességemet valódi saját projekteken keresztül építem tovább - gyakran AI-eszközök segítségével, de mindig megértve, hogy az egyes elemek valójában mit csinálnak.",
     "Rendszeresen konfigurálok és hárítok el hibákat VPS infrastruktúrán, DNS-t és Cloudflare routingot kezelek, és email rendszer migrációkat is végeztem már, a stabilitásra és biztonság-orientált konfigurációra fókuszálva.",
-    "Emellett saját projekteket is építek és üzemeltetek: Dockerizált alkalmazásokat, automatizált VPS deploy-t végző GitHub Actions pipeline-okat, nginx/TLS beállítást, és strukturált, deploy utáni biztonsági auditokat.",
+    "Emellett saját projekteket is építek és üzemeltetek: Dockerizált alkalmazásokat, automatizált VPS deploy-t végző GitHub Actions pipeline-okat, és strukturált, deploy utáni biztonsági auditokat - ezek egy részében magabiztos vagyok, másik részét még aktívan tanulom.",
     "Strukturált adatrendszerekkel is foglalkozom - könyvelési adatmodellek köré épített riportolási logika újratervezésével, valamint legacy MDB/DLL forrásokból származó számított mezők újraépítésével dashboard riportokhoz."
   ],
   "lookingFor": "Jelenleg infrastruktúra- és biztonság-fókuszú szerepek felé fejlődöm, ahol végponttól-végpontig sajátomként kezelhetek rendszereket - pont olyan munka felé, amit ennek az oldalnak a saját deploy pipeline-ja és VPS hardeningje is képvisel.",
@@ -139,7 +139,6 @@
     ],
     "interpersonal": [
       "Analitikus és rendszer-szemléletű gondolkodás",
-      "Strukturált technikai problémamegoldás",
       "Magas szintű figyelem a technikai részletekre",
       "Megbízhatóság üzemeltetési környezetben",
       "Alkalmazkodóképesség a változó technikai követelményekhez",
