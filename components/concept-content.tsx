@@ -4,10 +4,12 @@ import { localePath, t, type Locale } from "@/lib/i18n"
 import { HtmlLang } from "@/components/html-lang"
 import "@/app/concept/concept.css"
 
-// These are real skills (confidential client work), just not part of
-// eiplsoma.hu's own stack - excluded from the "Stack status" dashboard
-// below since that section specifically claims to show this site's own
-// live infrastructure, not the general CV skills list.
+// These are real skills - confidential client work, or genuinely from a
+// different VPS/project (e.g. certbot is used on the DigitalOcean box,
+// not this site's netcup one, which uses Cloudflare Origin CA instead) -
+// just not part of eiplsoma.hu's own stack. Excluded from the "Stack
+// status" dashboard below since that section specifically claims to show
+// this site's own live infrastructure, not the general CV skills list.
 const NOT_THIS_SITE_SKILLS = new Set([
   "SQL data models & database management",
   "Data structuring & transformation",
@@ -15,12 +17,14 @@ const NOT_THIS_SITE_SKILLS = new Set([
   "Mail infrastructure management (incl. Zoho migration)",
   "Reverse engineering & decompilation",
   "AI-assisted development workflows (Claude Code)",
+  "nginx reverse proxy & TLS (Let's Encrypt/certbot)",
   "SQL adatmodellek és adatbázis-kezelés",
   "Adatstrukturálás és transzformáció",
   "PHP és tranzakciós email API integráció (Brevo)",
   "Email infrastruktúra kezelés (Zoho migrációval)",
   "Reverse engineering és dekompiláció",
   "AI-asszisztált fejlesztési workflow-k (Claude Code)",
+  "nginx reverse proxy és TLS (Let's Encrypt/certbot)",
 ])
 
 export function ConceptContent({ locale = "en" }: { locale?: Locale }) {
