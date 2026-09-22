@@ -14,7 +14,7 @@ export function HomeContent({ locale }: { locale: Locale }) {
     <>
       <HtmlLang locale={locale} />
       <Nav locale={locale} path="/" />
-      <div className="wrap">
+      <main className="wrap">
         <section className="hero">
           <div className="prompt">
             <span className="dot" /> soma@eipl:~$ whoami
@@ -176,7 +176,7 @@ export function HomeContent({ locale }: { locale: Locale }) {
             {cv.languages} · {cv.drivingLicence}
           </p>
         </section>
-      </div>
+      </main>
       <SiteFooter locale={locale} />
     </>
   )

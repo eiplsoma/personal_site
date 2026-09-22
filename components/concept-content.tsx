@@ -53,6 +53,7 @@ export function ConceptContent({ locale = "en" }: { locale?: Locale }) {
           </span>
         </nav>
 
+        <main className="concept-main">
         <div className="concept-status-bar">
           <span className="pulse-dot" />
           All systems operational
@@ -130,8 +131,9 @@ export function ConceptContent({ locale = "en" }: { locale?: Locale }) {
             ))}
           </div>
         </div>
+        </main>
 
-        <div className="concept-footer">
+        <footer className="concept-footer">
           <div>
             <a href={`mailto:${cv.footer.email}`}>{cv.footer.email}</a>
             <a href={`https://${cv.footer.github}`} target="_blank" rel="noreferrer">
@@ -142,7 +144,7 @@ export function ConceptContent({ locale = "en" }: { locale?: Locale }) {
             </a>
           </div>
           <div>{cv.languages}</div>
-        </div>
+        </footer>
       </div>
     </div>
   )

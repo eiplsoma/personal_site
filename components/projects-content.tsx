@@ -45,7 +45,7 @@ export function ProjectsContent({ locale }: { locale: Locale }) {
     <>
       <HtmlLang locale={locale} />
       <Nav locale={locale} path="/projects" />
-      <div className="wrap">
+      <main className="wrap">
         <section className="page-header">
           <div className="eyebrow">{dividers.projects}</div>
           <h1>{strings.h1}</h1>
@@ -155,7 +155,7 @@ export function ProjectsContent({ locale }: { locale: Locale }) {
             ))}
           </ul>
         </section>
-      </div>
+      </main>
       <SiteFooter locale={locale} />
     </>
   )
