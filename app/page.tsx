@@ -10,6 +10,19 @@ export const metadata: Metadata = {
   alternates: {
     canonical: "/",
   },
+  openGraph: {
+    title: `${cv.name} — ${cv.title}`,
+    description: cv.tagline,
+    url: "/",
+    siteName: cv.name,
+    type: "website",
+    images: ["/opengraph-image.png"],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: `${cv.name} — ${cv.title}`,
+    description: cv.tagline,
+  },
 }
 
 export default function Home() {

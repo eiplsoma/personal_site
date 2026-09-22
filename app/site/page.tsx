@@ -14,6 +14,19 @@ export const metadata: Metadata = {
       hu: "/hu",
     },
   },
+  openGraph: {
+    title: `${cv.name} — ${cv.title}`,
+    description: cv.tagline,
+    url: "/site",
+    siteName: cv.name,
+    type: "website",
+    images: ["/opengraph-image.png"],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: `${cv.name} — ${cv.title}`,
+    description: cv.tagline,
+  },
 }
 
 export default function Site() {
