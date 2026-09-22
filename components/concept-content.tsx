@@ -4,6 +4,25 @@ import { localePath, t, type Locale } from "@/lib/i18n"
 import { HtmlLang } from "@/components/html-lang"
 import "@/app/concept/concept.css"
 
+// These are real skills (confidential client work), just not part of
+// eiplsoma.hu's own stack - excluded from the "Stack status" dashboard
+// below since that section specifically claims to show this site's own
+// live infrastructure, not the general CV skills list.
+const NOT_THIS_SITE_SKILLS = new Set([
+  "SQL data models & database management",
+  "Data structuring & transformation",
+  "PHP & transactional email API integration (Brevo)",
+  "Mail infrastructure management (incl. Zoho migration)",
+  "Reverse engineering & decompilation",
+  "AI-assisted development workflows (Claude Code)",
+  "SQL adatmodellek és adatbázis-kezelés",
+  "Adatstrukturálás és transzformáció",
+  "PHP és tranzakciós email API integráció (Brevo)",
+  "Email infrastruktúra kezelés (Zoho migrációval)",
+  "Reverse engineering és dekompiláció",
+  "AI-asszisztált fejlesztési workflow-k (Claude Code)",
+])
+
 export function ConceptContent({ locale = "en" }: { locale?: Locale }) {
   const cv = getCv(locale)
   const strings = t(locale)
@@ -75,7 +94,16 @@ export function ConceptContent({ locale = "en" }: { locale?: Locale }) {
         <div className="concept-grid">
           <div className="dash-card">
             <h2>Stack status</h2>
-            {cv.skills.technical.slice(0, 10).map((s) => (
+            {/* This dashboard frames itself as this site's own live infra
+                ("All systems operational"), so it must only list skills that
+                are actually part of eiplsoma.hu - not the general CV skills
+                list, which also covers confidential client work (SQL/PHP/
+                Brevo/Zoho/reverse-engineering) that has nothing to do with
+                this site and would misleadingly read as "active" here. */}
+            {cv.skills.technical
+              .filter((s) => !NOT_THIS_SITE_SKILLS.has(s.text))
+              .slice(0, 10)
+              .map((s) => (
               <div className="status-row" key={s.text}>
                 <span className="status-dot" />
                 <span className="name">{s.text}</span>
