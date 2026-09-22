@@ -1,5 +1,6 @@
 .term-page {
-  height: 100vh;
+  height: 100vh; /* fallback for browsers without dvh support */
+  height: 100dvh;
   background: #0b0d0f;
   padding: 16px;
   padding-top: 56px;
