@@ -133,7 +133,7 @@ const PROMPT = "\x1b[32mguest@eiplsoma\x1b[0m:~$ "
 
 export function TerminalLab() {
   const router = useRouter()
-  const containerRef = useRef<HTMLDivElement>(null)
+  const containerRef = useRef<HTMLElement>(null)
   const termRef = useRef<Terminal | null>(null)
 
   useEffect(() => {
@@ -282,7 +282,7 @@ export function TerminalLab() {
       <a href="/concept" className="term-concept-link">
         Try the concept dashboard →
       </a>
-      <div ref={containerRef} className="term-xterm" />
+      <main ref={containerRef} className="term-xterm" />
     </div>
   )
 }
