@@ -1,0 +1,38 @@
+name: Dependabot auto-merge
+
+# Turns on GitHub auto-merge for Dependabot PRs that are patch or minor
+# updates. Auto-merge only completes once every REQUIRED status check
+# (see ci.yml) is green - which is why branch protection with required
+# checks must be enabled before this workflow does anything useful. Major
+# version bumps are left for a human to review.
+#
+# Uses `pull_request` (not `pull_request_target`): the workflow file and
+# code come from the PR's base, and nothing from the PR is checked out or
+# executed here.
+
+on:
+  pull_request:
+    branches: [main]
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  automerge:
+    if: github.actor == 'dependabot[bot]'
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Fetch Dependabot metadata
+        id: metadata
+        uses: dependabot/fetch-metadata@25dd0e34f4fe68f24cc83900b1fe3fe149efef98 # v3.1.0
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Enable auto-merge (patch and minor only)
+        if: steps.metadata.outputs.update-type == 'version-update:semver-patch' || steps.metadata.outputs.update-type == 'version-update:semver-minor'
+        run: gh pr merge --auto --squash "$PR_URL"
+        env:
+          PR_URL: ${{ github.event.pull_request.html_url }}
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
