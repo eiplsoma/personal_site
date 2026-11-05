@@ -44,8 +44,8 @@ export function ConceptContent({ locale = "en" }: { locale?: Locale }) {
         <nav className="concept-nav">
           <span>eiplsoma.hu / concept</span>
           <span>
-            <Link href="/">{strings.concept.backToTerminal}</Link> &nbsp;·&nbsp;{" "}
-            <a href={localePath(locale, "/site")} className="concept-nav-primary">
+            <Link href="/terminal">{strings.concept.backToTerminal}</Link> &nbsp;·&nbsp;{" "}
+            <a href={localePath(locale, "/")} className="concept-nav-primary">
               {strings.concept.classicSite}
             </a>{" "}
             &nbsp;·&nbsp;{" "}

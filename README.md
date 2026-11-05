@@ -6,22 +6,28 @@ Source for [eiplsoma.hu](https://eiplsoma.hu), a personal portfolio site.
 
 - Next.js (App Router, `output: 'export'` — fully static, no server runtime)
 - TypeScript, React
-- xterm.js for the interactive terminal landing page
+- xterm.js for the interactive terminal page (`/terminal`)
 - HU/EN i18n via a static route tree (English unprefixed, Hungarian under `/hu`)
 
 ## Structure
 
-- `/` — an interactive terminal (xterm.js) with a small set of Unix-like
-  commands (`ls`, `cat`, `cd`, `whoami`, `pwd`, `history`) for exploring the
-  CV content and jumping to the rest of the site.
-- `/site` — the regular, non-terminal version of the site.
+- `/` — the regular site: about, background, skills, work and principles.
+- `/terminal` — an interactive terminal (xterm.js) with a small set of
+  Unix-like commands (`ls`, `cat`, `cd`, `whoami`, `pwd`, `history`) for
+  exploring the CV content and jumping to the rest of the site.
+- `/site` — the former address of the regular site, kept only as a
+  non-indexed alias (its canonical URL is `/`) so old links don't break.
 - `/concept` — an alternate, "system status dashboard"-styled landing view.
 - `/projects` — standalone project write-ups.
 - `/cv-tool` — a client-side CV builder/editor (localStorage-backed, no
   server): JSON import/export, an AI-translation round-trip (copy a prompt
   out, paste the translated JSON back in), and print-to-PDF via the
   browser's print dialog — separate from the main portfolio content.
-- `/hu` — Hungarian translation of `/site`, `/concept`, `/projects`.
+- `/hu` — Hungarian translation of `/`, `/concept`, `/projects`
+  (`/hu/concept`, `/hu/projects`), with `hreflang` alternates (including
+  `x-default`) linking the language versions.
+- `/sitemap.xml` — generated at build time from the route list in
+  `app/sitemap.ts`.
 - `content/cv.en.json` / `content/cv.hu.json` — the CV content that both the
   terminal and the regular site render from.
 

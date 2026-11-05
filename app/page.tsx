@@ -1,6 +1,6 @@
 import type { Metadata } from "next"
 import { getCv } from "@/lib/cv"
-import { TerminalLab } from "@/components/terminal-lab"
+import { HomeContent } from "@/components/home-content"
 
 const cv = getCv("en")
 
@@ -9,6 +9,11 @@ export const metadata: Metadata = {
   description: cv.tagline,
   alternates: {
     canonical: "/",
+    languages: {
+      en: "/",
+      hu: "/hu",
+      "x-default": "/",
+    },
   },
   openGraph: {
     title: `${cv.name} — ${cv.title}`,
@@ -26,5 +31,5 @@ export const metadata: Metadata = {
 }
 
 export default function Home() {
-  return <TerminalLab />
+  return <HomeContent locale="en" />
 }
