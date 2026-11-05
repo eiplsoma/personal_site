@@ -63,6 +63,14 @@ and tells browsers to revalidate HTML and other unhashed files on each use
 cached as immutable. `nginx -t` runs during the image build, so an invalid
 config fails the build rather than the running container.
 
+A static export has no server to mint per-request nonces, so a
+Content-Security-Policy is generated per page at build time:
+`scripts/generate-csp.mjs` runs after `next build`, hashes every inline
+script in each page and writes one nginx `location` per page
+(`deploy/generated/`, not committed). Inline scripts are allowed only by
+hash, so scripts need no `'unsafe-inline'`. The policy is currently
+delivered in report-only mode (`CSP_MODE=enforce` switches the header).
+
 `render.yaml` + `deploy/render-server.js` is a separate, password-gated
 preview deploy on Render (free tier) — for sharing the site pre-public,
 independent of the production VPS path.
@@ -78,4 +86,5 @@ pnpm dev
 pnpm build
 ```
 
-produces the static export in `out/`.
+produces the static export in `out/` and generates the nginx CSP config
+(`pnpm build` is needed before building the Docker image).
