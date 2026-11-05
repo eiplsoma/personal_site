@@ -55,6 +55,13 @@ attached) and restarts the container there. Deploy secrets are scoped to a
 GitHub `environment`, not the whole repo. `.github/workflows/ghcr-cleanup.yml`
 prunes old image versions on a weekly schedule.
 
+The image's nginx config (`deploy/nginx.conf`) also sets a baseline of
+security response headers (`deploy/security-headers.conf`) on every response
+and tells browsers to revalidate HTML and other unhashed files on each use
+(`Cache-Control: no-cache`), while the content-hashed `_next/static` files are
+cached as immutable. `nginx -t` runs during the image build, so an invalid
+config fails the build rather than the running container.
+
 `render.yaml` + `deploy/render-server.js` is a separate, password-gated
 preview deploy on Render (free tier) — for sharing the site pre-public,
 independent of the production VPS path.
