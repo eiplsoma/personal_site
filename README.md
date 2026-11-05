@@ -15,8 +15,8 @@ Source for [eiplsoma.hu](https://eiplsoma.hu), a personal portfolio site.
 - `/terminal` — an interactive terminal (xterm.js) with a small set of
   Unix-like commands (`ls`, `cat`, `cd`, `whoami`, `pwd`, `history`) for
   exploring the CV content and jumping to the rest of the site.
-- `/site` — the former address of the regular site, kept only as a
-  non-indexed alias (its canonical URL is `/`) so old links don't break.
+- `/site` — the former address of the regular site; nginx answers it with a
+  permanent (301) redirect to `/`.
 - `/concept` — an alternate, "system status dashboard"-styled landing view.
 - `/projects` — standalone project write-ups.
 - `/cv-tool` — a client-side CV builder/editor (localStorage-backed, no
