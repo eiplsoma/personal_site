@@ -10,8 +10,9 @@ export const metadata: Metadata = {
   alternates: {
     canonical: "/hu",
     languages: {
-      en: "/site",
+      en: "/",
       hu: "/hu",
+      "x-default": "/",
     },
   },
   openGraph: {

@@ -1,6 +1,7 @@
 "use client"
 
 import { useEffect, useRef } from "react"
+import Link from "next/link"
 import { useRouter } from "next/navigation"
 import { Terminal } from "@xterm/xterm"
 import { FitAddon } from "@xterm/addon-fit"
@@ -76,7 +77,7 @@ function runCommand(cmd: string, history: string[]): Action {
     }
     case "cd": {
       if (arg === "projects") return { kind: "navigate", href: "/projects" }
-      if (arg === "site" || arg === "..") return { kind: "navigate", href: "/site" }
+      if (arg === "site" || arg === "..") return { kind: "navigate", href: "/" }
       return { kind: "print", lines: [`cd: ${arg || "(missing operand)"}: No such directory`] }
     }
     case "projects":
@@ -85,7 +86,7 @@ function runCommand(cmd: string, history: string[]): Action {
       return { kind: "navigate", href: "/concept" }
     case "site":
     case "exit":
-      return { kind: "navigate", href: "/site" }
+      return { kind: "navigate", href: "/" }
     case "clear":
       return { kind: "clear" }
     case "sudo":
@@ -276,9 +277,9 @@ export function TerminalLab() {
   return (
     <div className="term-page">
       <HtmlLang locale="en" />
-      <a href="/site" className="term-skip">
+      <Link href="/" className="term-skip">
         Skip to full site →
-      </a>
+      </Link>
       <a href="/concept" className="term-concept-link">
         Try the concept dashboard →
       </a>
