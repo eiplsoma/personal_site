@@ -1,6 +1,6 @@
 "use client"
 
-import { useEffect, useRef, useState } from "react"
+import { useEffect, useRef, useState, useSyncExternalStore } from "react"
 import Link from "next/link"
 import { CvEditorForm } from "./_components/cv-editor-form"
 import { CvTemplate } from "./_components/cv-template"
@@ -30,6 +30,13 @@ function measureOverflow(container: Element | null, scale: number): number {
   return Math.round((bottom - top) / scale - (container as HTMLElement).clientHeight)
 }
 
+// Facebook/Messenger (FBAN, FBAV, FB_IAB, FBIOS), Instagram, Snapchat, TikTok,
+// LinkedIn and Line in-app browsers, plus any Android WebView ("; wv)").
+const IN_APP_BROWSER = /FBAN|FBAV|FB_IAB|FBIOS|Instagram|Snapchat|TikTok|BytedanceWebview|LinkedInApp|Line\/|; wv\)/i
+
+const subscribeNever = () => () => {}
+const readInApp = () => IN_APP_BROWSER.test(navigator.userAgent)
+
 export function CvToolClient() {
   const [cv, setCv] = useState<CvData>(EMPTY_CV)
   const [locale, setLocale] = useState<CvToolLocale>("en")
@@ -37,6 +44,12 @@ export function CvToolClient() {
   const [status, setStatus] = useState("")
   const [mobileView, setMobileView] = useState<"editor" | "preview">("editor")
   const [overflowPx, setOverflowPx] = useState(0)
+  // In-app browsers (Messenger, Facebook, Instagram, other Android WebViews)
+  // cannot save downloaded files or open the print dialog, so Export PDF and
+  // Export JSON silently do nothing there. The user agent is read through
+  // useSyncExternalStore: false on the server and during hydration, the real
+  // value afterwards, so server and client markup always match.
+  const inApp = useSyncExternalStore(subscribeNever, readInApp, () => false)
   // The A4 preview is a fixed 210mm wide - this shrinks it to fit narrower
   // panes (e.g. a 13" laptop) instead of forcing a horizontal scrollbar.
   const [previewScale, setPreviewScale] = useState(1)
@@ -211,6 +224,15 @@ export function CvToolClient() {
     }
   }
 
+  const handleCopyLink = async () => {
+    try {
+      await navigator.clipboard.writeText(window.location.href)
+      setStatus(strings.linkCopied)
+    } catch {
+      setStatus(strings.copyLinkError)
+    }
+  }
+
   if (!loaded) return null
 
   return (
@@ -230,6 +252,12 @@ export function CvToolClient() {
         </button>
       </div>
       <div className="cv-tool-editor">
+        {inApp && (
+          <div className="cv-tool-inapp" role="note">
+            <p>{strings.inAppNotice}</p>
+            <button onClick={handleCopyLink}>{strings.copyLink}</button>
+          </div>
+        )}
         <div className="cv-tool-toolbar">
           <Link href={locale === "hu" ? "/hu/projects" : "/projects"}>{strings.backToProjects}</Link>
           <button onClick={() => window.print()}>{strings.exportPdf}</button>
