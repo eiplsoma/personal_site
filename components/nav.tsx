@@ -14,10 +14,6 @@ export function Nav({ locale, path = "/" }: { locale: Locale; path?: string }) {
           <Link className="brand" href={localePath(locale, "/")}>
             soma<span>@</span>eipl
           </Link>
-          <span className="view-switch">
-            <Link href="/">terminal</Link>
-            <a href={localePath(locale, "/concept")}>concept</a>
-          </span>
         </div>
         <div className="links">
           <Link href={localePath(locale, "/#about")}>{strings.nav.about}</Link>
@@ -30,6 +26,14 @@ export function Nav({ locale, path = "/" }: { locale: Locale; path?: string }) {
               admin + public CV generator project is built (separate,
               later spec — see docs/superpowers/specs/). No route/auth
               exists yet, so nothing renders here for now. */}
+          <span className="nav-alt-views">
+            <Link href="/terminal" className="alt-view">
+              terminal
+            </Link>
+            <a href={localePath(locale, "/concept")} className="alt-view">
+              concept
+            </a>
+          </span>
           <Link href={localePath(otherLocale, path)} className="lang-switch">
             {locale === "en" ? "HU" : "EN"}
           </Link>
