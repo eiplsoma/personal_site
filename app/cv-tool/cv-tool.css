@@ -485,8 +485,12 @@ label.btn-like:focus-within {
    `display` toggles, and cv-tool-client.tsx explicitly re-runs the
    preview-scale measurement when switching to "preview", since a pane
    coming back from display:none has zero width for ResizeObserver to
-   have measured while it was hidden. */
-@media (max-width: 900px) {
+   have measured while it was hidden.
+
+   `screen` only: when printing, the viewport is the paper width (A4 is
+   about 794px), so without it this block would apply in print too and
+   hide the preview in the default "editor" tab - a blank PDF. */
+@media screen and (max-width: 900px) {
   .cv-tool-page {
     flex-direction: column;
     height: 100dvh;
