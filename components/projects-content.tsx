@@ -101,14 +101,28 @@ export function ProjectsContent({ locale }: { locale: Locale }) {
             // /hu for hu), unlike a hardcoded "/" which would always land
             // on the English terminal regardless of locale.
             const isThisSite = p.id === "this-site"
-            const thumbHref = isThisSite ? localePath(locale, "/") : (live ?? useLink ?? github)
+            const thumbHref = isThisSite ? localePath(locale, "/") : (live ?? useLink ?? p.extraLink?.href ?? github)
             return (
             <div className="project-card" key={p.title}>
               {thumb ? (
-                <ProjectThumb thumb={thumb} href={thumbHref} internal={isThisSite || (!live && !!useLink)} />
+                <ProjectThumb thumb={thumb} href={thumbHref} internal={isThisSite || (!live && !!(useLink ?? p.extraLink))} />
               ) : null}
               <h3>{p.title}</h3>
               <p className="lead">{p.lead}</p>
+              {p.credit && (
+                <p className="project-credit">
+                  {p.credit.text}{" "}
+                  {p.credit.links.map((l, i) => (
+                    <span key={l.href}>
+                      {i > 0 && ", "}
+                      <a href={l.href} target="_blank" rel="noreferrer">
+                        {l.label}
+                      </a>
+                    </span>
+                  ))}
+                  .
+                </p>
+              )}
               <div className="project-tags">
                 {p.tags.map((tag) => (
                   <span className="tag" key={tag}>
@@ -127,6 +141,11 @@ export function ProjectsContent({ locale }: { locale: Locale }) {
                   <a href={p.github} target="_blank" rel="noreferrer">
                     {strings.sourceOnGithub}
                   </a>
+                )}
+                {p.extraLink && (
+                  <Link href={p.extraLink.href}>
+                    {p.extraLink.label}
+                  </Link>
                 )}
               </div>
             </div>
