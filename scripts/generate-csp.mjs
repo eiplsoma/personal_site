@@ -87,13 +87,15 @@ function policy(hashes) {
 
 // One nginx location. add_header directives of an outer level are dropped as
 // soon as a location defines its own, so each block repeats the shared
-// security headers and the cache rule (HTML is revalidated on every use).
+// security headers and the cache rule: HTML is revalidated on every use
+// (no-cache) and must reach the browser byte for byte (no-transform), because
+// the hashes above are computed from exactly this markup.
 function block(matcher, csp, { internal = false, tryFiles = null } = {}) {
   return [
     `location ${matcher} {`,
     ...(internal ? ["    internal;"] : []),
     `    include ${HEADERS_INCLUDE};`,
-    `    add_header Cache-Control "no-cache" always;`,
+    `    add_header Cache-Control "no-cache, no-transform" always;`,
     `    add_header ${CSP_HEADER} "${csp}" always;`,
     ...(tryFiles ? [`    try_files ${tryFiles} =404;`] : []),
     "}",
