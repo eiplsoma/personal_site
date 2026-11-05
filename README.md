@@ -8,6 +8,8 @@ Source for [eiplsoma.hu](https://eiplsoma.hu), a personal portfolio site.
 - TypeScript, React
 - xterm.js for the interactive terminal page (`/terminal`)
 - HU/EN i18n via a static route tree (English unprefixed, Hungarian under `/hu`)
+- IBM Plex fonts, self-hosted at build time via `next/font` (no requests to
+  third-party font servers at runtime)
 
 ## Structure
 
