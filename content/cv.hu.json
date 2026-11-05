@@ -89,6 +89,14 @@
         "bold": false
       },
       {
+        "text": "Python-automatizálás (csak standard könyvtár, API-integráció)",
+        "bold": false
+      },
+      {
+        "text": "Android/Termux scriptelés",
+        "bold": false
+      },
+      {
         "text": "nginx reverse proxy és TLS (Let's Encrypt/certbot)",
         "bold": false
       },

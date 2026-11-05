@@ -89,6 +89,14 @@
         "bold": false
       },
       {
+        "text": "Python automation (stdlib-only, API integration)",
+        "bold": false
+      },
+      {
+        "text": "Android/Termux scripting",
+        "bold": false
+      },
+      {
         "text": "nginx reverse proxy & TLS (Let's Encrypt/certbot)",
         "bold": false
       },
