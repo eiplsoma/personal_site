@@ -5,16 +5,9 @@ export const defaultLocale: Locale = "en"
 
 export function localePath(locale: Locale, path: string) {
   if (locale === defaultLocale) {
-    // "/" is the regular site again - the interactive terminal moved to
-    // /terminal. "/site" is kept around as a non-canonical alias (see
-    // app/site/page.tsx) so old links/bookmarks don't 404.
+    // "/" is the regular site; the interactive terminal lives at /terminal.
     return path
   }
-  // Hungarian has no separate interactive-terminal page - /hu itself IS
-  // the "classic site" page, so a "/site" (or "/site#hash") request has
-  // to collapse onto /hu instead of the nonexistent /hu/site.
-  if (path === "/site") return "/hu"
-  if (path.startsWith("/site#")) return `/hu${path.slice("/site".length)}`
   return `/hu${path === "/" ? "" : path}`
 }
 
