@@ -24,6 +24,8 @@ export type ProjectCard = {
   useLink?: string
   live?: string
   github?: string
+  extraLink?: { label: string; href: string }
+  credit?: { text: string; links: { label: string; href: string }[] }
 }
 
 const dict = {
@@ -85,6 +87,15 @@ const dict = {
           tags: ["Next.js", "localStorage", "window.print()"],
           useLink: "/cv-tool",
           github: "https://github.com/eiplsoma/personal_site/tree/main/app/cv-tool",
+        },
+        {
+          id: "yazio-pipeline",
+          thumb: "yazio-pipeline",
+          title: "Yazio report pipeline — Android automation (Termux)",
+          lead: "A one-tap pipeline on my Android phone: a Termux:Widget shortcut runs a background bash script that pulls my food-diary data through an open-source Go exporter (compiled on the phone), fills in the recipe portions it leaves out, and builds colour-coded PDF and XLSX reports. My part: the automation, the recipe resolution and a hand-written XLSX/PDF writer in plain Python, with every change applied as a scripted patch with backup and rollback. Two bugs (850 and 564 kcal short) only showed up against the app, so every run now cross-checks its totals; daily kcal matches on all nine days. Unofficial Yazio API, not affiliated with Yazio, personal use only; AI \"Smart Tracking\" meals may be missing from the export.",
+          tags: ["Python", "Go", "Termux", "Bash", "REST API"],
+          extraLink: { label: "Demo report (PDF) →", href: "/yazio-demo" },
+          credit: { text: "Built on", links: [{ label: "Yazio Exporter by Morph (funmelon64/Yazio-Exporter, MIT)", href: "https://github.com/funmelon64/Yazio-Exporter" }, { label: "yazio-csv-exporter by tobintax (MIT)", href: "https://github.com/tobintax/yazio-csv-exporter" }] },
         },
         {
           id: "this-site",
@@ -196,6 +207,15 @@ const dict = {
           tags: ["Next.js", "localStorage", "window.print()"],
           useLink: "/cv-tool",
           github: "https://github.com/eiplsoma/personal_site/tree/main/app/cv-tool",
+        },
+        {
+          id: "yazio-pipeline",
+          thumb: "yazio-pipeline",
+          title: "Yazio riportgenerátor — Android-automatizálás (Termux)",
+          lead: "Egykoppintásos folyamat az Android-telefonomon: egy Termux:Widget-parancsikon háttérben futó bash-scriptet indít, ami egy nyílt forrású Go-exporteren át (a telefonon fordítottam) lekéri az étkezési napló adatait, pótolja a kihagyott recept-adagokat, és színkódolt PDF- és XLSX-riportot készít. Az én részem: az automatizálás, a receptek feloldása és egy kézzel írt XLSX/PDF-író sima Pythonban, minden módosítás javítóscripttel, mentéssel és visszaállítással. Két hiba (850, majd 564 kcal hiány) csak az appal összevetve derült ki, ezért minden futás ellenőrzi az összegeit; a napi kcal mind a kilenc napon egyezik. Nem hivatalos Yazio API, nincs kapcsolatban a Yazióval, személyes használatra; a Yazio AI „Smart Tracking” étkezései hiányozhatnak az exportból.",
+          tags: ["Python", "Go", "Termux", "Bash", "REST API"],
+          extraLink: { label: "Demó riport (PDF) →", href: "/hu/yazio-demo" },
+          credit: { text: "Alapja", links: [{ label: "Morph Yazio Exportere (funmelon64/Yazio-Exporter, MIT)", href: "https://github.com/funmelon64/Yazio-Exporter" }, { label: "tobintax yazio-csv-exportere (MIT)", href: "https://github.com/tobintax/yazio-csv-exporter" }] },
         },
         {
           id: "this-site",

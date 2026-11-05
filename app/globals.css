@@ -476,6 +476,23 @@ section p.lead {
   color: var(--muted);
   border: 1px solid var(--border);
 }
+.demo-figure {
+  display: block;
+  width: 100%;
+  max-width: 900px;
+  aspect-ratio: 16 / 9;
+  margin: 0 0 18px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+}
+.project-credit {
+  margin: 0 0 12px;
+  font-size: 13px;
+  color: var(--muted, inherit);
+}
+.project-credit a {
+  text-decoration: underline;
+}
 .project-links {
   display: flex;
   gap: 14px;
