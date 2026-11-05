@@ -4,11 +4,12 @@ import { SiteFooter } from "@/components/site-footer"
 import { HtmlLang } from "@/components/html-lang"
 import { localePath, t, type Locale } from "@/lib/i18n"
 
-// One screenshot thumbnail per "main" project (the pipeline card + the 3
-// extraFeatured ones), in display order - purely decorative, not tied to
-// project data. Source screenshots and the crop/resize script live in the
-// gitignored /photos-raw/ - these are the only committed, public output.
-const mainProjectThumbs = ["cicd-demo", "cv-tool", "this-site", "woolly-demo"]
+// Thumbnail of the pipeline card at the top. The other cards name their own
+// thumbnail (`thumb`) in the project data, so adding or reordering a card
+// never shifts the images. Source screenshots and the crop/resize script
+// live in the gitignored /photos-raw/ - the files in public/project-thumbs
+// are the only committed, public output.
+const PIPELINE_THUMB = "cicd-demo"
 
 // The thumbnail links to whatever the card's own primary action already
 // is - a live demo first, then an internal tool page, then the repo -
@@ -54,7 +55,7 @@ export function ProjectsContent({ locale }: { locale: Locale }) {
 
         <section style={{ marginTop: 40 }}>
           <div className="project-card">
-            <ProjectThumb thumb={mainProjectThumbs[0]} href="https://cicd-demo.eiplsoma.hu" />
+            <ProjectThumb thumb={PIPELINE_THUMB} href="https://cicd-demo.eiplsoma.hu" />
             <h3>{strings.cardTitle}</h3>
             <p className="lead">{strings.cardLead}</p>
 
@@ -91,18 +92,15 @@ export function ProjectsContent({ locale }: { locale: Locale }) {
             </div>
           </div>
 
-          {strings.extraFeatured.map((p, i) => {
-            const thumb = mainProjectThumbs[i + 1]
-            const live = "live" in p ? p.live : undefined
-            const useLink = "useLink" in p ? p.useLink : undefined
-            const github = "github" in p ? p.github : undefined
-            // "This site" (index 1) has no live/useLink of its own - it IS
+          {strings.extraFeatured.map((p) => {
+            const { thumb, live, useLink, github } = p
+            // "This site" has no live/useLink of its own - it IS
             // the site you're already on, so its thumbnail should send you
             // to the actual home page rather than falling back to GitHub.
             // localePath(locale, "/") resolves per-locale (/site for en,
             // /hu for hu), unlike a hardcoded "/" which would always land
             // on the English terminal regardless of locale.
-            const isThisSite = i === 1
+            const isThisSite = p.id === "this-site"
             const thumbHref = isThisSite ? localePath(locale, "/") : (live ?? useLink ?? github)
             return (
             <div className="project-card" key={p.title}>
@@ -119,13 +117,13 @@ export function ProjectsContent({ locale }: { locale: Locale }) {
                 ))}
               </div>
               <div className="project-links">
-                {"useLink" in p && p.useLink && <Link href={p.useLink}>{strings.useIt}</Link>}
-                {"live" in p && p.live && (
+                {p.useLink && <Link href={p.useLink}>{strings.useIt}</Link>}
+                {p.live && (
                   <a href={p.live} target="_blank" rel="noreferrer">
                     {strings.liveDemo}
                   </a>
                 )}
-                {"github" in p && p.github && (
+                {p.github && (
                   <a href={p.github} target="_blank" rel="noreferrer">
                     {strings.sourceOnGithub}
                   </a>

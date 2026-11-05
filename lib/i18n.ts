@@ -11,6 +11,21 @@ export function localePath(locale: Locale, path: string) {
   return `/hu${path === "/" ? "" : path}`
 }
 
+// One card in the "extraFeatured" list on the projects page. `id` and `thumb`
+// are language-independent: the thumbnail and the "this site" special case
+// follow the project, not its position in the list. Every link is optional and
+// rendered only when set.
+export type ProjectCard = {
+  id: string
+  thumb?: string
+  title: string
+  lead: string
+  tags: string[]
+  useLink?: string
+  live?: string
+  github?: string
+}
+
 const dict = {
   en: {
     nav: {
@@ -63,6 +78,8 @@ const dict = {
       useIt: "Use it →",
       extraFeatured: [
         {
+          id: "cv-tool",
+          thumb: "cv-tool",
           title: "CV Tool — client-side CV builder",
           lead: "A one-page CV editor and PDF exporter that runs entirely in your browser: fixed A4 layout, per-field character limits so nothing overflows, and no server — your data is saved to this browser only, never sent anywhere.",
           tags: ["Next.js", "localStorage", "window.print()"],
@@ -70,19 +87,23 @@ const dict = {
           github: "https://github.com/eiplsoma/personal_site/tree/main/app/cv-tool",
         },
         {
+          id: "this-site",
+          thumb: "this-site",
           title: "This site — VPS & Cloudflare hardening",
           lead: "Ran a security audit and hardening pass on this site's own infrastructure: layered network and cryptographic protections between the CDN and origin, deploy pipeline and SSH access hardening, an automated CI lint gate, and dependency vulnerability monitoring.",
           tags: ["Docker", "Cloudflare", "GitHub Actions", "nginx", "Dependabot"],
           github: "https://github.com/eiplsoma/personal_site",
         },
         {
+          id: "woolly-demo",
+          thumb: "woolly-demo",
           title: "Woolly Design — client landing page",
           lead: "A v0.dev-generated prototype, hardened and shipped to a live domain: bot protection, server-side input validation and XSS filtering, transactional email delivery, and the GDPR pages a small business needs. The original client domain is no longer active, so the link below is a read-only demo redeployment.",
           tags: ["Next.js", "Cloudflare Turnstile", "Nodemailer", "GDPR"],
           live: "https://woolly-demo.eiplsoma.hu",
           github: "https://github.com/eiplsoma/woolly-landing",
         },
-      ],
+      ] as ProjectCard[],
       sectionConfidential: "Confidential client work",
       confidentialNote: "Client name and industry withheld under NDA — technical scope only.",
       confidential: [
@@ -168,6 +189,8 @@ const dict = {
       useIt: "Kipróbálom →",
       extraFeatured: [
         {
+          id: "cv-tool",
+          thumb: "cv-tool",
           title: "CV Tool — böngészőben futó CV-építő",
           lead: "Egy egyoldalas CV-szerkesztő és PDF-exportáló, ami teljesen a böngésződben fut: fix A4 elrendezés, mezőnkénti karakterlimit, hogy semmi ne csorduljon túl, és nincs szerver — az adataid csak ebben a böngészőben mentődnek, sehova nem kerülnek fel.",
           tags: ["Next.js", "localStorage", "window.print()"],
@@ -175,19 +198,23 @@ const dict = {
           github: "https://github.com/eiplsoma/personal_site/tree/main/app/cv-tool",
         },
         {
+          id: "this-site",
+          thumb: "this-site",
           title: "Ez az oldal — VPS & Cloudflare hardening",
           lead: "Biztonsági auditot és hardening-kört futtattam ennek az oldalnak a saját infrastruktúráján: rétegzett hálózati és kriptográfiai védelem a CDN és az origin között, deploy-pipeline és SSH-hozzáférés megerősítése, automatizált CI lint-kapu, és függőség-sérülékenység monitorozás.",
           tags: ["Docker", "Cloudflare", "GitHub Actions", "nginx", "Dependabot"],
           github: "https://github.com/eiplsoma/personal_site",
         },
         {
+          id: "woolly-demo",
+          thumb: "woolly-demo",
           title: "Woolly Design — ügyfél landing oldal",
           lead: "Egy v0.dev-generált prototípus, élő domainre kiadva biztonsági megerősítéssel: bot-védelem, szerveroldali input-validáció és XSS-szűrés, tranzakciós email-küldés, és a GDPR-oldalak, amikre egy kisvállalkozásnak szüksége van. Az eredeti ügyfél-domain már nem aktív, az alábbi link egy csak-megtekinthető demo-újratelepítés.",
           tags: ["Next.js", "Cloudflare Turnstile", "Nodemailer", "GDPR"],
           live: "https://woolly-demo.eiplsoma.hu",
           github: "https://github.com/eiplsoma/woolly-landing",
         },
-      ],
+      ] as ProjectCard[],
       sectionConfidential: "NDA-s ügyfélmunka",
       confidentialNote: "Ügyfélnév és iparág titoktartás alatt — csak a technikai tartalom.",
       confidential: [
