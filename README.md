@@ -31,17 +31,29 @@ Source for [eiplsoma.hu](https://eiplsoma.hu), a personal portfolio site.
 - `content/cv.en.json` / `content/cv.hu.json` — the CV content that both the
   terminal and the regular site render from.
 
+## CI
+
+`.github/workflows/ci.yml` runs on every pull request to `main`: ESLint plus
+a TypeScript typecheck (`Lint & typecheck`) and a production build of the
+static export (`Build static export`). `main` is protected by a repository
+ruleset: changes land through a pull request, both checks must pass, and
+merges are squash-only.
+
+Dependabot (`docker`, `npm`, `github-actions`, weekly) opens the dependency
+PRs. `.github/workflows/dependabot-automerge.yml` turns on GitHub auto-merge
+for the patch and minor ones, which then merge only after the required
+checks pass; major version bumps are left for manual review.
+
 ## Deploy
 
-`.github/workflows/deploy.yml` runs `lint` (ESLint) → `build-and-push` →
+`.github/workflows/deploy.yml`, on every push to `main`, runs `lint` (ESLint) → `build-and-push` →
 `deploy`. `build-and-push` builds the static export, packages it into an
 `nginx:alpine` image, and pushes it to GHCR; `deploy` connects to a
 self-hosted VPS over a Cloudflare Tunnel (no port 22 exposed, SSH-key-only
 auth on a dedicated tunnel hostname with no Cloudflare Access application
 attached) and restarts the container there. Deploy secrets are scoped to a
 GitHub `environment`, not the whole repo. `.github/workflows/ghcr-cleanup.yml`
-prunes old image versions on a weekly schedule. Dependabot watches `docker`,
-`npm`, and `github-actions` dependencies.
+prunes old image versions on a weekly schedule.
 
 `render.yaml` + `deploy/render-server.js` is a separate, password-gated
 preview deploy on Render (free tier) — for sharing the site pre-public,
