@@ -11,9 +11,9 @@
 // image and included by deploy/nginx.conf. The build fails loudly if the
 // output would be empty or unsafe.
 //
-// Mode: the policy is delivered as Content-Security-Policy-Report-Only by
-// default (violations are only reported in the browser console, nothing is
-// blocked). Run with CSP_MODE=enforce to emit the enforcing header instead.
+// Mode: the policy is enforced (Content-Security-Policy). Run with
+// CSP_MODE=report-only to emit Content-Security-Policy-Report-Only instead:
+// violations are then only reported in the browser console, nothing is blocked.
 
 import { createHash } from "node:crypto"
 import { mkdirSync, readdirSync, readFileSync, writeFileSync } from "node:fs"
@@ -24,7 +24,7 @@ const OUT_DIR = "out"
 const DEST = join("deploy", "generated", "csp-locations.conf")
 const HEADERS_INCLUDE = "/etc/nginx/security-headers.conf"
 
-const ENFORCE = process.env.CSP_MODE === "enforce"
+const ENFORCE = process.env.CSP_MODE !== "report-only"
 const CSP_HEADER = ENFORCE ? "Content-Security-Policy" : "Content-Security-Policy-Report-Only"
 
 // <script type="..."> values that are data blocks, not executable code.

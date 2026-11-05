@@ -69,8 +69,8 @@ Content-Security-Policy is generated per page at build time:
 `scripts/generate-csp.mjs` runs after `next build`, hashes every inline
 script in each page and writes one nginx `location` per page
 (`deploy/generated/`, not committed). Inline scripts are allowed only by
-hash, so scripts need no `'unsafe-inline'`. The policy is currently
-delivered in report-only mode (`CSP_MODE=enforce` switches the header).
+hash, so scripts need no `'unsafe-inline'`. The policy is enforced;
+`CSP_MODE=report-only` switches the build to report-only for debugging.
 
 `render.yaml` + `deploy/render-server.js` is a separate, password-gated
 preview deploy on Render (free tier) — for sharing the site pre-public,
