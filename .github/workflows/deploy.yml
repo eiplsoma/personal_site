@@ -102,15 +102,7 @@ jobs:
           chmod +x /usr/local/bin/cloudflared
 
       - name: Set up SSH over Cloudflare Tunnel
-        # Uses a dedicated tunnel hostname (ci-deploy.eiplsoma.hu) that has no
-        # Cloudflare Access application/policy attached to it at all, unlike
-        # the human-facing ssh.eiplsoma.hu. This deliberately avoids Cloudflare
-        # Access entirely: mTLS auth is Business-plan-only, and Access Service
-        # Tokens hit a confirmed cloudflared bug (cloudflare/cloudflared#1673)
-        # where `access ssh`/`access tcp` ignores service-token credentials and
-        # falls back to interactive browser auth. The real access control here
-        # is the SSH key itself (same as any key-only-auth SSH host) — the
-        # tunnel just avoids exposing port 22 on the VPS firewall directly.
+        # Connect to the VPS over SSH through a Cloudflare Tunnel.
         run: |
           mkdir -p ~/.ssh
           chmod 700 ~/.ssh
@@ -130,15 +122,7 @@ jobs:
           VPS_USER: ${{ secrets.VPS_USER }}
 
       - name: Deploy on VPS
-        # personal-site-deploy is now a forced-command key (authorized_keys
-        # on the VPS runs /home/deploy/personal-site-deploy.sh regardless of
-        # what's sent here) - the wrapper script extracts IMAGE_TAG from
-        # $SSH_ORIGINAL_COMMAND (must be a 40-hex-char SHA, anything else is
-        # rejected), then does the pull/up/prune/smoke-test itself. The
-        # compose file is no longer scp'd per-deploy: it rarely changes and
-        # scp can't work through a forced-command key anyway. A reference
-        # copy stays at deploy/docker-compose.yml; copy it to the VPS by
-        # hand if it changes (see docs/RUNBOOK.md-equivalent for this repo).
+        # Hands the image tag to the deploy script on the VPS.
         env:
           IMAGE_SHA: ${{ github.sha }}
         run: |

@@ -51,9 +51,8 @@ checks pass; major version bumps are left for manual review.
 `.github/workflows/deploy.yml`, on every push to `main`, runs `lint` (ESLint) → `build-and-push` →
 `deploy`. `build-and-push` builds the static export, packages it into an
 `nginx:alpine` image, and pushes it to GHCR; `deploy` connects to a
-self-hosted VPS over a Cloudflare Tunnel (no port 22 exposed, SSH-key-only
-auth on a dedicated tunnel hostname with no Cloudflare Access application
-attached) and restarts the container there. Deploy secrets are scoped to a
+self-hosted VPS over a Cloudflare Tunnel with key-based authentication and
+restarts the container there. Deploy secrets are scoped to a
 GitHub `environment`, not the whole repo. `.github/workflows/ghcr-cleanup.yml`
 prunes old image versions on a weekly schedule.
 
