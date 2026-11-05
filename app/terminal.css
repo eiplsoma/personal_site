@@ -23,7 +23,7 @@
   padding: 16px 28px;
   font-size: 17px;
   font-weight: 600;
-  font-family: "IBM Plex Mono", ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  font-family: var(--mono);
   text-decoration: none;
   box-shadow: 0 4px 18px rgba(255, 91, 105, 0.4);
   z-index: 10;
@@ -47,7 +47,7 @@
   padding: 10px 20px;
   font-size: 13px;
   font-weight: 600;
-  font-family: "IBM Plex Mono", ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  font-family: var(--mono);
   text-decoration: none;
   z-index: 10;
   transition: background 0.15s ease, border-color 0.15s ease;

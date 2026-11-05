@@ -141,7 +141,11 @@ export function TerminalLab() {
     if (!containerRef.current) return
 
     const term = new Terminal({
-      fontFamily: '"IBM Plex Mono", ui-monospace, SFMono-Regular, Menlo, Consolas, monospace',
+      // The self-hosted font has a build-generated family name, so read the
+      // resolved stack from the --mono CSS variable instead of hardcoding it.
+      fontFamily:
+        getComputedStyle(document.documentElement).getPropertyValue("--mono").trim() ||
+        'ui-monospace, SFMono-Regular, Menlo, Consolas, monospace',
       fontSize: 14.5,
       cursorBlink: true,
       convertEol: true,
