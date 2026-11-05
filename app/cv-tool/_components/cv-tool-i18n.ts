@@ -34,6 +34,11 @@ export const cvToolStrings = {
       pasteAiWrongShape: 'That looks like a full CV export, not a translation payload - use "Import JSON" or "Paste JSON" instead.',
       editTab: "Edit",
       previewTab: "Preview",
+      inAppNotice:
+        "This in-app browser (Messenger, Facebook, Instagram...) can't save files or print, so Export PDF and Export JSON won't work here. Open this page in your phone's own browser: use the menu (⋮ or ⋯) and choose \"Open in browser\".",
+      copyLink: "Copy link",
+      linkCopied: "Link copied - paste it into your browser",
+      copyLinkError: "Could not copy the link",
     },
     form: {
       photo: "Photo",
@@ -124,6 +129,11 @@ export const cvToolStrings = {
       pasteAiWrongShape: 'Ez egy teljes CV exportnak tűnik, nem fordításnak - használd az "Import JSON"-t vagy a "JSON beillesztése"-t helyette.',
       editTab: "Szerkesztés",
       previewTab: "Előnézet",
+      inAppNotice:
+        "Ez a beépített böngésző (Messenger, Facebook, Instagram...) nem tud fájlt menteni és nyomtatni, ezért a PDF és a JSON exportálás itt nem működik. Nyisd meg az oldalt a telefon saját böngészőjében: a menüben (⋮ vagy ⋯) válaszd a \"Megnyitás böngészőben\" lehetőséget.",
+      copyLink: "Link másolása",
+      linkCopied: "Link kimásolva - illeszd be a böngésződbe",
+      copyLinkError: "Nem sikerült kimásolni a linket",
     },
     form: {
       photo: "Fénykép",
